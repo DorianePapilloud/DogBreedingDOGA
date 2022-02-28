@@ -64,7 +64,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_pager" />
+        //app:layout_constraintTop_toBottomOf="@+id/view_pager" />
 
     <ImageView
         android:layout_width="60dp"
@@ -72,7 +72,7 @@
         android:src="@drawable/doglogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"/>
+        //app:layout_constraintBottom_toTopOf="@+id/imageView"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
