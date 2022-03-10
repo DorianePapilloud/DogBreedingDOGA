@@ -13,27 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-//public class MainActivity extends AppCompatActivity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_login);
-//
-//
-//
-//
-//        }
-//    }
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+public class MainActivity extends AppCompatActivity {
 
-public class MainActivity extends Fragment {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login_welcome);
 
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.activity_login, container, false);
-        Intent intent = new Intent(getActivity(), LoginTabFragment.class);
-        startActivity(intent);
-
-        return root;
+        }
     }
-}
+
