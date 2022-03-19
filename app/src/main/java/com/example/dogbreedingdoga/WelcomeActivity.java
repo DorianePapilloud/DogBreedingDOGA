@@ -1,25 +1,20 @@
 package com.example.dogbreedingdoga;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
+import androidx.fragment.app.FragmentActivity;
 import android.content.Intent;
 import android.os.Handler;
-
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 public class WelcomeActivity extends AppCompatActivity {
 
 
         ImageView logo, background;
         TextView welcome, start;
+
+        protected int _splashTime = 5000;
 
         @Override
         protected void onCreate(Bundle savedInstances) {
@@ -37,25 +32,22 @@ public class WelcomeActivity extends AppCompatActivity {
                 start.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
 
 
-
-                final Handler handler = new Handler();
+                Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
-                        @Override
                         public void run() {
-
-                                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-                                startActivity(intent);
+//                                getSupportFragmentManager();
                                 setContentView(R.layout.activity_login);
+                                Intent i3 = new Intent(WelcomeActivity.this, LoginActivity.class);
+                                startActivity(i3);
                         }
-                }, 5000);
-
-
+                }, _splashTime);
 
         }
+
 }
 
 
-//public class WelcomeLogin extends Fragments {
+//public class WelcomeActivity extends Fragments {
 //
 //        FloatingActionButton arrowNext;
 //

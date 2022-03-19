@@ -1,14 +1,12 @@
 package com.example.dogbreedingdoga;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends FragmentActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
