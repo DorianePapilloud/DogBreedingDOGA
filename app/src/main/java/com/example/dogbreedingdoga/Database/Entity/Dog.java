@@ -7,8 +7,6 @@ import androidx.room.PrimaryKey;
 
 import com.example.dogbreedingdoga.Database.Gender;
 
-import java.util.Date;
-
 @Entity(tableName = "dog", foreignKeys = @ForeignKey(entity = Breeder.class,
                                     parentColumns = "idBreeder",
                                     childColumns = "breederId",
@@ -20,15 +18,15 @@ public class Dog {
     @ColumnInfo(name = "nameDog")
     String nameDog;
     @ColumnInfo(name = "dateOfBirth")
-    Date dateOfBirth;
+    String dateOfBirth;
     @ColumnInfo(name = "gender")
     Gender gender;
     @ColumnInfo (name = "mother")
-    Dog mother;
+    int idMother;
     @ColumnInfo (name = "father")
-    Dog father;
+    int idFather;
     @ColumnInfo (name = "breederId")
-    Breeder breederId;
+    int breederId;
     @ColumnInfo (name = "pedigree")
     Boolean pedigree;
     @ColumnInfo (name = "pictureDog")
@@ -37,22 +35,22 @@ public class Dog {
     String specificationsDog;
 
 
-    public Dog(String nameDog, Date dateOfBirth, Gender gender, Dog mother, Dog father, Breeder breederId, Boolean pedigree, String profilePicture, String specificationsDog) {
+    public Dog(String nameDog, String dateOfBirth, Gender gender, int breederId, Boolean pedigree, String profilePicture, String specificationsDog) {
 
         this.nameDog = nameDog;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.mother = mother;
-        this.father = father;
+//        this.mother = mother;
+//        this.father = father;
         this.breederId = breederId;
         this.pedigree = pedigree;
         this.profilePicture = profilePicture;
         this.specificationsDog = specificationsDog;
     }
 
-    public Dog(String nameDog) {
-        this.nameDog = nameDog;
-    }
+//    public Dog(String nameDog) {
+//        this.nameDog = nameDog;
+//    }
 
 
     public int getIdDog() {
@@ -71,11 +69,11 @@ public class Dog {
         this.nameDog = nameDog;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -87,27 +85,27 @@ public class Dog {
         this.gender = gender;
     }
 
-    public Dog getMother() {
-        return mother;
+    public int getIdMother() {
+        return idMother;
     }
 
-    public void setMother(Dog mother) {
-        this.mother = mother;
+    public void setIdMother(int idMother) {
+        this.idMother = idMother;
     }
 
-    public Dog getFather() {
-        return father;
+    public int getIdFather() {
+        return idFather;
     }
 
-    public void setFather(Dog father) {
-        this.father = father;
+    public void setIdFather(int idFather) {
+        this.idFather = idFather;
     }
 
-    public Breeder getBreederId() {
+    public int getBreederId() {
         return breederId;
     }
 
-    public void setBreederId(Breeder breederId) {
+    public void setBreederId(int breederId) {
         this.breederId = breederId;
     }
 

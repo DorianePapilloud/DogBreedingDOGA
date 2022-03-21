@@ -28,17 +28,19 @@ public class Breeder {
     String descriptionBreeder;
 
 
-    public Breeder(int idBreeder, String name, String surname, String address, String phone, String email, String password, String profilePicture, String description) {
+    public Breeder(int idBreeder, String nameBreeder, String surnameBreeder,
+                   String addressBreeder, String phone, String email, String password,
+                   String pictureBreeder, String descriptionBreeder) {
         this.idBreeder = idBreeder;
-        this.nameBreeder = name;
-        this.surnameBreeder = surname;
-        this.addressBreeder = address;
+        this.nameBreeder = nameBreeder;
+        this.surnameBreeder = surnameBreeder;
+        this.addressBreeder = addressBreeder;
         this.phone = phone;
         this.email = email;
-        this.pictureBreeder = profilePicture;
-        this.descriptionBreeder = description;
+        this.password = password;
+        this.pictureBreeder = pictureBreeder;
+        this.descriptionBreeder = descriptionBreeder;
     }
-
 
     public int getIdBreeder() {
         return idBreeder;
