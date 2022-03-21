@@ -17,7 +17,7 @@ public class LoginActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setContentView(R.layout.login_tab_fragment);
+//        setContentView(R.layout.login_tab_fragment);
 
 
         tabLayout = findViewById(R.id.tab_layout);
