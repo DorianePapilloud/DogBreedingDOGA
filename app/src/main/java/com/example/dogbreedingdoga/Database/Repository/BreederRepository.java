@@ -29,7 +29,7 @@ public class BreederRepository {
         return instance;
     }
 
-    public LiveData<Breeder> getBreeder(final int breederId, Application application) {
+    public LiveData<Breeder> getBreeder(final String breederId, Application application) {
         return ((BaseApp) application).getDatabase().breederDao().getById(breederId);
     }
 

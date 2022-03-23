@@ -18,8 +18,8 @@ public interface DogDAO {
     @Query("SELECT * FROM dog")
     LiveData<List<Dog>> getAllDogs();
 
-    @Query("SELECT * FROM dog WHERE breederId LIKE :breederId")
-    LiveData<List<Dog>> getDogForOneBreeder(int breederId);
+    @Query("SELECT * FROM dog WHERE breederMail LIKE :breederMail")
+    LiveData<List<Dog>> getDogForOneBreeder(String breederMail);
 
     @Query("SELECT * FROM dog WHERE idDog LIKE :dogId")
     LiveData<Dog> getDogById(int dogId);

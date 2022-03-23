@@ -1,38 +1,27 @@
 package com.example.dogbreedingdoga.Database;
-
 import android.content.Context;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-
 import com.example.dogbreedingdoga.Database.DAO.BreederDAO;
 import com.example.dogbreedingdoga.Database.DAO.DogDAO;
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
-
 import java.util.concurrent.Executors;
 
 @Database(entities = {Breeder.class, Dog.class}, version = 1)
-
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
-
     private static AppDatabase instance;
-
     private static final String DATABASE_NAME = "Breeding-database";
-
     public abstract BreederDAO breederDao();
-
     public abstract DogDAO dogDao();
-
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
-
     public static AppDatabase getInstance(final Context context) {
         if (instance == null) {
             synchronized (AppDatabase.class) {
@@ -44,7 +33,6 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return instance;
     }
-
     private static AppDatabase buildDatabase(final Context appContext) {
         Log.i(TAG, "Database will be initialized.");
         return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
@@ -61,15 +49,12 @@ public abstract class AppDatabase extends RoomDatabase {
                     }
                 }).build();
     }
-
     private void updateDatabaseCreated(final Context context) {
         if (context.getDatabasePath(DATABASE_NAME).exists()) {
             Log.i(TAG, "Database initialized.");
             setDatabaseCreated();
         }
     }
-
-
     private void setDatabaseCreated(){
         mIsDatabaseCreated.postValue(true);
     }

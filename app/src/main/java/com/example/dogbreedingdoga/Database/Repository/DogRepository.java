@@ -39,8 +39,8 @@ public class DogRepository {
         return ((BaseApp) application).getDatabase().dogDao().getAllDogs();
     }
 
-    public LiveData<List<Dog>> getByBreeder(final int breederId, Application application) {
-        return ((BaseApp) application).getDatabase().dogDao().getDogForOneBreeder(breederId);
+    public LiveData<List<Dog>> getByBreeder(final String breederMail, Application application) {
+        return ((BaseApp) application).getDatabase().dogDao().getDogForOneBreeder(breederMail);
     }
 
     public void insert(final Dog dog, OnAsyncEventListener callback,

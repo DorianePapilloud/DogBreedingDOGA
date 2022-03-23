@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey;
 import com.example.dogbreedingdoga.Database.Gender;
 
 @Entity(tableName = "dog", foreignKeys = @ForeignKey(entity = Breeder.class,
-                                    parentColumns = "idBreeder",
-                                    childColumns = "breederId",
+                                    parentColumns = "email",
+                                    childColumns = "breederMail",
                                     onDelete = ForeignKey.CASCADE))
 public class Dog {
 
@@ -25,8 +25,8 @@ public class Dog {
     int idMother;
     @ColumnInfo (name = "father")
     int idFather;
-    @ColumnInfo (name = "breederId")
-    int breederId;
+    @ColumnInfo (name = "breederMail")
+    String breederMail;
     @ColumnInfo (name = "pedigree")
     Boolean pedigree;
     @ColumnInfo (name = "pictureDog")
@@ -35,23 +35,21 @@ public class Dog {
     String specificationsDog;
 
 
-    public Dog(String nameDog, String dateOfBirth, Gender gender, int breederId, Boolean pedigree, String profilePicture, String specificationsDog) {
+    public Dog(String nameDog, String dateOfBirth, Gender gender, String breederMail, Boolean pedigree) {
 
         this.nameDog = nameDog;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-//        this.mother = mother;
-//        this.father = father;
-        this.breederId = breederId;
         this.pedigree = pedigree;
-        this.profilePicture = profilePicture;
-        this.specificationsDog = specificationsDog;
     }
 
-//    public Dog(String nameDog) {
-//        this.nameDog = nameDog;
-//    }
+    public String getBreederMail() {
+        return breederMail;
+    }
 
+    public void setBreederMail(String breederMail) {
+        this.breederMail = breederMail;
+    }
 
     public int getIdDog() {
         return idDog;
@@ -99,14 +97,6 @@ public class Dog {
 
     public void setIdFather(int idFather) {
         this.idFather = idFather;
-    }
-
-    public int getBreederId() {
-        return breederId;
-    }
-
-    public void setBreederId(int breederId) {
-        this.breederId = breederId;
     }
 
     public Boolean getPedigree() {

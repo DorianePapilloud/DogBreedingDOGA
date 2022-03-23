@@ -11,8 +11,8 @@ import android.widget.TextView;
 public class WelcomeActivity extends AppCompatActivity {
 
 
-        ImageView logo, background;
-        TextView welcome, start;
+        private ImageView logo, background;
+        private TextView welcome, start;
 
         protected int _splashTime = 5000;
 

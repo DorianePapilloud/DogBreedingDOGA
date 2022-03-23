@@ -1,15 +1,17 @@
 package com.example.dogbreedingdoga.Database.Entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "breeder", indices = @Index(value = {"email"}, unique = true))
+@Entity(tableName = "breeder", primaryKeys = {"email"})
 public class Breeder {
 
-    @PrimaryKey
-    int idBreeder;
+    @NonNull
+    @ColumnInfo (name = "email")
+    String email;
     @ColumnInfo (name = "nameBreeder")
     String nameBreeder;
     @ColumnInfo (name = "surnameBreeder")
@@ -18,8 +20,6 @@ public class Breeder {
     String addressBreeder;
     @ColumnInfo (name = "phone")
     String phone;
-    @ColumnInfo (name = "email")
-    String email;
     @ColumnInfo (name = "password")
     String password;
     @ColumnInfo (name = "pictureBreeder")
@@ -28,26 +28,13 @@ public class Breeder {
     String descriptionBreeder;
 
 
-    public Breeder(int idBreeder, String nameBreeder, String surnameBreeder,
-                   String addressBreeder, String phone, String email, String password,
-                   String pictureBreeder, String descriptionBreeder) {
-        this.idBreeder = idBreeder;
+    public Breeder(@NonNull String email, String nameBreeder, String surnameBreeder,
+                   String password) {
+
         this.nameBreeder = nameBreeder;
         this.surnameBreeder = surnameBreeder;
-        this.addressBreeder = addressBreeder;
-        this.phone = phone;
         this.email = email;
         this.password = password;
-        this.pictureBreeder = pictureBreeder;
-        this.descriptionBreeder = descriptionBreeder;
-    }
-
-    public int getIdBreeder() {
-        return idBreeder;
-    }
-
-    public void setIdBreeder(int idBreeder) {
-        this.idBreeder = idBreeder;
     }
 
     public String getNameBreeder() {
