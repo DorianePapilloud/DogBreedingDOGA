@@ -40,16 +40,16 @@ public class CreateNewAccountFragment extends Fragment {
 
     private void createAccount(String email, String pwd, String pwd2) {
         if (!pwd.equals(pwd2) || pwd.length() < 5) {
-            pwd.setError(getString(R.string.error_invalid_password));
-            pwd.requestFocus();
-            pwd.setText("");
-            pwd2.setText("");
+            tv_pwd.setError(getString(R.string.error_invalid_password));
+            tv_pwd.requestFocus();
+            tv_pwd.setText("");
+            tv_pwdConf.setText("");
 
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            email.setError(getString(R.string.error_invalid_email));
-            email.requestFocus();
+            tv_email.setError(getString(R.string.error_invalid_email));
+            tv_email.requestFocus();
             return;
         }
 
