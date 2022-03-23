@@ -37,10 +37,9 @@ public class LoginActivity extends FragmentActivity {
 
 
         final LoginAdapter adapter = new LoginAdapter(getSupportFragmentManager(), this,tabLayout.getTabCount());
-
+        viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.setAdapter(adapter);
 
         //titles setup
         tabLayout.getTabAt(0).setText("Login");

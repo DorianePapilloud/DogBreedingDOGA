@@ -8,4 +8,6 @@
     <string name="error_incorrect_password">Incorrect password</string>
     <string name="btn_ValidCreateAccount">Create</string>
     <string name="tv_PwdConf">Confirm password</string>
+    <string name="toast_BreederCreated">New Breeder created</string>
+    <string name="error_used_email">This email is already used</string>
 </resources>

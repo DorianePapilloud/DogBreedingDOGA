@@ -28,11 +28,8 @@ public class Breeder {
     String descriptionBreeder;
 
 
-    public Breeder(@NonNull String email, String nameBreeder, String surnameBreeder,
-                   String password) {
+    public Breeder(@NonNull String email, String password) {
 
-        this.nameBreeder = nameBreeder;
-        this.surnameBreeder = surnameBreeder;
         this.email = email;
         this.password = password;
     }

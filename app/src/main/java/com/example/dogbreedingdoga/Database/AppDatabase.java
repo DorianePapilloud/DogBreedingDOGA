@@ -17,11 +17,17 @@ import java.util.concurrent.Executors;
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
+
     private static AppDatabase instance;
+
     private static final String DATABASE_NAME = "Breeding-database";
+
     public abstract BreederDAO breederDao();
+
     public abstract DogDAO dogDao();
+
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
+
     public static AppDatabase getInstance(final Context context) {
         if (instance == null) {
             synchronized (AppDatabase.class) {
@@ -33,6 +39,7 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return instance;
     }
+
     private static AppDatabase buildDatabase(final Context appContext) {
         Log.i(TAG, "Database will be initialized.");
         return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
@@ -49,6 +56,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     }
                 }).build();
     }
+
     private void updateDatabaseCreated(final Context context) {
         if (context.getDatabasePath(DATABASE_NAME).exists()) {
             Log.i(TAG, "Database initialized.");
