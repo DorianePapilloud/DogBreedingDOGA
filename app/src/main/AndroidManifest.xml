@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DogBreedingDOGA">
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.mgmt.LoginActivity"
             android:exported="false"
             android:label="activity_login"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
 <!--            <intent-filter>-->
@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".ui.WelcomeActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>

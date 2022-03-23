@@ -1,4 +1,4 @@
-package com.example.dogbreedingdoga;
+package com.example.dogbreedingdoga.ui.mgmt;
 
 import android.content.Context;
 

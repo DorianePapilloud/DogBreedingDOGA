@@ -1,12 +1,15 @@
-package com.example.dogbreedingdoga;
+package com.example.dogbreedingdoga.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
+
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.dogbreedingdoga.R;
+import com.example.dogbreedingdoga.ui.mgmt.LoginActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 

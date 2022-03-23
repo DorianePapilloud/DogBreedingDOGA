@@ -1,20 +1,12 @@
-package com.example.dogbreedingdoga;
+package com.example.dogbreedingdoga.ui.mgmt;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
-import com.android.car.ui.toolbar.Tab;
+import com.example.dogbreedingdoga.R;
 import com.google.android.material.tabs.TabLayout;
 
 public class LoginActivity extends FragmentActivity {

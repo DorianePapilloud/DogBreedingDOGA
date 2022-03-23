@@ -1,4 +1,4 @@
-package com.example.dogbreedingdoga;
+package com.example.dogbreedingdoga.ui.mgmt;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.dogbreedingdoga.Database.Repository.BreederRepository;
+import com.example.dogbreedingdoga.ui.MainActivity;
+import com.example.dogbreedingdoga.R;
 
 public class LoginTabFragment extends Fragment {
 
@@ -51,10 +53,10 @@ public class LoginTabFragment extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment, container, false);
 
 
-        tv_email = root.findViewById(R.id.email);
-        tv_pass = root.findViewById(R.id.pass);
+        tv_email = root.findViewById(R.id.et_email);
+        tv_pass = root.findViewById(R.id.createPass);
         tv_registerNow = root.findViewById(R.id.register_now);
-        btn_login = root.findViewById(R.id.button);
+        btn_login = root.findViewById(R.id.btn_CreateBreeder);
 
 
         tv_email.setTranslationY(800);

@@ -6,4 +6,6 @@
     <string name="error_field_required">This field cannot be empty</string>
     <string name="error_invalid_email">Invalid login credentials</string>
     <string name="error_incorrect_password">Incorrect password</string>
+    <string name="btn_ValidCreateAccount">Create</string>
+    <string name="tv_PwdConf">Confirm password</string>
 </resources>
