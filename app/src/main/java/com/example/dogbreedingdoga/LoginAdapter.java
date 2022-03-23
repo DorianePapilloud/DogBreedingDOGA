@@ -2,6 +2,7 @@ package com.example.dogbreedingdoga;
 
 import android.content.Context;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -34,4 +35,11 @@ public class LoginAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return totalTabs;
     }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return super.getPageTitle(position);
+    }
+
 }

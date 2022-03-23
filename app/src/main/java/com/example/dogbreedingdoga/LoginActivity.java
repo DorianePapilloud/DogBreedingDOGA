@@ -38,21 +38,23 @@ public class LoginActivity extends FragmentActivity {
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Login"));
-        tabLayout.addTab(tabLayout.newTab().setText("Create new account"));
+        //creation of tabs
+        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
 
         final LoginAdapter adapter = new LoginAdapter(getSupportFragmentManager(), this,tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        //Gaétan
-//        viewPager.addView();
-//        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.setAdapter(adapter);
 
-        //
+        //titles setup
+        tabLayout.getTabAt(0).setText("Login");
+        tabLayout.getTabAt(1).setText("Create new account");
 
+        //animation
         tabLayout.setTranslationY(300);
         tabLayout.setAlpha(v);
         tabLayout.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
