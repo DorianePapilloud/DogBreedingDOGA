@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/BreederProfileView">
 
 
 
@@ -18,21 +19,19 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_PictureProfile"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:src="@drawable/arthur"
-            >
-        </de.hdodenhof.circleimageview.CircleImageView>
+            android:src="@drawable/arthur"></de.hdodenhof.circleimageview.CircleImageView>
 
         <TextView
+            android:id="@+id/tv_ProfileFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arthur Pendragon"
+            android:layout_marginTop="8dp"
             android:textColor="@color/myColor"
             android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"
@@ -58,24 +57,64 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_person"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            android:layout_marginLeft="5dp"
-            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arthur Pendragon"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/str_ProfileName"
+            android:textColor="@color/black"
             android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_ProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:textColor="@color/grey"
-            />
+            android:textSize="15dp" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_person"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/str_ProfileSurname"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_ProfileSurname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/grey"
+            android:textSize="15dp" />
 
     </LinearLayout>
     <View
@@ -100,24 +139,23 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_address"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Address"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            android:layout_marginLeft="5dp"
-            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Street Dog 15, 1003 Lausanne"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/str_Address"
+            android:textColor="@color/black"
             android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_Address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:textColor="@color/grey"
-            />
+            android:textSize="15dp" />
 
     </LinearLayout>
     <View
@@ -142,24 +180,23 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_email"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            android:layout_marginLeft="5dp"
-            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="arthur@dog.com"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/str_Email"
+            android:textColor="@color/black"
             android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/et_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:textColor="@color/grey"
-            />
+            android:textSize="15dp" />
 
     </LinearLayout>
     <View
@@ -184,24 +221,23 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_phone"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            android:layout_marginLeft="5dp"
-            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="079 876 57 88"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/str_Phone"
+            android:textColor="@color/black"
             android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_Phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
             android:textColor="@color/grey"
-            />
+            android:textSize="15dp" />
 
     </LinearLayout>
     <View
@@ -217,35 +253,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/btn_editProfil"
             android:layout_width="150dp"
             android:layout_height="30dp"
+            android:layout_marginLeft="-10dp"
             android:background="@drawable/bg_button_profile"
-            android:text="Edit Profile"
-            android:gravity="center"
-            android:textColor="@color/myColor"
-            android:textSize="15dp"
             android:drawableLeft="@drawable/ic_edit"
+            android:gravity="center"
             android:paddingLeft="10dp"
-            android:layout_marginLeft="-10dp" />
+            android:text="@string/btn_EditProfile"
+            android:textColor="@color/myColor"
+            android:textSize="15dp" />
 
         <TextView
             android:layout_width="340dp"
             android:layout_height="45dp"
+            android:layout_marginTop="80dp"
             android:background="@drawable/bg_button_gotodogs"
-            android:text="Go to my dogs !"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/white"
-
-            android:textSize="25dp"
             android:drawableLeft="@drawable/paws"
+            android:gravity="center"
             android:paddingLeft="10dp"
-            android:layout_marginTop="150dp"
-            />
+            android:text="@string/btn_GoToDogsList"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

@@ -39,7 +39,7 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-//        frameLayout = findViewById(R.id.flContent);
+        frameLayout = findViewById(R.id.tab_createNewAccount);
 
 //        drawerLayout = findViewById(R.id.base_drawer_layout);
 //        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
