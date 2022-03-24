@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.async.breeder.CreateBreeder;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
@@ -69,8 +70,10 @@ public class CreateNewAccountFragment extends Fragment {
             return;
         }
         Breeder newBreeder = new Breeder(email, pwd);
-        System.out.println("création breeder ; L'application est : " +getContext().getApplicationInfo());
-        new CreateBreeder(getActivity().getApplication(), new OnAsyncEventListener() {
+        System.out.println("création breeder ; L'application est : " +requireActivity().getApplication());
+
+
+        new CreateBreeder((BaseApp)getActivity().getApplication(), new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "createUserWithEmail: success");

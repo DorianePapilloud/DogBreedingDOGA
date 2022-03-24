@@ -40,6 +40,7 @@ public abstract class AppDatabase extends RoomDatabase {
         return instance;
     }
 
+
     private static AppDatabase buildDatabase(final Context appContext) {
         Log.i(TAG, "Database will be initialized.");
         return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)

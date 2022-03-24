@@ -1,6 +1,7 @@
 package com.example.dogbreedingdoga.Database.async.breeder;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
@@ -8,7 +9,7 @@ import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 
 public class CreateBreeder extends AsyncTask<Breeder, Void, Void> {
 
-
+    private Context context;
     private Application application;
     private OnAsyncEventListener callback;
     private Exception exception;
@@ -22,7 +23,7 @@ public class CreateBreeder extends AsyncTask<Breeder, Void, Void> {
     protected Void doInBackground(Breeder... params) {
         try {
             for (Breeder breeder : params)
-                ((BaseApp) application).getDatabase().breederDao()
+                ((BaseApp) application) .getDatabase().breederDao()
                         .insertBreeder(breeder);
         } catch (Exception e) {
             exception = e;

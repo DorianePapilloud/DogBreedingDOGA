@@ -50,6 +50,7 @@ public class LoginActivity extends FragmentActivity {
         tabLayout.setAlpha(v);
         tabLayout.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
 
+        getApplication();
     }
 
     @Override
