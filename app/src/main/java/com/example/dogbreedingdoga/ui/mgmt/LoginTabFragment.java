@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Repository.BreederRepository;
 import com.example.dogbreedingdoga.ui.MainActivity;
 import com.example.dogbreedingdoga.R;
@@ -52,6 +53,7 @@ public class LoginTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment, container, false);
 
+        repository = ((BaseApp) getActivity().getApplication()).getBreederRepository();
 
         tv_email = root.findViewById(R.id.et_email);
         tv_pass = root.findViewById(R.id.createPass);
@@ -128,7 +130,10 @@ public class LoginTabFragment extends Fragment {
             focusView.requestFocus();
         } else {
 //            progressBar.setVisibility(View.VISIBLE);
-            repository.getBreeder(email, getInstance(this.position).getActivity().getApplication()).observe(LoginTabFragment.this, breeder -> {
+            System.out.println("========= L'application : " +this.getActivity().getApplication()); //semble CORRECT !!
+            System.out.println("========= && LoginTabFragment : " +LoginTabFragment.this +" \n======== && breederId : "+email); // + repository.getBreeder(email, this.getActivity().getApplication())
+            System.out.println("====== getbreeder... " +repository.getBreeder(email, this.getActivity().getApplication()));
+            repository.getBreeder(email, this.getActivity().getApplication()).observe(LoginTabFragment.this, breeder -> {
                 if (breeder != null) {
                     if (breeder.getPassword().equals(password)) {
                         // We need an Editor object to make preference changes.
@@ -136,9 +141,11 @@ public class LoginTabFragment extends Fragment {
 //                        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
 //                        editor.putString(BaseActivity.PREFS_USER, breeder.getEmail());
 //                        editor.apply();
-
-                        Intent intent = new Intent(getInstance(this.position).getActivity(), MainActivity.class);
+                        System.out.println("Connexion validée");
+                        System.out.println("This.getContext() : " +this.getContext() +"\nthis.getActivity.getClass : " +this.getActivity().getClass());
+                        Intent intent = new Intent(this.getContext(), MainActivity.class);
                         startActivity(intent);
+                        System.out.println("============= INTENT : " +intent);
                         tv_email.setText("");
                         tv_pass.setText("");
                     } else {
