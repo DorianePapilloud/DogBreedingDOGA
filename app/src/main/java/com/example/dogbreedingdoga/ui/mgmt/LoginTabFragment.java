@@ -88,7 +88,6 @@ public class LoginTabFragment extends Fragment {
     private View.OnClickListener btnConnectListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            System.out.println("Cliqué !");
             attemptLogin();
         }
 
@@ -96,7 +95,6 @@ public class LoginTabFragment extends Fragment {
 
     private void attemptLogin() {
 
-        System.out.println("attemptLogin lancé");
         // Reset errors.
         tv_email.setError(null);
         tv_pass.setError(null);

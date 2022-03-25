@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/BreederProfileView">
+    android:id="@+id/BreederProfileView"
+    android:background="#FFFFFF">
 
 
 
     <include layout="@layout/toolbar"/>
 
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:id="@+id/ly_ProfilePicture"
+        android:layout_width="402dp"
+        android:layout_height="145dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="0dp"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingTop="15dp">
@@ -25,15 +33,6 @@
             android:layout_height="110dp"
             android:src="@drawable/arthur"></de.hdodenhof.circleimageview.CircleImageView>
 
-        <TextView
-            android:id="@+id/tv_ProfileFullName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/myColor"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -43,20 +42,23 @@
             android:background="@color/myColor" />
     </LinearLayout>
 
-
     <LinearLayout
+        android:id="@+id/ly_ProfileName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ly_ProfilePicture"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/dim_gapProfileLayout"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_vertical">
+        android:paddingRight="15dp">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_person"/>
+            android:src="@drawable/ic_person" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,37 +69,39 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/tv_ProfileName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:textColor="@color/grey"
-            android:textSize="15dp" />
+            style="@style/EditableText"
+            android:layout_marginLeft="30dp" />
+
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/grey"
-        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@id/ly_ProfileName"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="0dp"
         android:layout_marginRight="20dp"
-        />
+        android:background="@color/grey" />
 
     <LinearLayout
+        android:id="@+id/ly_ProfileSurname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_ProfileName"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/dim_gapProfileLayout"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_vertical">
+        android:paddingRight="15dp">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_person"/>
+            android:src="@drawable/ic_person" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,35 +114,36 @@
 
         <TextView
             android:id="@+id/tv_ProfileSurname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:textColor="@color/grey"
-            android:textSize="15dp" />
+            style="@style/EditableText"
+            android:layout_marginLeft="30dp" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/grey"
-        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@id/ly_ProfileSurname"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        />
+        android:background="@color/grey" />
 
     <LinearLayout
+        android:id="@+id/ly_ProfileAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_ProfileSurname"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/dim_gapProfileLayout"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_vertical">
+        android:paddingRight="15dp">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_address"/>
+            android:src="@drawable/ic_address" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -151,35 +156,36 @@
 
         <TextView
             android:id="@+id/tv_Address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:textColor="@color/grey"
-            android:textSize="15dp" />
+            style="@style/EditableText"
+            android:layout_marginLeft="15dp" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/grey"
-        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@id/ly_ProfileAddress"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        />
+        android:background="@color/grey"
+        android:rotationX="-72" />
 
     <LinearLayout
+        android:id="@+id/ly_ProfileEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_ProfileAddress"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/dim_gapProfileLayout"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_vertical">
+        android:paddingRight="15dp">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_email"/>
+            android:src="@drawable/ic_email" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -192,35 +198,35 @@
 
         <TextView
             android:id="@+id/et_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:textColor="@color/grey"
-            android:textSize="15dp" />
+            style="@style/EditableText"
+            android:layout_marginLeft="30dp" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/grey"
-        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@id/ly_ProfileEmail"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        />
+        android:background="@color/grey" />
 
     <LinearLayout
+        android:id="@+id/ly_ProfilePhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_ProfileEmail"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/dim_gapProfileLayout"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_vertical">
+        android:paddingRight="15dp">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_phone"/>
+            android:src="@drawable/ic_phone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -233,58 +239,126 @@
 
         <TextView
             android:id="@+id/tv_Phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:textColor="@color/grey"
-            android:textSize="15dp" />
+            style="@style/EditableText"
+            android:layout_marginLeft="25dp" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/grey"
-        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@id/ly_ProfilePhone"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        />
+        android:background="@color/grey" />
+
+    <TextView
+        android:id="@+id/tv_BtnGoToDogs"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="45dp"
+        android:background="@drawable/bg_button_gotodogs"
+        android:drawableLeft="@drawable/paws"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:text="@string/btn_GoToDogsList"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/btn_editProfil"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/ly_ProfilePwdConf"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="-10dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/bg_button_profile"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_edit"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:state_focused="true"
+        android:text="@string/btn_EditProfile"
+        android:textColor="@color/myColor"
+        android:textSize="15dp" />
 
     <LinearLayout
+        android:id="@+id/ly_ProfilePwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_below="@+id/ly_ProfilePhone"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/dim_gapProfileLayout"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:visibility="invisible">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_person" />
 
         <TextView
-            android:id="@+id/btn_editProfil"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="-10dp"
-            android:background="@drawable/bg_button_profile"
-            android:drawableLeft="@drawable/ic_edit"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:text="@string/btn_EditProfile"
-            android:textColor="@color/myColor"
-            android:textSize="15dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        <TextView
-            android:layout_width="340dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="80dp"
-            android:background="@drawable/bg_button_gotodogs"
-            android:drawableLeft="@drawable/paws"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:text="@string/btn_GoToDogsList"
-            android:textColor="@color/white"
-            android:textSize="25dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/str_Password"
+            android:textColor="@color/black"
+            android:textSize="15dp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_ProfilePwd"
+            style="@style/EditableText"
+            android:layout_marginLeft="30dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_ProfilePwdConf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_ProfilePwd"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/dim_gapProfileLayout"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:visibility="invisible">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_person" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+
+            android:text="@string/tv_PwdConf"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_ProfilePwdConf"
+            style="@style/EditableText"
+            android:layout_marginLeft="30dp" />
 
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

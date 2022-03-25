@@ -19,4 +19,5 @@
     <string name="str_Phone">Phone</string>
     <string name="btn_EditProfile">Edit Profile</string>
     <string name="btn_GoToDogsList">Go to my dogs !</string>
+    <string name="str_Password">Password</string>
 </resources>
