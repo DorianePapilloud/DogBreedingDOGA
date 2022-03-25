@@ -1,6 +1,7 @@
 package com.example.dogbreedingdoga.ui.mgmt;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Repository.BreederRepository;
+import com.example.dogbreedingdoga.ui.BaseActivity;
+import com.example.dogbreedingdoga.ui.BreederProfileActivity;
 import com.example.dogbreedingdoga.ui.MainActivity;
 import com.example.dogbreedingdoga.R;
 
@@ -138,12 +141,12 @@ public class LoginTabFragment extends Fragment {
                     if (breeder.getPassword().equals(password)) {
                         // We need an Editor object to make preference changes.
                         // All objects are from android.context.Context
-//                        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-//                        editor.putString(BaseActivity.PREFS_USER, breeder.getEmail());
-//                        editor.apply();
+                        SharedPreferences.Editor editor = this.getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
+                        editor.putString(BaseActivity.PREFS_USER, breeder.getEmail());
+                        editor.apply();
                         System.out.println("Connexion validée");
                         System.out.println("This.getContext() : " +this.getContext() +"\nthis.getActivity.getClass : " +this.getActivity().getClass());
-                        Intent intent = new Intent(this.getContext(), MainActivity.class);
+                        Intent intent = new Intent(this.getContext(), BreederProfileActivity.class);
                         startActivity(intent);
                         System.out.println("============= INTENT : " +intent);
                         tv_email.setText("");

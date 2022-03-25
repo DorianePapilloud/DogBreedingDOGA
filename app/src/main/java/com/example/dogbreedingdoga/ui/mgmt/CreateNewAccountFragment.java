@@ -20,6 +20,7 @@ import com.example.dogbreedingdoga.Database.async.breeder.CreateBreeder;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.BaseActivity;
+import com.example.dogbreedingdoga.ui.BreederProfileActivity;
 import com.example.dogbreedingdoga.ui.MainActivity;
 
 
@@ -70,8 +71,6 @@ public class CreateNewAccountFragment extends Fragment {
             return;
         }
         Breeder newBreeder = new Breeder(email, pwd);
-        System.out.println("création breeder ; L'application est : " +requireActivity().getApplication());
-
 
         new CreateBreeder((BaseApp)getActivity().getApplication(), new OnAsyncEventListener() {
             @Override
@@ -97,8 +96,11 @@ public class CreateNewAccountFragment extends Fragment {
             editor.putString(BaseActivity.PREFS_USER, tv_email.getText().toString());
             editor.apply();
             toast.show();
-            Intent intent = new Intent(CreateNewAccountFragment.this.getActivity(), MainActivity.class);
+            Intent intent = new Intent(CreateNewAccountFragment.this.getActivity(), BreederProfileActivity.class);
             startActivity(intent);
+            tv_email.setText("");
+            tv_pwd.setText("");
+            tv_pwdConf.setText("");
         } else {
             tv_email.setError(getString(R.string.error_used_email));
             tv_email.requestFocus();

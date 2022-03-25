@@ -17,7 +17,8 @@
             />
         <activity
             android:name=".ui.BreederProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".ui.mgmt.LoginActivity"
             android:exported="false"
