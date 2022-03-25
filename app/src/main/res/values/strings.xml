@@ -6,10 +6,12 @@
     <string name="error_field_required">This field cannot be empty</string>
     <string name="error_invalid_email">Invalid login credentials</string>
     <string name="error_incorrect_password">Incorrect password</string>
+    <string name="error_incorrect_phone">Incorrect phone number</string>
+    <string name="error_used_email">This email is already used</string>
     <string name="btn_ValidCreateAccount">Create</string>
     <string name="tv_PwdConf">Confirm password</string>
     <string name="toast_BreederCreated">New Breeder created</string>
-    <string name="error_used_email">This email is already used</string>
+    <string name="breeder_updated">Breeder successfully updated</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="str_ProfileName">Name</string>

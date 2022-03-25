@@ -70,9 +70,10 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/tv_ProfileName"
+            android:id="@+id/et_ProfileName"
             style="@style/EditableText"
-            android:layout_marginLeft="30dp" />
+            android:layout_marginLeft="30dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
     </LinearLayout>
@@ -112,8 +113,8 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_ProfileSurname"
+        <EditText
+            android:id="@+id/et_ProfileSurname"
             style="@style/EditableText"
             android:layout_marginLeft="30dp" />
 
@@ -154,8 +155,8 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_Address"
+        <EditText
+            android:id="@+id/et_Address"
             style="@style/EditableText"
             android:layout_marginLeft="15dp" />
 
@@ -196,7 +197,7 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/et_email"
             style="@style/EditableText"
             android:layout_marginLeft="30dp" />
@@ -237,8 +238,8 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_Phone"
+        <EditText
+            android:id="@+id/et_Phone"
             style="@style/EditableText"
             android:layout_marginLeft="25dp" />
 
@@ -273,13 +274,13 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/btn_editProfil"
+        android:id="@+id/tv_BtnEditProfil"
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:layout_below="@+id/ly_ProfilePwdConf"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="-10dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="@dimen/dim_gapProfileLayout"
         android:background="@drawable/bg_button_profile"
         android:clickable="true"
         android:drawableLeft="@drawable/ic_edit"
@@ -318,10 +319,11 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_ProfilePwd"
+        <EditText
+            android:id="@+id/et_ProfilePwd"
             style="@style/EditableText"
-            android:layout_marginLeft="30dp" />
+            android:layout_marginLeft="30dp"
+            android:password="true" />
 
     </LinearLayout>
 
@@ -353,10 +355,11 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_ProfilePwdConf"
+        <EditText
+            android:id="@+id/et_ProfilePwdConf"
             style="@style/EditableText"
-            android:layout_marginLeft="30dp" />
+            android:layout_marginLeft="30dp"
+            android:password="true" />
 
     </LinearLayout>
 

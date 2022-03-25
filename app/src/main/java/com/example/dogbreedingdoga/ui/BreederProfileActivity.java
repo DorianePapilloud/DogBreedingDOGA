@@ -1,18 +1,20 @@
 package com.example.dogbreedingdoga.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.ColorLong;
+import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
+import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.viewmodel.breeder.BreederViewModel;
 
@@ -23,16 +25,19 @@ public class BreederProfileActivity extends BaseActivity {
 
     private Toast toast;
 
-    private boolean isEditable;
+//    private boolean isEditable;
 
-    private TextView tv_ProfileFullName;
-    private EditText tv_ProfileName;
-    private TextView tv_ProfileSurname;
-    private TextView tv_ProfileAddress;
-    private TextView tv_ProfileEmail;
-    private TextView tv_ProfilePhone;
+    private EditText et_ProfileName;
+    private EditText et_ProfileSurname;
+    private EditText et_ProfileAddress;
+    private EditText et_ProfileEmail;
+    private EditText et_ProfilePhone;
+
+    private EditText et_ProfilePwd;
+    private EditText et_ProfilePwdConf;
 
     private TextView tv_BtnEdit;
+    private TextView tv_BtnGoToDogs;
 
     private BreederViewModel viewModel;
 
@@ -58,32 +63,27 @@ public class BreederProfileActivity extends BaseActivity {
                 updateContent();
             }
         });
-
     }
 
     private void initiateView() {
-        isEditable = false;
-        tv_ProfileEmail = findViewById(R.id.et_email);
+//        isEditable = false;
+        et_ProfileEmail = findViewById(R.id.et_email);
         //add all elements that we can modify in edit
-        tv_ProfileName = findViewById(R.id.tv_ProfileName);
-        tv_ProfileName.setFocusable(false);
-        tv_ProfileSurname = findViewById(R.id.tv_ProfileSurname);
-        tv_ProfileAddress = findViewById(R.id.tv_Address);
-        tv_ProfilePhone = findViewById(R.id.tv_Phone);
+//        System.out.println("=================" +breeder.getNameBreeder());
+        et_ProfileName = findViewById(R.id.et_ProfileName);
+        et_ProfileSurname = findViewById(R.id.et_ProfileSurname);
+        et_ProfileAddress = findViewById(R.id.et_Address);
+        et_ProfilePhone = findViewById(R.id.et_Phone);
 
-        tv_BtnEdit = findViewById(R.id.btn_editProfil);
+        et_ProfilePwd = findViewById(R.id.et_ProfilePwd);
+        et_ProfilePwdConf = findViewById(R.id.et_ProfilePwdConf);
+
+        tv_BtnEdit = findViewById(R.id.tv_BtnEditProfil);
         tv_BtnEdit.setOnClickListener(btnEditListener);
 
-        //If Name And / OR  Surname is empty...
-//        if(findViewById(R.id.tv_ProfileName)==null && findViewById(R.id.tv_ProfileSurname)==null)
-//            tv_ProfileFullName = findViewById(R.id.et_email);
-//        else if(findViewById(R.id.tv_ProfileName) != null && findViewById(R.id.tv_ProfileSurname) == null){
-//            tv_ProfileFullName = findViewById(R.id.tv_ProfileName);
-//        }else if(findViewById(R.id.tv_ProfileSurname) != null && findViewById(R.id.tv_ProfileName) == null) {
-//            tv_ProfileFullName = findViewById(R.id.tv_ProfileSurname);
-//        } else
-            //à améliorer !!
-//            tv_ProfileFullName = findViewById(R.id.tv_ProfileName);
+        tv_BtnGoToDogs = findViewById(R.id.tv_BtnGoToDogs);
+        tv_BtnGoToDogs.setOnClickListener(btnGoToDogsListener);
+
     }
 
     private View.OnClickListener btnEditListener = new View.OnClickListener() {
@@ -94,24 +94,156 @@ public class BreederProfileActivity extends BaseActivity {
         }
     };
 
+    private View.OnClickListener btnGoToDogsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //go to dogs list
+        }
+    };
+
     private void editBreeder() {
-        //make all textviews editable
-        tv_ProfileName.setFocusable(true);
-        tv_ProfileName.setEnabled(true);
-        tv_ProfileName.setFocusableInTouchMode(true);
-        tv_ProfileName.setBackgroundColor(Color.GREEN);
+        //make all EditText editable including display pwd and pwdConfirm fields
+        enableTextView(et_ProfileName, et_ProfileSurname, et_ProfileAddress, et_ProfilePhone, et_ProfileEmail, et_ProfilePwd, et_ProfilePwdConf);
 
         //modify 'button' text + listener
         tv_BtnEdit.setText("Save");
+//        tv_BtnEdit.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tv_BtnEdit.setOnClickListener(btnSaveListener);
 
-        //Display pwd and pwdConfirm fields
+        //Hide "GoToDogs" button
+        tv_BtnGoToDogs.setVisibility(View.INVISIBLE);
+
 
         //updateContent
     }
 
+    private void enableTextView(TextView... TVs) {
+        if(findViewById(R.id.ly_ProfilePwd).getVisibility() == View.INVISIBLE){
+            findViewById(R.id.ly_ProfilePwd).setVisibility(View.VISIBLE);
+        }
+        if(findViewById(R.id.ly_ProfilePwdConf).getVisibility() == View.INVISIBLE){
+            findViewById(R.id.ly_ProfilePwdConf).setVisibility(View.VISIBLE);
+        }
+
+        for (TextView tv : TVs) {
+            tv.setFocusable(true);
+            tv.setEnabled(true);
+            tv.setFocusableInTouchMode(true);
+            tv.setBackgroundColor(Color.LTGRAY);
+        }
+
+    }
+
+    private void disableTextView(EditText... TVs) {
+        for (TextView tv:TVs) {
+            tv.setFocusable(false);
+            tv.setEnabled(false);
+            tv.setFocusableInTouchMode(false);
+            tv.setBackgroundColor(Color.TRANSPARENT);
+        }
+        if(findViewById(R.id.ly_ProfilePwd).getVisibility() == View.VISIBLE){
+            findViewById(R.id.ly_ProfilePwd).setVisibility(View.INVISIBLE);
+        }
+        if(findViewById(R.id.ly_ProfilePwdConf).getVisibility() == View.VISIBLE){
+            findViewById(R.id.ly_ProfilePwdConf).setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private View.OnClickListener btnSaveListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //all save stuff
+            //disable EditTexts
+
+
+            saveChanges(et_ProfileName.getText().toString(), et_ProfileSurname.getText().toString(),
+                        et_ProfileAddress.getText().toString(), et_ProfileEmail.getText().toString(),
+                        et_ProfilePhone.getText().toString(),
+                        et_ProfilePwd.getText().toString(), et_ProfilePwdConf.getText().toString());
+
+
+        }
+    };
+
     private void updateContent() {
         if (breeder != null) {
-            tv_ProfileEmail.setText(breeder.getEmail());
+            et_ProfileEmail.setText(breeder.getEmail());
+            et_ProfileName.setText(breeder.getNameBreeder());
+            et_ProfileSurname.setText(breeder.getSurnameBreeder());
+            et_ProfileAddress.setText(breeder.getAddressBreeder());
+            et_ProfilePhone.setText(breeder.getPhone());
+            et_ProfilePwd.setText(breeder.getPassword());
+            et_ProfilePwdConf.setText(breeder.getPassword());
         }
+    }
+
+    private void saveChanges(String firstName, String lastName, String address ,String email, String phone, String pwd, String pwd2) {
+        if (!pwd.equals(pwd2) || pwd.length() < 5) {
+            toast = Toast.makeText(this, getString(R.string.error_incorrect_password), Toast.LENGTH_LONG);
+            toast.show();
+            et_ProfilePwd.setText("");
+            et_ProfilePwdConf.setText("");
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            et_ProfileEmail.setError(getString(R.string.error_invalid_email));
+            et_ProfileEmail.requestFocus();
+            return;
+        }
+        if(!Patterns.PHONE.matcher(phone).matches()){
+            et_ProfilePhone.setError(getString((R.string.error_incorrect_phone)));
+            et_ProfilePhone.requestFocus();
+            return;
+        }
+
+
+        breeder.setEmail(email);
+        breeder.setNameBreeder(firstName);
+        breeder.setSurnameBreeder(lastName);
+        breeder.setAddressBreeder(address);
+        breeder.setPhone(phone);
+        breeder.setPassword(pwd);
+
+        //restore 'Edit Profile' textview-button
+        tv_BtnEdit.setText("Edit Profile");
+        tv_BtnEdit.setOnClickListener(btnEditListener);
+
+        //restore 'GoToMyDogs' button
+        tv_BtnGoToDogs.setVisibility(View.VISIBLE);
+
+        disableTextView(et_ProfileName, et_ProfileSurname, et_ProfileAddress, et_ProfilePhone, et_ProfileEmail);
+
+        viewModel.updateClient(breeder, new OnAsyncEventListener() {
+            @Override
+            public void onSuccess() {
+                setResponse(true);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                setResponse(false);
+            }
+        });
+    }
+
+    private void setResponse(Boolean response) {
+        if (response) {
+            updateContent();
+            toast = Toast.makeText(this, getString(R.string.breeder_updated), Toast.LENGTH_LONG);
+            toast.show();
+        } else {
+            et_ProfileEmail.setError(getString(R.string.error_used_email));
+            et_ProfileEmail.requestFocus();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return;
+        }
+        super.onBackPressed();
+        startActivity(new Intent(this, BreederProfileActivity.class));
     }
 }
