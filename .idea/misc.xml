@@ -5,14 +5,17 @@
       <map>
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/drawable/bg_button_gotodogs.xml" value="0.273" />
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/drawable/bg_button_profile.xml" value="0.273" />
+        <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/drawable/button_background.xml" value="0.132" />
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/drawable/edit_text_background.xml" value="0.1" />
-        <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/activity_breeder_profile.xml" value="0.5755208333333334" />
+        <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/activity_breeder_profile.xml" value="0.29307568438003223" />
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/activity_main.xml" value="0.288135593220339" />
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/activity_welcome.xml" value="0.34394904458598724" />
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/breeder_profile_fragment.xml" value="0.4354166666666667" />
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/create_new_account_tab_fragment.xml" value="0.1984375" />
+        <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/fragment_add_new_dog.xml" value="0.2" />
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/fragment_dog_details.xml" value="0.2" />
+        <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/fragment_dogs.xml" value="0.5755208333333334" />
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/fragment_dogs_list.xml" value="0.3" />
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/fragment_test.xml" value="0.2574074074074074" />
         <entry key="..\:/Users/doria/OneDrive/Documents/HEG/604_F/Cloud&amp;Application/DogBreedingDOGA/app/src/main/res/layout/list_dog_item.xml" value="0.2838541666666667" />

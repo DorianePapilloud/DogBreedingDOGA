@@ -1,14 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddNewDogFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+
+        <EditText
+            android:id="@+id/et_name_dog"
+            android:layout_width="279dp"
+            android:layout_height="43dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Name"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="210dp" />
+
+        <ImageButton
+            android:id="@+id/ib_birth"
+            android:layout_width="51dp"
+            android:layout_height="38dp"
+            android:background="@color/white"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_calendar"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.186"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="346dp"
+            />
+
+        <EditText
+            android:id="@+id/et_mother"
+            android:layout_width="128dp"
+            android:layout_height="43dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Mother"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.236"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="413dp" />
+
+        <EditText
+            android:id="@+id/et_father"
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Father"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.769"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="411dp" />
+
+        <CheckBox
+            android:id="@+id/cb_female"
+            android:layout_width="98dp"
+            android:layout_height="49dp"
+            android:text="Female"
+            android:textColor="@color/myColor"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="67dp"
+            tools:layout_editor_absoluteY="476dp" />
+
+        <CheckBox
+            android:id="@+id/cb_male"
+            android:layout_width="102dp"
+            android:layout_height="48dp"
+            android:text="Male"
+            android:textColor="@color/myColor"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="244dp"
+            tools:layout_editor_absoluteY="477dp" />
+
+
+        <!--        <Button-->
+<!--            android:layout_width="148dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            tools:layout_editor_absoluteX="130dp"-->
+<!--            tools:layout_editor_absoluteY="469dp"-->
+<!--            android:background=""-->
+<!--            tools:ignore="MissingConstraints" />-->
+
+
+        <Switch
+            android:id="@+id/sw_pedigree"
+            android:layout_width="126dp"
+            android:layout_height="47dp"
+            android:text="Pedigree"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="142dp"
+            tools:layout_editor_absoluteY="547dp" />
+
+        <EditText
+            android:id="@+id/et_breed"
+            android:layout_width="279dp"
+            android:layout_height="43dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Breed"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="277dp" />
+
+        <ImageView
+            android:id="@+id/iv_add_picture_dog"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:src="@drawable/addpicdog"
+            tools:ignore="MissingConstraints,UsingOnClickInXml"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="30dp" />
+
+        <TextView
+            android:id="@+id/tv_birth"
+            android:layout_width="210dp"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Select birthdate"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.671"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="344dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_CreateBreeder"
+            android:layout_width="197dp"
+            android:layout_height="46dp"
+            android:background="@drawable/button_background"
+            android:text="Add"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="107dp"
+            tools:layout_editor_absoluteY="646dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
