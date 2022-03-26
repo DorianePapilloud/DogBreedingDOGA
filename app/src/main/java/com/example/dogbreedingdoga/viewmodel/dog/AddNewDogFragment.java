@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 
 import com.example.dogbreedingdoga.Database.Entity.Dog;
 import com.example.dogbreedingdoga.Database.Gender;
+import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 
@@ -41,37 +43,6 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
-//
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-//
-//    public AddNewDogFragment() {
-//        // Required empty public constructor
-//    }
-//
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment AddNewDogFragment.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static AddNewDogFragment newInstance(String param1, String param2) {
-//        AddNewDogFragment fragment = new AddNewDogFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
 
     private static final String TAG = "New Dog added" ;
 
@@ -115,6 +86,20 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 //        }
 //    }
 
+    /**
+     * RESTE A TRAITER :
+     *      edit vs create
+     *      Availability behavior
+     *      Visibility with keyboard
+     *      check name already taken
+     *
+     *      TEST VALIDATIONS
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -123,7 +108,8 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
         //Retrieve the id (mail) of the connected breeder
         SharedPreferences settings = getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-        currentBreederMail = settings.getString(BaseActivity.PREFS_USER, null);
+        this.currentBreederMail = settings.getString(BaseActivity.PREFS_USER, null);
+        System.out.println("========== BREEEEDDDEEEEEEER : " +currentBreederMail +" =======================");
 
         //check if new dog and initialise checkbox Availability
         Long idDog = getActivity().getIntent().getLongExtra("idDog", 0L);
@@ -285,39 +271,33 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private void saveDog(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
         System.out.println("Saperlipopette, ne passerai-je point dans ce clique ??");
 
-        valideDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl);
+        if( valideDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl) ) {
+            Dog newDog = new Dog(dogName, dogBreed, dogBirth,gender, this.currentBreederMail, pedig, avlbl);
+            newDog.setSpecificationsDog(et_Description.getText().toString());
+            newDog.setBreederMail(this.currentBreederMail);
 
+            //set mother + father
 
-//        Dog newDog = new Dog(dogName, dogBreed, dogBirth, genderDog, currentBreederMail, this.pedigree, this.available);
-//        System.out.println("=========DDDDDDDDDDDDDDDDDDDDDDDDDDDDOOOOOOGGGGGGGGGG : " +newDog.getIdDog() +
-//                "\n" +newDog.getNameDog());
-//
-//        System.out.println("=========Really ??? : " +((BaseApp) getActivity().getApplication()));
-//
-//        new CreateDog(newDog, new OnAsyncEventListener() { //(BaseApp) getActivity().getApplication()
-//            @Override
-//            public void onSuccess() {
-//
-////                SharedPreferences.Editor editor = getContext().getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-////                editor.putInt(BaseActivity.PREFS_USER, newDog.getIdDog());
-////                editor.apply();
-//
-//                Log.d(TAG, "createDog: success" + " CURRENTBREEDER : " +currentBreederMail);
-//                toast = Toast.makeText(getContext(), getString(R.string.msg_DogCreated), Toast.LENGTH_LONG);
-////                toast.show();
-//                //retour sur la liste des chiens
-//            }
-//
-//            @Override
-//            public void onFailure(Exception e) {
-//                Log.d(TAG, "createDog: failure", e);
-//                toast = Toast.makeText(getContext(), getString(R.string.msg_DogNOTCreated), Toast.LENGTH_LONG);
-//                // OH NON
-//            }
-//        }).execute();
+            viewModel.createDog(newDog, new OnAsyncEventListener() {
+                @Override
+                public void onSuccess() {
+                    Log.d(TAG, getString(R.string.msg_DogCreated));
+                    toast = Toast.makeText(getContext(), getString(R.string.msg_DogCreated), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Log.d(TAG, "createDog: failure", e);
+                    toast = Toast.makeText(getContext(), getString(R.string.msg_DogNOTCreated), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            });
+        }
     }
 
-    private void valideDogAttributes(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
+    private boolean valideDogAttributes(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
+
         boolean cancel = false;
         View focusView = null;
 
@@ -349,8 +329,10 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
         if(cancel){
             focusView.requestFocus();
-            return;
+            return false;
         }
+
+        return true ;
     }
 
     private void updateContent() {
@@ -358,7 +340,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
             et_NameDog.setText(dog.getNameDog());
             et_BreedDog.setText(dog.getBreedDog());
             tv_BirthDateDog.setText(Calendar.getInstance().getTime().toString());
-            tv_PedigInfo.setText(dog.getSpecificationsDog());
+            et_Description.setText(dog.getSpecificationsDog());
 
         }
     }
