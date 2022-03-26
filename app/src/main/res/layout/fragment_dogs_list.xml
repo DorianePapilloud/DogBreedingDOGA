@@ -16,7 +16,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_dogs"
+            android:id="@+id/recycler_view_list_dogs"
             android:layout_width="match_parent"
             android:layout_height="670dp"
             tools:layout_editor_absoluteX="0dp"

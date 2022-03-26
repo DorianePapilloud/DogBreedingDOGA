@@ -65,6 +65,7 @@ public class DogsListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            //manage if no dogs in the list
             recyclerView.setAdapter(new MyDogsRecyclerViewAdapter(PlaceholderContent.ITEMS));
         }
         return view;
