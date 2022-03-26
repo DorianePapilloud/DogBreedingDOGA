@@ -41,7 +41,7 @@ public class DogRepository {
     }
 
     public LiveData<List<Dog>> getAllDogsByBreeder(final String breederMail, Application application) {
-        return ((BaseApp) application).getDatabase().dogDao().getDogForOneBreeder(breederMail);
+        return ((BaseApp) application).getDatabase().dogDao().getDogsForOneBreeder(breederMail);
     }
 
     public LiveData<Breeder> getDogsBreeder(final int idDog, Application application) {

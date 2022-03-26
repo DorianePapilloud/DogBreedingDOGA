@@ -12,13 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
-import com.example.dogbreedingdoga.Database.Repository.BreederRepository;
 import com.example.dogbreedingdoga.Database.Repository.DogRepository;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 
 public class DogViewModel extends AndroidViewModel {
     private DogRepository dogRepository;
-    private BreederRepository breederRepository; // needed ???
 
     private Application application;
 

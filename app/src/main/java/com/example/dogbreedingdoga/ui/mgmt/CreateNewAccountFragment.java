@@ -76,14 +76,12 @@ public class CreateNewAccountFragment extends Fragment {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "createUserWithEmail: success");
-                System.out.println("passe par create");
                 setResponse(true);
             }
 
             @Override
             public void onFailure(Exception e) {
                 Log.d(TAG, "createUserWithEmail: failure", e);
-                System.out.println("passe par failure...");
                 setResponse(false);
             }
         }).execute(newBreeder);

@@ -1,5 +1,6 @@
 package com.example.dogbreedingdoga.Database.Entity;
 
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -17,12 +18,16 @@ public class Dog {
     int idDog;
     @ColumnInfo(name = "nameDog")
     String nameDog;
+    @ColumnInfo(name = "breedDog")
+    String breedDog;
     @ColumnInfo(name = "dateOfBirth")
     String dateOfBirth;
     @ColumnInfo(name = "gender")
     Gender gender;
+    @Nullable
     @ColumnInfo (name = "mother")
     int idMother;
+    @Nullable
     @ColumnInfo (name = "father")
     int idFather;
     @ColumnInfo (name = "breederMail")
@@ -33,14 +38,19 @@ public class Dog {
     String profilePicture;
     @ColumnInfo (name = "specificationsDog")
     String specificationsDog;
+    @ColumnInfo(name = "availability")
+    boolean isAvailable ;
 
 
-    public Dog(String nameDog, String dateOfBirth, Gender gender, String breederMail, Boolean pedigree) {
+    public Dog(String nameDog, String breedDog, String dateOfBirth, Gender gender,
+               String breederMail, Boolean pedigree, boolean isAvailable) {
 
         this.nameDog = nameDog;
+        this.breedDog = breedDog;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.pedigree = pedigree;
+        this.isAvailable = isAvailable;
     }
 
     public String getBreederMail() {
@@ -66,6 +76,10 @@ public class Dog {
     public void setNameDog(String nameDog) {
         this.nameDog = nameDog;
     }
+
+    public String getBreedDog() { return breedDog; }
+
+    public void setBreedDog(String breedDog) { this.breedDog = breedDog; }
 
     public String getDateOfBirth() {
         return dateOfBirth;
@@ -122,4 +136,8 @@ public class Dog {
     public void setSpecificationsDog(String specificationsDog) {
         this.specificationsDog = specificationsDog;
     }
+
+    public boolean isAvailable() { return isAvailable; }
+
+    public void setAvailable(boolean available) { isAvailable = available; }
 }

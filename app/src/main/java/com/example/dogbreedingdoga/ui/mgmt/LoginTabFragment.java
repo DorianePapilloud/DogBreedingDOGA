@@ -131,9 +131,7 @@ public class LoginTabFragment extends Fragment {
             focusView.requestFocus();
         } else {
 //            progressBar.setVisibility(View.VISIBLE);
-            System.out.println("========= L'application : " +this.getActivity().getApplication()); //semble CORRECT !!
-            System.out.println("========= && LoginTabFragment : " +LoginTabFragment.this +" \n======== && breederId : "+email); // + repository.getBreeder(email, this.getActivity().getApplication())
-            System.out.println("====== getbreeder... " +repository.getBreeder(email, this.getActivity().getApplication()));
+
             repository.getBreeder(email, this.getActivity().getApplication()).observe(LoginTabFragment.this, breeder -> {
                 if (breeder != null) {
                     if (breeder.getPassword().equals(password)) {
@@ -142,11 +140,10 @@ public class LoginTabFragment extends Fragment {
                         SharedPreferences.Editor editor = this.getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
                         editor.putString(BaseActivity.PREFS_USER, breeder.getEmail());
                         editor.apply();
-                        System.out.println("Connexion validée");
-                        System.out.println("This.getContext() : " +this.getContext() +"\nthis.getActivity.getClass : " +this.getActivity().getClass());
+
                         Intent intent = new Intent(this.getContext(), BreederProfileActivity.class);
                         startActivity(intent);
-                        System.out.println("============= INTENT : " +intent);
+
                         tv_email.setText("");
                         tv_pass.setText("");
                     } else {

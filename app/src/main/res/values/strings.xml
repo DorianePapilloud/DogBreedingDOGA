@@ -8,6 +8,10 @@
     <string name="error_incorrect_password">Incorrect password</string>
     <string name="error_incorrect_phone">Incorrect phone number</string>
     <string name="error_used_email">This email is already used</string>
+    <string name="error_dog_noGender">Please select a gender for this dog</string>
+    <string name="error_dog_noName">Please enter a name</string>
+    <string name="error_dog_noBirth">Please select a birth date for this dog</string>
+    <string name="error_dog_noBreed">Please mention a breed</string>
     <string name="btn_ValidCreateAccount">Create</string>
     <string name="tv_PwdConf">Confirm password</string>
     <string name="toast_BreederCreated">New Breeder created</string>
@@ -31,4 +35,12 @@
     <string name="str_DogCheckMale">Male</string>
     <string name="str_DogPedigree">Pedigree</string>
     <string name="str_BtnAddDog">Add</string>
+    <string name="str_DogDescrip">Enter additional information about your dog</string>
+    <string name="str_Pedigree">Has a Pedigree</string>
+    <string name="str_NoPedigree">Has no Pedigree</string>
+    <string name="str_LabelPedigree">Pedigree</string>
+    <string name="str_Availability">Available</string>
+    <string name="msg_DogCreated">New dog successfully added</string>
+    <string name="msg_DogNOTCreated">Unknown failure during dog creation. No dog added</string>
+    <string name="msg_DogUpdated">Dog successfully updated</string>
 </resources>
