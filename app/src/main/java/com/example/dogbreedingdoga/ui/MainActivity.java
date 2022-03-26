@@ -1,37 +1,38 @@
 package com.example.dogbreedingdoga.ui;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
+        import androidx.activity.result.ActivityResultCallback;
+        import androidx.activity.result.ActivityResultLauncher;
+        import androidx.activity.result.contract.ActivityResultContract;
+        import androidx.activity.result.contract.ActivityResultContracts;
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.fragment.app.DialogFragment;
+        import androidx.fragment.app.FragmentManager;
 
-import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+        import android.app.DatePickerDialog;
+        import android.content.Intent;
+        import android.net.Uri;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.DatePicker;
+        import android.widget.FrameLayout;
+        import android.widget.ImageButton;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
-import com.example.dogbreedingdoga.R;
-import com.example.dogbreedingdoga.viewmodel.dog.AddNewDogFragment;
-import com.example.dogbreedingdoga.viewmodel.dog.DogsListFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+        import com.example.dogbreedingdoga.R;
+        import com.example.dogbreedingdoga.viewmodel.dog.AddNewDogFragment;
+        import com.example.dogbreedingdoga.viewmodel.dog.DogsListFragment;
+        import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.DateFormat;
-import java.util.Calendar;
+        import java.text.DateFormat;
+        import java.util.Calendar;
 
 public class MainActivity extends BaseActivity {
 
     //code for implementing camera ================================= MOVE and implements datePickerDialog ---> implements DatePickerDialog.OnDateSetListener
     ImageView imageView;
+    TextView btn_logout;
 
 
     @Override
@@ -47,7 +48,7 @@ public class MainActivity extends BaseActivity {
                 .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
                 .setReorderingAllowed(true)
                 .addToBackStack("").commit();
-        }
+    }
 
 
     // =========================== MOVE
@@ -74,5 +75,9 @@ public class MainActivity extends BaseActivity {
                 }
             }
     );
+
+
+
+
 
 }

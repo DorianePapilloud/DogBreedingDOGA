@@ -3,7 +3,11 @@ package com.example.dogbreedingdoga.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -17,6 +21,9 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
 
     public static final String PREFS_NAME = "SharedPrefs";
     public static final String PREFS_USER = "LoggedIn";
+
+
+
     /**
      *  Frame layout: Which is going to be used as parent layout for child activity layout.
      *  This layout is protected so that child activity can access this
@@ -36,11 +43,13 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar); //
+//        setSupportActionBar(toolbar); //
 
         frameLayout = findViewById(R.id.tab_createNewAccount);
 
+
+        //=================================================================
 //        drawerLayout = findViewById(R.id.base_drawer_layout);
 //        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
 //                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -49,6 +58,9 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
 
 //        navigationView = findViewById(R.id.base_nav_view);
 //        navigationView.setNavigationItemSelectedListener(this);
+        //===================================================================
+
+
     }
 
     @Override
@@ -129,5 +141,13 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
+
+
+    public View.OnClickListener btnLogoutListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            logout();
+        }
+    };
 
 }
