@@ -22,10 +22,10 @@ public interface DogDAO {
     LiveData<List<Dog>> getDogsForOneBreeder(String breederMail);
 
     @Query("SELECT * FROM dog WHERE idDog LIKE :dogId")
-    LiveData<Dog> getDogById(int dogId);
+    LiveData<Dog> getDogById(long dogId);
 
     @Query("SELECT email FROM dog, breeder WHERE idDog LIKE :dogId AND dog.breederMail LIKE breeder.email")
-    LiveData<Breeder> getDogsBreeder(int dogId);
+    LiveData<Breeder> getDogsBreeder(long dogId);
 
     @Query("SELECT * FROM dog WHERE breederMail LIKE :breederMail AND availability LIKE :availability")
     LiveData<List<Dog>> getDogsByBreederByAvailability(String breederMail, boolean availability);

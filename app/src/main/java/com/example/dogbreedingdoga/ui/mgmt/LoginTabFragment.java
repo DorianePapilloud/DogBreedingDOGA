@@ -16,7 +16,6 @@ import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Repository.BreederRepository;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 import com.example.dogbreedingdoga.ui.BreederProfileActivity;
-import com.example.dogbreedingdoga.ui.MainActivity;
 import com.example.dogbreedingdoga.R;
 
 public class LoginTabFragment extends Fragment {
@@ -61,7 +60,7 @@ public class LoginTabFragment extends Fragment {
         tv_email = root.findViewById(R.id.et_email);
         tv_pass = root.findViewById(R.id.createPass);
         tv_registerNow = root.findViewById(R.id.register_now);
-        btn_login = root.findViewById(R.id.btn_CreateBreeder);
+        btn_login = root.findViewById(R.id.btn_CreateDog);
 
 
         tv_email.setTranslationY(800);
