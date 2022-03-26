@@ -6,6 +6,7 @@ import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -19,14 +20,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dogbreedingdoga.R;
+import com.example.dogbreedingdoga.viewmodel.dog.AddNewDogFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener {
 
-    //code for implementing camera
+    //code for implementing camera ================================= MOVE and implements datePickerDialog
     ImageView imageView;
+
+    FloatingActionButton btn_add_new_dog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +40,22 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
 //        getLayoutInflater().inflate(R.layout.activity_main, frameLayout);
         setContentView(R.layout.activity_main);
 
+        }
 
 
+        private View.OnClickListener btnAddNewDogListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.nv_NavHostView, AddNewDogFragment.class, null)
+                    .setReorderingAllowed(true)
+                    .addToBackStack("").commit();
+        }
+    };
 
-    }
 
+    // =========================== MOVE
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();

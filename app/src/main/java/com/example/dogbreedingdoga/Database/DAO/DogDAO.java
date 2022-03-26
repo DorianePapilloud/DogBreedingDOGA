@@ -24,7 +24,7 @@ public interface DogDAO {
     @Query("SELECT * FROM dog WHERE idDog LIKE :dogId")
     LiveData<Dog> getDogById(int dogId);
 
-    @Query("SELECT breederMail FROM dog WHERE idDog LIKE :dogId")
+    @Query("SELECT email FROM dog, breeder WHERE idDog LIKE :dogId AND dog.breederMail LIKE breeder.email")
     LiveData<Breeder> getDogsBreeder(int dogId);
 
     @Insert
