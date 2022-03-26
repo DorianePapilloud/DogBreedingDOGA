@@ -22,7 +22,7 @@ public class BaseApp extends Application {
         return AppDatabase.getInstance(this);
     }
 
-    public DogRepository getAccountRepository() {
+    public DogRepository getDogRepository() {
         return DogRepository.getInstance();
     }
 

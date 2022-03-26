@@ -22,4 +22,13 @@
     <string name="btn_EditProfile">Edit Profile</string>
     <string name="btn_GoToDogsList">Go to my dogs !</string>
     <string name="str_Password">Password</string>
+    <string name="str_DogName">Name</string>
+    <string name="str_DogBreed">Breed</string>
+    <string name="str_BirthDate">Select birthdate</string>
+    <string name="str_DogMother">Mother</string>
+    <string name="str_DogFather">Father</string>
+    <string name="str_DogCheckFemale">Female</string>
+    <string name="str_DogCheckMale">Male</string>
+    <string name="str_DogPedigree">Pedigree</string>
+    <string name="str_BtnAddDog">Add</string>
 </resources>

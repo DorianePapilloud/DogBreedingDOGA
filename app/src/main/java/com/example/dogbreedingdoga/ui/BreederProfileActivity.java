@@ -57,7 +57,7 @@ public class BreederProfileActivity extends BaseActivity {
 
         BreederViewModel.Factory factory = new BreederViewModel.Factory(getApplication(), user);
         viewModel = new ViewModelProvider(this, factory).get(BreederViewModel.class);
-        viewModel.getClient().observe(this, accountEntity -> {
+        viewModel.getBreeder().observe(this, accountEntity -> {
             if (accountEntity != null) {
                 breeder = accountEntity;
                 updateContent();
