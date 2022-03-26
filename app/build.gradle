@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    //for "Using Safe Args to pass data with type safety (in fragments navigation) -> https://developer.android.com/guide/navigation/navigation-pass-data
+    id 'androidx.navigation.safeargs'
 }
 
 android {

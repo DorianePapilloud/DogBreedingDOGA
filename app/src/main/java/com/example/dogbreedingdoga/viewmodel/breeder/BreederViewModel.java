@@ -20,7 +20,7 @@ public class BreederViewModel extends AndroidViewModel {
     private Application application;
 
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
-    private final MediatorLiveData<Breeder> observableClient;
+    private final MediatorLiveData<Breeder> observableBreeder;
 
     public BreederViewModel(@NonNull Application application,
                             final String breederMail, BreederRepository breederRepository) {
@@ -30,14 +30,14 @@ public class BreederViewModel extends AndroidViewModel {
 
         repository = breederRepository;
 
-        observableClient = new MediatorLiveData<>();
+        observableBreeder = new MediatorLiveData<>();
         // set by default null, until we get data from the database.
-        observableClient.setValue(null);
+        observableBreeder.setValue(null);
 
         LiveData<Breeder> breeder = repository.getBreeder(breederMail, application);
 
         // observe the changes of the client entity from the database and forward them
-        observableClient.addSource(breeder, observableClient::setValue);
+        observableBreeder.addSource(breeder, observableBreeder::setValue);
     }
 
     /**
@@ -48,28 +48,28 @@ public class BreederViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final String clientId;
+        private final String breederId;
 
         private final BreederRepository repository;
 
-        public Factory(@NonNull Application application, String clientId) {
+        public Factory(@NonNull Application application, String breederId) {
             this.application = application;
-            this.clientId = clientId;
+            this.breederId = breederId;
             repository = ((BaseApp) application).getBreederRepository();
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new BreederViewModel(application, clientId, repository);
+            return (T) new BreederViewModel(application, breederId, repository);
         }
     }
 
     /**
      * Expose the LiveData ClientEntity query so the UI can observe it.
      */
-    public LiveData<Breeder> getClient() {
-        return observableClient;
+    public LiveData<Breeder> getBreeder() {
+        return observableBreeder;
     }
 
     public void createClient(Breeder breeder, OnAsyncEventListener callback) {
