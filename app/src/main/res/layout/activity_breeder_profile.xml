@@ -9,8 +9,7 @@
     android:background="#FFFFFF">
 
 
-
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
 
     <LinearLayout

@@ -1,12 +1,17 @@
-package com.example.dogbreedingdoga;
+package com.example.dogbreedingdoga.viewmodel.dog;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+
+import com.example.dogbreedingdoga.R;
+import com.example.dogbreedingdoga.ui.DatePickerFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,6 +58,24 @@ public class AddNewDogFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+//
+//        //code for implementing camera
+//        imageView = findViewById(R.id.iv_add_picture_dog);
+//        imageView.setOnClickListener(view -> mGetContent.launch("image/*"));
+//        //end
+//
+//
+//        //this code will open a calendar in which you can select a date
+//        ImageButton btnDate = (ImageButton) findViewById(R.id.ib_birth);
+//        btnDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DialogFragment datePicker = new DatePickerFragment();
+//                datePicker.show(getSupportFragmentManager(), "Date picker");
+//            }
+//        });
+
     }
 
     @Override

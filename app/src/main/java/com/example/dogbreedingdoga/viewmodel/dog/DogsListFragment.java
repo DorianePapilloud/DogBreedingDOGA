@@ -1,4 +1,4 @@
-package com.example.dogbreedingdoga;
+package com.example.dogbreedingdoga.viewmodel.dog;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.placeholder.PlaceholderContent;
 
 /**

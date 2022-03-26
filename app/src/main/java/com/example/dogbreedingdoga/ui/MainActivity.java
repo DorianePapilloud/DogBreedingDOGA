@@ -23,7 +23,7 @@ import com.example.dogbreedingdoga.R;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class MainActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener {
 
     //code for implementing camera
     ImageView imageView;
@@ -31,23 +31,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("============= HELLO FROM MAINACTIVITY ! :-) ");
+//        getLayoutInflater().inflate(R.layout.activity_main, frameLayout);
         setContentView(R.layout.activity_main);
 
-        //code for implementing camera
-        imageView = findViewById(R.id.iv_add_picture_dog);
-        imageView.setOnClickListener(view -> mGetContent.launch("image/*"));
-        //end
 
 
-        //this code will open a calendar in which you can select a date
-        ImageButton btnDate = (ImageButton) findViewById(R.id.ib_birth);
-        btnDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "Date picker");
-            }
-        });
 
     }
 

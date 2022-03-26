@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dogsListFragment"
-        android:name="com.example.dogbreedingdoga.DogsListFragment"
+        android:name="com.example.dogbreedingdoga.viewmodel.dog.DogsListFragment"
         android:label="fragment_dogs_list"
         tools:layout="@layout/fragment_dogs_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/dogDetailsFragment"
-        android:name="com.example.dogbreedingdoga.DogDetailsFragment"
+        android:name="com.example.dogbreedingdoga.viewmodel.dog.DogDetailsFragment"
         android:label="fragment_dog_details"
         tools:layout="@layout/fragment_dog_details" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNewDogFragment"
-        android:name="com.example.dogbreedingdoga.AddNewDogFragment"
+        android:name="com.example.dogbreedingdoga.viewmodel.dog.AddNewDogFragment"
         android:label="fragment_add_new_dog"
         tools:layout="@layout/fragment_add_new_dog" />
 </navigation>

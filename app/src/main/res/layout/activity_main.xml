@@ -5,19 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.MainActivity"
+    android:id="@+id/MainActivityView">
 
-    <include layout="@layout/toolbar" />
+    <include
+        android:id="@+id/ly_toolbarMainActivity"
+        layout="@layout/toolbar" />
 
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+<!--    <androidx.fragment.app.FragmentContainerView-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nv_NavHostView"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="412dp"
-        android:layout_height="677dp"
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph_dogs"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="54dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ly_toolbarMainActivity"
+        app:layout_constraintVertical_bias="1.0"
+        app:navGraph="@navigation/nav_graph_dogs" />
+
+    <!-- Old  -->
+<!--        android:layout_width="412dp"-->
+<!--        android:layout_height="677dp"-->
+<!--        app:defaultNavHost="true"-->
+<!--        app:navGraph="@navigation/nav_graph_dogs"-->
+<!--        tools:ignore="MissingConstraints"-->
+<!--        tools:layout_editor_absoluteX="0dp"-->
+<!--        tools:layout_editor_absoluteY="54dp" />-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

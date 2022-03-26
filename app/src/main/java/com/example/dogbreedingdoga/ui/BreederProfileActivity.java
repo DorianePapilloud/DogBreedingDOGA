@@ -98,6 +98,8 @@ public class BreederProfileActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             //go to dogs list
+            Intent intent = new Intent(BreederProfileActivity.this, MainActivity.class);
+            startActivity(intent);
         }
     };
 
