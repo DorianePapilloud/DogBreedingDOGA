@@ -4,11 +4,14 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.viewmodel.dog.DogsListFragment;
 
 public class MainActivity extends BaseActivity {
+
+    public TextView btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,9 @@ public class MainActivity extends BaseActivity {
                 .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
                 .setReorderingAllowed(true)
                 .addToBackStack("").commit();
+
+        btnLogout = findViewById(R.id.tv_logout);
+        btnLogout.setOnClickListener(btnLogoutListener);
         }
 
 }
