@@ -91,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn_CreateBreeder"
+        android:id="@+id/btn_CreateDog"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background"

@@ -32,7 +32,7 @@ public class DogRepository {
         return instance;
     }
 
-    public LiveData<Dog> getDog(final int idDog, Application application) {
+    public LiveData<Dog> getDog(final long idDog, Application application) {
         return ((BaseApp) application).getDatabase().dogDao().getDogById(idDog);
     }
 
@@ -44,7 +44,7 @@ public class DogRepository {
         return ((BaseApp) application).getDatabase().dogDao().getDogsForOneBreeder(breederMail);
     }
 
-    public LiveData<Breeder> getDogsBreeder(final int idDog, Application application) {
+    public LiveData<Breeder> getDogsBreeder(final long idDog, Application application) {
         return ((BaseApp) application).getDatabase().dogDao().getDogsBreeder(idDog);
     }
 

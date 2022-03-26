@@ -25,7 +25,7 @@ public class DogViewModel extends AndroidViewModel {
     private final MediatorLiveData<Breeder> observableBreeder;
 
     public DogViewModel(@NonNull Application application,
-                        final int dogId, DogRepository dogRep) {
+                        final long dogId, DogRepository dogRep) {
         super(application);
 
         this.application = application;
@@ -60,12 +60,12 @@ public class DogViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final int dogId;
+        private final long dogId;
         private final String breederId;
 
         private final DogRepository repository;
 
-        public Factory(@NonNull Application application, int dogId, String breederId) {
+        public Factory(@NonNull Application application, long dogId, String breederId) {
             this.application = application;
             this.dogId = dogId;
             this.breederId = breederId;

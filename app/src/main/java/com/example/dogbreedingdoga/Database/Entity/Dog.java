@@ -15,11 +15,12 @@ import com.example.dogbreedingdoga.Database.Gender;
 public class Dog {
 
     @PrimaryKey (autoGenerate = true)
-    int idDog;
+    long idDog;
     @ColumnInfo(name = "nameDog")
     String nameDog;
     @ColumnInfo(name = "breedDog")
     String breedDog;
+    @Nullable
     @ColumnInfo(name = "dateOfBirth")
     String dateOfBirth;
     @ColumnInfo(name = "gender")
@@ -61,7 +62,7 @@ public class Dog {
         this.breederMail = breederMail;
     }
 
-    public int getIdDog() {
+    public long getIdDog() {
         return idDog;
     }
 

@@ -2,4 +2,5 @@
 <resources>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="dim_gapProfileLayout">25dp</dimen>
+    <dimen name="dim_GapAddDogFrag">25dp</dimen>
 </resources>

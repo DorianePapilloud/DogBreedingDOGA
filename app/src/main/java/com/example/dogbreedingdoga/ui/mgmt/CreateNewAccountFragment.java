@@ -21,7 +21,6 @@ import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 import com.example.dogbreedingdoga.ui.BreederProfileActivity;
-import com.example.dogbreedingdoga.ui.MainActivity;
 
 
 public class CreateNewAccountFragment extends Fragment {
@@ -42,7 +41,7 @@ public class CreateNewAccountFragment extends Fragment {
         tv_email = root.findViewById(R.id.et_email);
         tv_pwd = root.findViewById(R.id.createPass);
         tv_pwdConf = root.findViewById(R.id.pwdConf);
-        btn_Create = root.findViewById(R.id.btn_CreateBreeder);
+        btn_Create = root.findViewById(R.id.btn_CreateDog);
 
         toast = Toast.makeText(this.getContext(), getString(R.string.toast_BreederCreated), Toast.LENGTH_LONG);
 
