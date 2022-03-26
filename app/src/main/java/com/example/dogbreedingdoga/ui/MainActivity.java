@@ -15,23 +15,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.viewmodel.dog.AddNewDogFragment;
+import com.example.dogbreedingdoga.viewmodel.dog.DogsListFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class MainActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener {
+public class MainActivity extends BaseActivity {
 
-    //code for implementing camera ================================= MOVE and implements datePickerDialog
+    //code for implementing camera ================================= MOVE and implements datePickerDialog ---> implements DatePickerDialog.OnDateSetListener
     ImageView imageView;
 
-    FloatingActionButton btn_add_new_dog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,33 +41,27 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
 //        getLayoutInflater().inflate(R.layout.activity_main, frameLayout);
         setContentView(R.layout.activity_main);
 
+        // call the main fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
+                .setReorderingAllowed(true)
+                .addToBackStack("").commit();
         }
-
-
-        private View.OnClickListener btnAddNewDogListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.nv_NavHostView, AddNewDogFragment.class, null)
-                    .setReorderingAllowed(true)
-                    .addToBackStack("").commit();
-        }
-    };
 
 
     // =========================== MOVE
-    @Override
-    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(currentDateString);
-    }
+//    @Override
+//    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.YEAR, year);
+//        calendar.set(Calendar.MONTH, month);
+//        calendar.set(Calendar.DAY_OF_MONTH, day);
+//        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+//
+//        TextView textView = (TextView) findViewById(R.id.textView);
+//        textView.setText(currentDateString);
+//    }
 
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(
             new ActivityResultContracts.GetContent(),
@@ -79,6 +74,5 @@ public class MainActivity extends BaseActivity implements DatePickerDialog.OnDat
                 }
             }
     );
-
 
 }
