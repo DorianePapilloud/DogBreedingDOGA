@@ -3,8 +3,13 @@ package com.example.dogbreedingdoga.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import androidx.annotation.NonNull;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,14 +49,14 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        frameLayout = findViewById(R.id.tab_createNewAccount);
+        frameLayout = findViewById(R.id.flContent);
 
 
-//        drawerLayout = findViewById(R.id.base_drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawerLayout.addDrawerListener(toggle);
-//        toggle.syncState();
+        drawerLayout = findViewById(R.id.base_drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
 //        navigationView = findViewById(R.id.base_nav_view);
 //        navigationView.setNavigationItemSelectedListener(this);
@@ -125,6 +130,10 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
 //        drawerLayout.closeDrawer(GravityCompat.START);
 //        return true;
 //    }
+
+
+
+
 
     public void logout() {
         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
