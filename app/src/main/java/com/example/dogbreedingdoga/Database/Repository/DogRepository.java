@@ -48,6 +48,10 @@ public class DogRepository {
         return ((BaseApp) application).getDatabase().dogDao().getDogsBreeder(idDog);
     }
 
+    public LiveData<List<Dog>> getDogsByBreederByAvailability(final String breederMail, boolean availability, Application application) {
+        return ((BaseApp) application).getDatabase().dogDao().getDogsByBreederByAvailability(breederMail, availability);
+    }
+
     public void insert(final Dog dog, OnAsyncEventListener callback,
                        Application application) {
         new CreateDog(application, callback).execute(dog);
