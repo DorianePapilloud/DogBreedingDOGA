@@ -1,5 +1,7 @@
 package com.example.dogbreedingdoga.ui;
 
+import static com.example.dogbreedingdoga.Database.AppDatabase.initializeDemoData;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dogbreedingdoga.Database.AppDatabase;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.mgmt.LoginActivity;
 
@@ -23,6 +26,8 @@ public class WelcomeActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstances) {
                 super.onCreate(savedInstances);
                 setContentView(R.layout.activity_welcome);
+
+//                initializeDemoData(AppDatabase.getInstance(this));
 
                 logo = findViewById(R.id.logo);
                 background = findViewById(R.id.imageView2);

@@ -53,6 +53,7 @@ public class Dog implements Comparable {
         this.breedDog = breedDog;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
+        this.breederMail = breederMail;
         this.pedigree = pedigree;
         this.isAvailable = isAvailable;
     }

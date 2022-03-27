@@ -38,4 +38,7 @@ public abstract class DogDAO {
 
     @Update
     public abstract void updateDog(Dog dog);
+
+    @Query("DELETE FROM dog")
+    public abstract void deleteAll();
 }
