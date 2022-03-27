@@ -50,4 +50,7 @@
     <string name="pref_header_about">À propos</string>
     <string name="action_logout">Déconnexion</string>
     <string name="title_activity_breeder">Mon profile</string>
+    <string name="action_delete">Supprimer</string>
+    <string name="action_cancel">Annuler</string>
+    <string name="delete_msg">Êtes-vous sûr de vouloir supprimer votre compte ?</string>
 </resources>
