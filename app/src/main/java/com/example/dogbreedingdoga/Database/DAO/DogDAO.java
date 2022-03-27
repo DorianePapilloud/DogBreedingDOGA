@@ -13,29 +13,29 @@ import com.example.dogbreedingdoga.Database.Entity.Dog;
 import java.util.List;
 
 @Dao
-public interface DogDAO {
+public abstract class DogDAO {
 
     @Query("SELECT * FROM dog")
-    LiveData<List<Dog>> getAllDogs();
+    public abstract LiveData<List<Dog>> getAllDogs();
 
-    @Query("SELECT * FROM dog WHERE breederMail LIKE :breederMail")
-    LiveData<List<Dog>> getDogsForOneBreeder(String breederMail);
+    @Query("SELECT * FROM dog WHERE breederMail = :breederMail")
+    public abstract LiveData<List<Dog>> getDogsForOneBreeder(String breederMail);
 
     @Query("SELECT * FROM dog WHERE idDog LIKE :dogId")
-    LiveData<Dog> getDogById(long dogId);
+    public abstract LiveData<Dog> getDogById(long dogId);
 
     @Query("SELECT email FROM dog, breeder WHERE idDog LIKE :dogId AND dog.breederMail LIKE breeder.email")
-    LiveData<Breeder> getDogsBreeder(long dogId);
+    public abstract LiveData<Breeder> getDogsBreeder(long dogId);
 
     @Query("SELECT * FROM dog WHERE breederMail LIKE :breederMail AND availability LIKE :availability")
-    LiveData<List<Dog>> getDogsByBreederByAvailability(String breederMail, boolean availability);
+    public abstract LiveData<List<Dog>> getDogsByBreederByAvailability(String breederMail, boolean availability);
 
     @Insert
-    void insertDog(Dog dog);
+    public abstract long insertDog(Dog dog);
 
     @Delete
-    void deleteDog(Dog dog);
+    public abstract void deleteDog(Dog dog);
 
     @Update
-    void updateDog(Dog dog);
+    public abstract void updateDog(Dog dog);
 }

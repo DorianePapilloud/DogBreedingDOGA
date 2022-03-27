@@ -107,7 +107,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
                     }
                     if(data instanceof Breeder) {
                         Breeder newBreeder = (Breeder) data.get(newItemPosition);
-                        Breeder oldBreeder = (Breeder) data.get(newItemPosition);
+                        Breeder oldBreeder = (Breeder) mData.get(newItemPosition);
 
                         return newBreeder.getEmail().equals(oldBreeder.getEmail());
                     }

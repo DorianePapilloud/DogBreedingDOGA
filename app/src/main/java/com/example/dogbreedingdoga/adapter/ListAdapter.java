@@ -50,7 +50,7 @@ public class ListAdapter<T> extends ArrayAdapter<T> {
                     .inflate(mResource, parent, false);
 
             viewHolder = new ViewHolder();
-            viewHolder.itemView = convertView.findViewById(R.id.rl_dog_view);
+            viewHolder.itemView = convertView.findViewById(R.id.tv_dog_item);
 
             convertView.setTag(viewHolder);
         } else {
