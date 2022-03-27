@@ -19,7 +19,7 @@
     <string name="tv_PwdConf">Confirmation du mot de passe</string>
     <string name="toast_BreederCreated">Nouvel éleveur créé</string>
     <string name="breeder_updated">Profile mis à jour avec succès</string>
-    <string name="pref_about_text">Ceette application a été développée par Gaétan Motte tet Doriane Papilloud dans le cadre du cours \'Mobile and Cloud Application\'. Ce cours fait partie intégrante du programme d\'informatique de gestion de la Haute école spécialisée de Suisse occidentale (HES-SO) Valais-Wallis à Sierre.</string>
+    <string name="pref_about_text">Cette application a été développée par Gaétan Motte tet Doriane Papilloud dans le cadre du cours \'Mobile and Cloud Application\'. Ce cours fait partie intégrante du programme d\'informatique de gestion de la Haute école spécialisée de Suisse occidentale (HES-SO) Valais-Wallis à Sierre.</string>
     <string name="str_ProfileName">Prénom</string>
     <string name="str_ProfileSurname">Nom</string>
     <string name="str_Address">Adresse</string>

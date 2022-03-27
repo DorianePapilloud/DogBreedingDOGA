@@ -147,7 +147,15 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             intent = new Intent(this, BreederProfileActivity.class);
         } else if (id == R.id.nav_settings) {
             intent = new Intent(this, SettingsActivity.class);
-        } else if (id == R.id.nav_logout) {
+        } //language choice
+        else if (id == R.id.language_en){
+            Paper.book().write("language", "en");
+            updateView((String)Paper.book().read("language"));
+        } else if(id == R.id.language_fr) {
+            Paper.book().write("language", "fr");
+            updateView((String)Paper.book().read("language"));
+        } //end language choice
+        else if (id == R.id.nav_logout) {
             logout();
         }
         if (intent != null) {
