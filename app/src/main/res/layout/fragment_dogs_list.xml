@@ -7,9 +7,6 @@
     tools:context=".viewmodel.dog.DogsListFragment">
 
 
-<!--    <include layout="@layout/toolbar"/>-->
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_DogsList"
         android:layout_width="match_parent"
