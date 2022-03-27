@@ -4,7 +4,7 @@ package com.example.dogbreedingdoga.Database;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.dogbreedingdoga.Database.AppDatabase;
+import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
 
 
@@ -22,11 +22,13 @@ class DatabaseInitializer {
         task.execute();
     }
 
-//    private static void addClient(final AppDatabase db, final String email, final String firstName,
-//                                  final String lastName, final String password) {
-//        ClientEntity client = new ClientEntity(email, firstName, lastName, password);
-//        db.clientDao().insert(client);
-//    }
+    private static void addBreeder(final AppDatabase db, final String email, final String firstName,
+                                   final String lastName, final String password) {
+        Breeder breeder = new Breeder(email, password);
+        breeder.setNameBreeder(firstName);
+        breeder.setSurnameBreeder(lastName);
+        db.breederDao().insertBreeder(breeder);
+    }
 
     private static void addDog(final AppDatabase db, final String nameDog, final String breedDog, final String dateOfBirth, final Gender gender,
                                final String breederMail, final Boolean pedigree, final boolean isAvailable) {
@@ -35,20 +37,20 @@ class DatabaseInitializer {
     }
 
     private static void populateWithTestData(AppDatabase db) {
-//        db.clientDao().deleteAll();
-//
-//        addClient(db,
-//                "m.p@fifa.com", "Michel", "Platini", "michel1"
-//        );
-//        addClient(db,
-//                "s.b@fifa.com", "Sepp", "Blatter", "sepp1"
-//        );
-//        addClient(db,
-//                "e.s@fifa.com", "Ebbe", "Schwartz", "ebbe1"
-//        );
-//        addClient(db,
-//                "a.c@fifa.com", "Aleksander", "Ceferin", "aleksander1"
-//        );
+        db.breederDao().deleteAll();
+
+        addBreeder(db,
+                "jean@test.com", "Jean", "Valjean", "123456"
+        );
+        addBreeder(db,
+                "gavroche@test.com", "Gavroche", null, "123456"
+        );
+        addBreeder(db,
+                "fantine@test.com", "Fantine", "", "123456"
+        );
+        addBreeder(db,
+                "victor@hugo.eng", "Victor", "Hugo", "123456"
+        );
 
         try {
             // Let's ensure that the clients are already stored in the database before we continue.
@@ -58,16 +60,16 @@ class DatabaseInitializer {
         }
 
         addDog(db,
-                "DoggyOne", "Sam", "today", Gender.Female, "test@test.fr",true, true
+                "DoggyOne", "Kenoby", "today", Gender.Female, "jean@test.com",true, true
         );
         addDog(db,
-                "DoggyTwo", "Sam","today", Gender.Female, "test@test.fr",true, true
+                "DoggyTwo", "Javert","today", Gender.Male, "jean@test.com",false, true
         );
         addDog(db,
-                "DoggyThree", "Sam","today", Gender.Female, "test@test.fr",true, true
+                "DoggyThree", "Husky","today", Gender.Female, "fantine@test.com",false, true
         );
         addDog(db,
-                "DoggyFour", "Sam","today", Gender.Female, "test@test.fr",true, true
+                "DoggyFour", "Berger allemand","today", Gender.Male, "fantine@test.com",true, true
         );
 
     }

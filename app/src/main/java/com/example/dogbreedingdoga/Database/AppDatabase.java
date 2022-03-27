@@ -62,8 +62,8 @@ public abstract class AppDatabase extends RoomDatabase {
         Executors.newSingleThreadExecutor().execute(() -> {
             database.runInTransaction(() -> {
                 Log.i(TAG, "Wipe database.");
-//                database.clientDao().deleteAll();
-//                database.accountDao().deleteAll();
+                database.breederDao().deleteAll();
+                database.dogDao().deleteAll();
 
                 DatabaseInitializer.populateDatabase(database);
             });

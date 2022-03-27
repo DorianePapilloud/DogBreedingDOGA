@@ -68,15 +68,23 @@ public class BreederProfileActivity extends BaseActivity {
     private void initiateView() {
 //        isEditable = false;
         et_ProfileEmail = findViewById(R.id.et_email);
+//        et_ProfileEmail.setEnabled(false);
         //add all elements that we can modify in edit
 //        System.out.println("=================" +breeder.getNameBreeder());
         et_ProfileName = findViewById(R.id.et_ProfileName);
+//        et_ProfileName.setEnabled(false);
         et_ProfileSurname = findViewById(R.id.et_ProfileSurname);
+//        et_ProfileSurname.setEnabled(false);
         et_ProfileAddress = findViewById(R.id.et_Address);
+//        et_ProfileAddress.setEnabled(false);
         et_ProfilePhone = findViewById(R.id.et_Phone);
+//        et_ProfilePhone.setEnabled(false);
 
         et_ProfilePwd = findViewById(R.id.et_ProfilePwd);
         et_ProfilePwdConf = findViewById(R.id.et_ProfilePwdConf);
+
+        disableTextView(et_ProfileEmail, et_ProfileName, et_ProfileSurname,
+                        et_ProfileAddress, et_ProfilePhone, et_ProfilePwd, et_ProfilePwdConf);
 
         tv_BtnEdit = findViewById(R.id.tv_BtnEditProfil);
         tv_BtnEdit.setOnClickListener(btnEditListener);
@@ -192,7 +200,7 @@ public class BreederProfileActivity extends BaseActivity {
             et_ProfileEmail.requestFocus();
             return;
         }
-        if(!Patterns.PHONE.matcher(phone).matches()){
+        if(!Patterns.PHONE.matcher(phone).matches() && !(phone.equals("") || phone.isEmpty())){ //empty or "" are accepted
             et_ProfilePhone.setError(getString((R.string.error_incorrect_phone)));
             et_ProfilePhone.requestFocus();
             return;

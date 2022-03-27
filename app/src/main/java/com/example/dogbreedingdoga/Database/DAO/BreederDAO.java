@@ -30,13 +30,16 @@ public interface BreederDAO {
     LiveData<Breeder> getBreederByEmail(String email);
 
 @Insert
-    void insertBreeder(Breeder breeder);
+    long insertBreeder(Breeder breeder);
 
 @Delete
     void deleteBreeder(Breeder breeder);
 
 @Update
     void updateBreeder(Breeder breeder);
+
+@Query("DELETE FROM breeder")
+    void deleteAll();
 
 
 }

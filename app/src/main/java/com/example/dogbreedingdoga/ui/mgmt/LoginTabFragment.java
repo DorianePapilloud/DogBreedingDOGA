@@ -17,6 +17,7 @@ import com.example.dogbreedingdoga.Database.Repository.BreederRepository;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 import com.example.dogbreedingdoga.ui.BreederProfileActivity;
 import com.example.dogbreedingdoga.R;
+import com.example.dogbreedingdoga.ui.MainActivity;
 
 public class LoginTabFragment extends Fragment {
 
@@ -140,7 +141,7 @@ public class LoginTabFragment extends Fragment {
                         editor.putString(BaseActivity.PREFS_USER, breeder.getEmail());
                         editor.apply();
 
-                        Intent intent = new Intent(this.getContext(), BreederProfileActivity.class);
+                        Intent intent = new Intent(this.getContext(), BreederProfileActivity.class); //BreederProfileActivity.class
                         startActivity(intent);
 
                         tv_email.setText("");
