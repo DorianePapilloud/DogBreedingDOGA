@@ -36,8 +36,10 @@ public class Dog implements Comparable {
     String breederMail;
     @ColumnInfo (name = "pedigree")
     Boolean pedigree;
+    @Nullable /////////////////////
     @ColumnInfo (name = "pictureDog")
     String profilePicture;
+    @Nullable /////////////////////////////
     @ColumnInfo (name = "specificationsDog")
     String specificationsDog;
     @ColumnInfo(name = "availability")

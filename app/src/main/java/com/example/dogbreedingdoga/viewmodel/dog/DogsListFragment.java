@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.example.dogbreedingdoga.Database.Entity.Dog;
 import com.example.dogbreedingdoga.Database.util.RecyclerViewItemClickListener;
@@ -39,7 +40,7 @@ public class DogsListFragment extends Fragment {
     private List<Dog> dogs;
     private RecyclerAdapter<Dog> adapter;
     private DogListViewModel viewModel;
-    private RecyclerView recyclerView;
+    private FrameLayout frameLayout;
 
     FloatingActionButton btn_add_new_dog;
 
@@ -68,7 +69,8 @@ public class DogsListFragment extends Fragment {
         System.out.println("=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= container : " +container + " and fragment_dogs_list : " +R.layout.fragment_dogs_list );
         View view = getLayoutInflater().inflate(R.layout.fragment_dogs_list, container, false);
 
-        RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_view_list_dogs);
+//        RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_view_list_dogs);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_list_dogs);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -76,6 +78,14 @@ public class DogsListFragment extends Fragment {
 
         // use a linear layout manager
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+
+        System.out.println("========================== this from DogsLIstFragment : " +this);
+        System.out.println("========================== CONTEXT from DogsLIstFragment : " +getContext());
+        System.out.println("========================== Activity from DogsLIstFragment : " +getActivity());
+        System.out.println("========================== Appli Context from DogsLIstFragment : " +getActivity().getApplication().getApplicationContext());
+        System.out.println("========================== Component type from DogsLIstFragment : " +this.getActivity().getClass().getComponentType());
+        System.out.println("========================== LAYOUT MANAGER =========" + layoutManager);
+
         recyclerView.setLayoutManager(layoutManager);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),

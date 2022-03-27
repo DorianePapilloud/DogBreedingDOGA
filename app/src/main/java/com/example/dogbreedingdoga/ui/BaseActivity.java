@@ -18,6 +18,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.dogbreedingdoga.ui.mgmt.LoginActivity;
 import com.example.dogbreedingdoga.R;
+import com.example.dogbreedingdoga.ui.mgmt.SettingsActivity;
+import com.example.dogbreedingdoga.viewmodel.dog.DogsListFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{ //implements NavigationView.OnNavigationItemSelectedListener {
@@ -61,6 +63,14 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.base_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        System.out.println("===============FRAME LAYOUT=================" + frameLayout);
+        System.out.println("===============DRAWER LAYOUR=================" + drawerLayout);
+        System.out.println("===============NAVIGATION VIEW=================" + navigationView);
+        System.out.println("===============FLCONTENT=================" + R.id.flContent);
+        System.out.println("===============this=================" + this);
+
+
+
     }
 
     @Override
@@ -80,12 +90,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
+         //Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-//    @Override
+//    @Override // ce sont peut etre les 3 petits points mais pas sur
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        // Handle action bar item clicks here. The action bar will
 //        // automatically handle clicks on the Home/Up button, so long
@@ -112,15 +122,15 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setCheckedItem(id);
 
-//        if (id == R.id.nav_client) {
-//            intent = new Intent(this, ClientActivity.class);
-//        } else if (id == R.id.nav_accounts) {
-//            intent = new Intent(this, AccountsActivity.class);
-//        } else if (id == R.id.nav_transaction) {
-//            intent = new Intent(this, TransactionActivity.class);
-//        } else if (id == R.id.nav_logout) {
-//            logout();
-//        }
+        if (id == R.id.nav_list_dogs) {
+            intent = new Intent(this, DogsListFragment.class);
+        } else if (id == R.id.nav_breeder_profile) {
+            intent = new Intent(this, BreederProfileActivity.class);
+        } else if (id == R.id.nav_settings) {
+            intent = new Intent(this, SettingsActivity.class);
+        } else if (id == R.id.nav_logout) {
+            logout();
+        }
         if (intent != null) {
             intent.setFlags(
                     Intent.FLAG_ACTIVITY_NO_ANIMATION
