@@ -1,7 +1,9 @@
 package com.example.dogbreedingdoga.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,11 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.dogbreedingdoga.helper.LocaleHelper;
 import com.example.dogbreedingdoga.ui.mgmt.LoginActivity;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.mgmt.SettingsActivity;
 import com.example.dogbreedingdoga.viewmodel.dog.DogsListFragment;
 import com.google.android.material.navigation.NavigationView;
+
+import io.paperdb.Paper;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{ //implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -51,8 +56,20 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // =========== Part of language management =========
+            //Init Paper
+        Paper.init(this);
+
+            //English as default language
+        String language = Paper.book().read("language");
+        if(language == null)
+            Paper.book().write("language", "en");
+
+        updateView((String)Paper.book().read("language"));
+        
+        // =================================================
+
         frameLayout = findViewById(R.id.flContent);
-        System.out.println("============== FLContent : " +findViewById(R.id.flContent).toString());
 
         drawerLayout = findViewById(R.id.base_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,14 +80,17 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.base_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        System.out.println("===============FRAME LAYOUT=================" + frameLayout);
-        System.out.println("===============DRAWER LAYOUR=================" + drawerLayout);
-        System.out.println("===============NAVIGATION VIEW=================" + navigationView);
-        System.out.println("===============FLCONTENT=================" + R.id.flContent);
-        System.out.println("===============this=================" + this);
+    }
 
+    private void updateView(String language) {
+        Context context = LocaleHelper.setLocale(this, language);
+        Resources resources = context.getResources();
+    }
 
-
+    // Language management
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase, "en"));
     }
 
     @Override
@@ -94,7 +114,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
 //    @Override // ce sont peut etre les 3 petits points mais pas sur
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        // Handle action bar item clicks here. The action bar will

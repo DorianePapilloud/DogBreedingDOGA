@@ -97,6 +97,13 @@ public class SettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         setupActionBar();
         setActionBarTitle(getString(R.string.title_activity_settings));
+
+//        if(findViewById(R.id.fragment_settings_container) != null) {
+//            if(savedInstanceState != null)
+//                return
+//
+//                getFragmentManager().beginTransaction().add(R.id.fragment_settings_container, new SettingsFragment()).commit();
+//        }
     }
 
     /**
@@ -161,7 +168,7 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_about);
+            addPreferencesFromResource(R.xml.preferences_screen);
             setHasOptionsMenu(true);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
@@ -180,4 +187,30 @@ public class SettingsActivity extends PreferenceActivity {
             return super.onOptionsItemSelected(item);
         }
     }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    public static class LanguagePreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.preferences_screen);
+            setHasOptionsMenu(true);
+
+            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
+            // to their values. When their values change, their summaries are
+            // updated to reflect the new value, per the Android Design
+            // guidelines.
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+            if (id == android.R.id.home) {
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
