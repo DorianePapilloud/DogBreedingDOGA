@@ -40,7 +40,10 @@ public class DogListViewModel extends AndroidViewModel {
         observableOwnDogs.setValue(null);
 
 
-        LiveData<List<Dog>> ownDogs = repository.getAllDogsByBreeder(breederId, application);
+//        LiveData<List<Dog>> ownDogs = repository.getAllDogsByBreeder(breederId, application); //independant of availability
+        //depending of dog availability :
+        boolean dogAvailable = true ;
+        LiveData<List<Dog>> ownDogs = repository.getDogsByBreederByAvailability(breederId, dogAvailable, application);
 
         // observe the changes of the entities from the database and forward them
         observableOwnDogs.addSource(ownDogs, observableOwnDogs::setValue);

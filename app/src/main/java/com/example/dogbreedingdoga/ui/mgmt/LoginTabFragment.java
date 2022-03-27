@@ -141,7 +141,7 @@ public class LoginTabFragment extends Fragment {
                         editor.putString(BaseActivity.PREFS_USER, breeder.getEmail());
                         editor.apply();
 
-                        Intent intent = new Intent(this.getContext(), BreederProfileActivity.class); //BreederProfileActivity.class
+                        Intent intent = new Intent(this.getContext(), MainActivity.class); //BreederProfileActivity.class
                         startActivity(intent);
 
                         tv_email.setText("");
