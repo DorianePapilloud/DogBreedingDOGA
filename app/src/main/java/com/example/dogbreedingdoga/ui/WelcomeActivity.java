@@ -10,11 +10,12 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.AppDatabase;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.mgmt.LoginActivity;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends BaseActivity {
 
 
         private ImageView logo, background;

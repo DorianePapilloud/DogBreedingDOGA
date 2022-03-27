@@ -53,4 +53,5 @@
     <string name="action_delete">Supprimer</string>
     <string name="action_cancel">Annuler</string>
     <string name="delete_msg">Êtes-vous sûr de vouloir supprimer votre compte ?</string>
+    <string name="language_settings_title">Langue</string>
 </resources>

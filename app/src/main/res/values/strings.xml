@@ -56,4 +56,15 @@
     <string name="delete_msg">Do you really want to delete your breeder account ?</string>
     <string name="action_delete">Delete</string>
     <string name="action_cancel">Cancel</string>
+    <string name="language_settings_title">Language</string>
+    <string name="language_en" translatable="false">English</string>
+    <string name="language_fr" translatable="false">Français</string>
+    <string-array name="pref_language_list_entries">
+        <item>@string/language_en</item>
+        <item>@string/language_fr</item>
+    </string-array>
+    <string-array name="pref_language_list_values">
+        <item>en</item>
+        <item>fr</item>
+    </string-array>
 </resources>

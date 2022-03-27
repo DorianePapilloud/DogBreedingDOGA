@@ -29,7 +29,7 @@ public class LocaleHelper {
         return setLocale(context,lang);
     }
 
-    private static Context setLocale(Context context, String lang) {
+    public static Context setLocale(Context context, String lang) {
         persist(context, lang);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             return updateResources(context, lang);
