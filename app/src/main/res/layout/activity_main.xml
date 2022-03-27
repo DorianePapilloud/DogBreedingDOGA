@@ -10,11 +10,12 @@
 
     <include
         android:id="@+id/ly_toolbarMainActivity"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-
-<!--    <androidx.fragment.app.FragmentContainerView-->
-    <com.google.android.material.navigation.NavigationView
+<!--    <com.google.android.material.navigation.NavigationView-->
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nv_NavHostView"
         android:name="androidx.navigation.fragment.NavHostFragment"
 

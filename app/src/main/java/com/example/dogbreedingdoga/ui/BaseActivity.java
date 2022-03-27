@@ -20,7 +20,7 @@ import com.example.dogbreedingdoga.ui.mgmt.LoginActivity;
 import com.example.dogbreedingdoga.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class BaseActivity extends AppCompatActivity { //implements NavigationView.OnNavigationItemSelectedListener {
+public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{ //implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String PREFS_NAME = "SharedPrefs";
     public static final String PREFS_USER = "LoggedIn";
@@ -50,7 +50,7 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
         setSupportActionBar(toolbar);
 
         frameLayout = findViewById(R.id.flContent);
-
+        System.out.println("============== FLContent : " +findViewById(R.id.flContent).toString());
 
         drawerLayout = findViewById(R.id.base_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -58,8 +58,8 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-//        navigationView = findViewById(R.id.base_nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
+        navigationView = findViewById(R.id.base_nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -78,13 +78,13 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
         super.onBackPressed();
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
+        return true;
+    }
+
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        // Handle action bar item clicks here. The action bar will
@@ -97,21 +97,21 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
 //
 //        return super.onOptionsItemSelected(item);
 //    }
-//
-//    @Override
-//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//
-//        if (id == BaseActivity.position) {
-//            drawerLayout.closeDrawer(GravityCompat.START);
-//            return false;
-//        }
-//        BaseActivity.position = id;
-//        Intent intent = null;
-//
-//        navigationView.setCheckedItem(id);
-//
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == BaseActivity.position) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return false;
+        }
+        BaseActivity.position = id;
+        Intent intent = null;
+
+        navigationView.setCheckedItem(id);
+
 //        if (id == R.id.nav_client) {
 //            intent = new Intent(this, ClientActivity.class);
 //        } else if (id == R.id.nav_accounts) {
@@ -121,15 +121,15 @@ public class BaseActivity extends AppCompatActivity { //implements NavigationVie
 //        } else if (id == R.id.nav_logout) {
 //            logout();
 //        }
-//        if (intent != null) {
-//            intent.setFlags(
-//                    Intent.FLAG_ACTIVITY_NO_ANIMATION
-//            );
-//            startActivity(intent);
-//        }
-//        drawerLayout.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
+        if (intent != null) {
+            intent.setFlags(
+                    Intent.FLAG_ACTIVITY_NO_ANIMATION
+            );
+            startActivity(intent);
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
 
 

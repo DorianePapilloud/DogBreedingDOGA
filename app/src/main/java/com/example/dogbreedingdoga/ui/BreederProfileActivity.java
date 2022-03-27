@@ -48,7 +48,7 @@ public class BreederProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breeder_profile);
 
-        getLayoutInflater().inflate(R.layout.create_new_account_tab_fragment, frameLayout);
+//        getLayoutInflater().inflate(R.layout.create_new_account_tab_fragment, frameLayout);
 
         initiateView();
 

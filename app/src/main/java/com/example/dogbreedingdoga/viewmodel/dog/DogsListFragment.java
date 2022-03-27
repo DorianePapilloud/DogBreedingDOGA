@@ -65,8 +65,8 @@ public class DogsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 //        View view = inflater.inflate(R.layout.fragment_dogs_list, container, false);
-
-        View view = getLayoutInflater().inflate(R.layout.fragment_dogs_list, container);
+        System.out.println("=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= container : " +container + " and fragment_dogs_list : " +R.layout.fragment_dogs_list );
+        View view = getLayoutInflater().inflate(R.layout.fragment_dogs_list, container, false);
 
         RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_view_list_dogs);
 
@@ -93,10 +93,10 @@ public class DogsListFragment extends Fragment {
                 Log.d(TAG, "clicked on: " + dogs.get(position).getNameDog());
 
                 Intent intent = new Intent(getActivity(), AddNewDogFragment.class);
-                intent.setFlags(
-                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
-                                Intent.FLAG_ACTIVITY_NO_HISTORY
-                );
+//                intent.setFlags(
+//                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
+//                                Intent.FLAG_ACTIVITY_NO_HISTORY
+//                );
                 intent.putExtra("accountId", dogs.get(position).getIdDog());
                 startActivity(intent);
             }
@@ -116,7 +116,7 @@ public class DogsListFragment extends Fragment {
         viewModel.getOwnDogs().observe((BaseActivity)getActivity(), dogEntities -> {
             if (dogEntities != null) {
                 dogs = dogEntities;
-//                adapter.setData(dogs); //========================================
+                adapter.setData(dogs); //========================================
             }
         });
 

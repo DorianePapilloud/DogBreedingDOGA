@@ -1,5 +1,6 @@
 package com.example.dogbreedingdoga.Database.Entity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -12,7 +13,7 @@ import com.example.dogbreedingdoga.Database.Gender;
                                     parentColumns = "email",
                                     childColumns = "breederMail",
                                     onDelete = ForeignKey.CASCADE))
-public class Dog {
+public class Dog implements Comparable {
 
     @PrimaryKey (autoGenerate = true)
     long idDog;
@@ -141,4 +142,12 @@ public class Dog {
     public boolean isAvailable() { return isAvailable; }
 
     public void setAvailable(boolean available) { isAvailable = available; }
+
+    @Override
+    public String toString() {return nameDog +", " +breedDog; }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return toString().compareTo(o.toString());
+    }
 }

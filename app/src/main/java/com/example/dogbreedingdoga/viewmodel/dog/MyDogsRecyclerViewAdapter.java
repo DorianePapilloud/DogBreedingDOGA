@@ -2,10 +2,13 @@ package com.example.dogbreedingdoga.viewmodel.dog;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.placeholder.PlaceholderContent.PlaceholderItem;
 import com.example.dogbreedingdoga.databinding.FragmentDogsBinding;
 
@@ -25,7 +28,11 @@ public class MyDogsRecyclerViewAdapter extends RecyclerView.Adapter<MyDogsRecycl
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+//        Context context = parent.getContext();
+//        LayoutInflater inflater = LayoutInflater.from(context);
+//        View view = inflater.inflate(R.layout.list_dog_item, parent, false) ;
+//
+//        return new ViewHolder(view);
         return new ViewHolder(FragmentDogsBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
 
     }

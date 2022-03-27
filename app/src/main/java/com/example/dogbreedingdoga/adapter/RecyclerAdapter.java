@@ -67,26 +67,56 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         }
     }
 
-//    public void setData(final List<T> data) {
-//        if (mData == null) {
-//            mData = data;
-//            notifyItemRangeInserted(0, data.size());
-//        } else {
-//            DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
-//                @Override
-//                public int getOldListSize() {
-//                    return mData.size();
-//                }
-//
-//                @Override
-//                public int getNewListSize() {
-//                    return data.size();
-//                }
-//
-//
-//            });
-//            mData = data;
-//            result.dispatchUpdatesTo(this);
-//        }
-//    }
+    public void setData(final List<T> data) {
+        if (mData == null) {
+            mData = data;
+            notifyItemRangeInserted(0, data.size());
+        } else {
+            DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+                @Override
+                public int getOldListSize() {
+                    return mData.size();
+                }
+
+                @Override
+                public int getNewListSize() {
+                    return data.size();
+                }
+
+                @Override
+                public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                    if(mData instanceof Dog) {
+                        return ((Dog) mData.get(oldItemPosition)).getIdDog() == (((Dog) data.get(newItemPosition)).getIdDog() );
+                    }
+                    if(mData instanceof Breeder) {
+                        return ((Breeder) mData.get(oldItemPosition)).getEmail().equals(
+                                ((Breeder) data.get(newItemPosition)).getEmail());
+                    }
+                    return false;
+                }
+
+                @Override
+                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                    if(mData instanceof Dog) {
+                        Dog newDog = (Dog) data.get(newItemPosition);
+                        Dog oldDog = (Dog) mData.get(newItemPosition);
+
+                        return Objects.equals(newDog.toString(), oldDog.toString())
+//                                newDog.toString().equals(oldDog.toString())
+                                && newDog.getBreederMail().equals(oldDog.getBreederMail());
+                    }
+                    if(data instanceof Breeder) {
+                        Breeder newBreeder = (Breeder) data.get(newItemPosition);
+                        Breeder oldBreeder = (Breeder) data.get(newItemPosition);
+
+                        return newBreeder.getEmail().equals(oldBreeder.getEmail());
+                    }
+
+                    return false;
+                }
+            });
+            mData = data;
+            result.dispatchUpdatesTo(this);
+        }
+    }
 }
