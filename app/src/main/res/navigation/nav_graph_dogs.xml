@@ -29,5 +29,9 @@
         android:id="@+id/addNewDogFragment"
         android:name="com.example.dogbreedingdoga.viewmodel.dog.AddNewDogFragment"
         android:label="fragment_add_new_dog"
-        tools:layout="@layout/fragment_add_new_dog" />
+        tools:layout="@layout/fragment_add_new_dog" >
+        <argument
+            android:name="dogId"
+            app:argType="long" />
+    </fragment>
 </navigation>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,23 +37,6 @@ public class DogsListFragment extends Fragment {
     private DogListViewModel viewModel;
 
     FloatingActionButton btn_add_new_dog;
-
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
-
-
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static DogsListFragment newInstance(int columnCount) {
-        DogsListFragment fragment = new DogsListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
 
     @Override
@@ -84,13 +68,27 @@ public class DogsListFragment extends Fragment {
                 Log.d(TAG, "clicked position:" + position);
                 Log.d(TAG, "clicked on: " + dogs.get(position).getNameDog());
 
-                Intent intent = new Intent(getContext(), BaseActivity.class);
-                intent.setFlags(
-                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
-                                Intent.FLAG_ACTIVITY_NO_HISTORY
-                );
-                intent.putExtra("accountId", dogs.get(position).getIdDog());
-                startActivity(intent);
+//                Intent intent = new Intent(getContext(), BaseActivity.class)
+//                intent.setFlags(
+//                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
+//                                Intent.FLAG_ACTIVITY_NO_HISTORY
+//                );
+//                intent.putExtra("accountId", dogs.get(position).getIdDog());
+//                startActivity(intent);
+
+                FragmentManager fragmentManager = getParentFragmentManager();
+
+                long idDog = dogs.get(position).getIdDog();
+                DogsListFragmentDirections.ActionDogsListFragmentToAddNewDogFragment action  = DogsListFragmentDirections.actionDogsListFragmentToAddNewDogFragment(idDog);
+                action.setDogId(idDog);
+                Navigation.findNavController(view).navigate(action);
+
+                System.out.println("===============================================" + idDog);
+
+                fragmentManager.beginTransaction()
+                        .replace(R.id.nv_NavHostView, AddNewDogFragment.class, null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("").commit();
             }
 
             @Override

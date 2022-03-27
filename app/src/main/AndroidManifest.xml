@@ -9,18 +9,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DogBreedingDOGA">
+        android:theme="@style/Theme.DogBreedingDOGA"
+        android:windowSoftInputMode="adjustPan|adjustResize" >
         <activity
             android:name=".ui.MainActivity"
             android:exported="false" />
         <!-- android:theme="@style/Theme.AppCompat.NoActionBar" -->
         <activity
             android:name=".ui.BreederProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.mgmt.LoginActivity"
             android:exported="false"
-            android:label="activity_login" />
+            android:label="activity_login"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.WelcomeActivity"
             android:exported="true">

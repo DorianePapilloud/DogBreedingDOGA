@@ -10,10 +10,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
@@ -26,6 +28,7 @@ public class BreederProfileActivity extends BaseActivity {
     private static final int DELETE_CLIENT = 2;
 
     private Toast toast;
+    private Toolbar toolbar;
 
 //    private boolean isEditable;
 
@@ -50,6 +53,8 @@ public class BreederProfileActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breeder_profile);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 //        getLayoutInflater().inflate(R.layout.create_new_account_tab_fragment, frameLayout);
 

@@ -23,7 +23,6 @@ public class LoginTabFragment extends Fragment {
 
     private TextView tv_email;
     private TextView tv_pass;
-    private TextView tv_registerNow;
     private Button btn_login;
     private float v = 0;
 
@@ -60,23 +59,19 @@ public class LoginTabFragment extends Fragment {
 
         tv_email = root.findViewById(R.id.et_email);
         tv_pass = root.findViewById(R.id.createPass);
-        tv_registerNow = root.findViewById(R.id.register_now);
         btn_login = root.findViewById(R.id.btn_CreateDog);
 
 
         tv_email.setTranslationY(800);
         tv_pass.setTranslationY(800);
-        tv_registerNow.setTranslationY(800);
         btn_login.setTranslationY(800);
 
         tv_email.setAlpha(v);
         tv_pass.setAlpha(v);
-        tv_registerNow.setAlpha(v);
         btn_login.setAlpha(v);
 
         tv_email.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(300).start();
         tv_pass.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(500).start();
-        tv_registerNow.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(500).start();
         btn_login.animate().translationY(0).alpha(1).setDuration(800).setStartDelay(700).start();
 
         btn_login.setOnClickListener(btnConnectListener);

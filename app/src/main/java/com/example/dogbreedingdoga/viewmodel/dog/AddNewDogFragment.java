@@ -75,7 +75,6 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private Dog dog;
     private boolean isNewDog;
 
-
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -109,8 +108,6 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
         //Retrieve the id (mail) of the connected breeder
         SharedPreferences settings = getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0);
         this.currentBreederMail = settings.getString(BaseActivity.PREFS_USER, null);
-        System.out.println("========== BREEEEDDDEEEEEEER : " +currentBreederMail +" =======================");
-
         //check if new dog and initialise checkbox Availability
         Long idDog = getActivity().getIntent().getLongExtra("idDog", 0L);
         available = true;
@@ -137,6 +134,9 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
             }
         });
+
+        long idDogFromList = AddNewDogFragmentArgs.fromBundle(getArguments()).getDogId();
+        System.out.println("================================================ " + idDogFromList);
 
 
         // =================== code à checker ========================
@@ -269,9 +269,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     );
 
     private void saveDog(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
-        System.out.println("Saperlipopette, ne passerai-je point dans ce clique ??");
-
-        if( valideDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl) ) {
+        if( validateDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl) ) {
             Dog newDog = new Dog(dogName, dogBreed, dogBirth,gender, this.currentBreederMail, pedig, avlbl);
             newDog.setSpecificationsDog(et_Description.getText().toString());
             newDog.setBreederMail(this.currentBreederMail);
@@ -296,7 +294,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
         }
     }
 
-    private boolean valideDogAttributes(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
+    private boolean validateDogAttributes(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
 
         boolean cancel = false;
         View focusView = null;
