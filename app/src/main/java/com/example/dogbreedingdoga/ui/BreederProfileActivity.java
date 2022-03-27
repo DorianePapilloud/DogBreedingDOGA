@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -36,7 +38,8 @@ public class BreederProfileActivity extends BaseActivity {
     private EditText et_ProfilePwd;
     private EditText et_ProfilePwdConf;
 
-    private TextView tv_BtnEdit;
+    private ImageView iv_BtnEdit;
+    private ImageView iv_BtnDelete;
     private TextView tv_BtnGoToDogs;
 
     private BreederViewModel viewModel;
@@ -65,20 +68,13 @@ public class BreederProfileActivity extends BaseActivity {
         });
     }
 
+
     private void initiateView() {
-//        isEditable = false;
         et_ProfileEmail = findViewById(R.id.et_email);
-//        et_ProfileEmail.setEnabled(false);
-        //add all elements that we can modify in edit
-//        System.out.println("=================" +breeder.getNameBreeder());
         et_ProfileName = findViewById(R.id.et_ProfileName);
-//        et_ProfileName.setEnabled(false);
         et_ProfileSurname = findViewById(R.id.et_ProfileSurname);
-//        et_ProfileSurname.setEnabled(false);
         et_ProfileAddress = findViewById(R.id.et_Address);
-//        et_ProfileAddress.setEnabled(false);
         et_ProfilePhone = findViewById(R.id.et_Phone);
-//        et_ProfilePhone.setEnabled(false);
 
         et_ProfilePwd = findViewById(R.id.et_ProfilePwd);
         et_ProfilePwdConf = findViewById(R.id.et_ProfilePwdConf);
@@ -86,8 +82,12 @@ public class BreederProfileActivity extends BaseActivity {
         disableTextView(et_ProfileEmail, et_ProfileName, et_ProfileSurname,
                         et_ProfileAddress, et_ProfilePhone, et_ProfilePwd, et_ProfilePwdConf);
 
-        tv_BtnEdit = findViewById(R.id.tv_BtnEditProfil);
-        tv_BtnEdit.setOnClickListener(btnEditListener);
+        iv_BtnEdit = findViewById(R.id.iv_BtnEditProfil);
+        iv_BtnEdit.setOnClickListener(btnEditListener);
+
+        iv_BtnDelete = findViewById(R.id.iv_BtnDeleteProfile);
+        iv_BtnDelete.setOnClickListener(btnDeleteListener);
+        iv_BtnDelete.setVisibility(View.INVISIBLE);
 
         tv_BtnGoToDogs = findViewById(R.id.tv_BtnGoToDogs);
         tv_BtnGoToDogs.setOnClickListener(btnGoToDogsListener);
@@ -99,8 +99,18 @@ public class BreederProfileActivity extends BaseActivity {
         public void onClick(View view) {
             //method for editing breeder
             editBreeder();
+            iv_BtnDelete.setVisibility(View.VISIBLE);
         }
     };
+
+    private View.OnClickListener btnDeleteListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //method for deleting breeder
+            deleteBreeder();
+        }
+    };
+
 
     private View.OnClickListener btnGoToDogsListener = new View.OnClickListener() {
         @Override
@@ -116,9 +126,10 @@ public class BreederProfileActivity extends BaseActivity {
         enableTextView(et_ProfileName, et_ProfileSurname, et_ProfileAddress, et_ProfilePhone, et_ProfileEmail, et_ProfilePwd, et_ProfilePwdConf);
 
         //modify 'button' text + listener
-        tv_BtnEdit.setText("Save");
+        iv_BtnEdit.setImageResource(R.drawable.ic_validate_24dp);
+
 //        tv_BtnEdit.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        tv_BtnEdit.setOnClickListener(btnSaveListener);
+        iv_BtnEdit.setOnClickListener(btnSaveListener);
 
         //Hide "GoToDogs" button
         tv_BtnGoToDogs.setVisibility(View.INVISIBLE);
@@ -215,11 +226,12 @@ public class BreederProfileActivity extends BaseActivity {
         breeder.setPassword(pwd);
 
         //restore 'Edit Profile' textview-button
-        tv_BtnEdit.setText("Edit Profile");
-        tv_BtnEdit.setOnClickListener(btnEditListener);
+        iv_BtnEdit.setImageResource(R.drawable.ic_edit);
+        iv_BtnEdit.setOnClickListener(btnEditListener);
 
         //restore 'GoToMyDogs' button
         tv_BtnGoToDogs.setVisibility(View.VISIBLE);
+        iv_BtnDelete.setVisibility(View.INVISIBLE);
 
         disableTextView(et_ProfileName, et_ProfileSurname, et_ProfileAddress, et_ProfilePhone, et_ProfileEmail);
 
@@ -255,5 +267,25 @@ public class BreederProfileActivity extends BaseActivity {
         }
         super.onBackPressed();
         startActivity(new Intent(this, BreederProfileActivity.class));
+    }
+
+    private void deleteBreeder() {
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(getString(R.string.action_delete));
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage(getString(R.string.delete_msg));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.action_delete), (dialog, which) -> {
+            viewModel.deleteBreeder(breeder, new OnAsyncEventListener() {
+                @Override
+                public void onSuccess() {
+                    logout();
+                }
+
+                @Override
+                public void onFailure(Exception e) {}
+            });
+        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.action_cancel), (dialog, which) -> alertDialog.dismiss());
+        alertDialog.show();
     }
 }

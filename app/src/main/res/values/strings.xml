@@ -53,4 +53,7 @@
     <string name="title_activity_list_dogs">Dogs list</string>
     <string name="action_logout">Logout</string>
     <string name="title_activity_breeder">My Profile</string>
+    <string name="delete_msg">Do you really want to delete your client account?</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_cancel">Cancel</string>
 </resources>

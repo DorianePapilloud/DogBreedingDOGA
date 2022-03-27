@@ -255,6 +255,7 @@
         android:layout_marginRight="20dp"
         android:background="@color/grey" />
 
+
     <TextView
         android:id="@+id/tv_BtnGoToDogs"
         android:layout_width="340dp"
@@ -263,8 +264,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="118dp"
         android:background="@drawable/bg_button_gotodogs"
         android:drawableLeft="@drawable/paws"
         android:gravity="center"
@@ -274,25 +275,33 @@
         android:textSize="25dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_BtnEditProfil"
-        android:layout_width="118dp"
+    <ImageView
+        android:id="@+id/iv_BtnEditProfil"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ly_ProfilePicture"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="-10dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="1dp"
-        android:background="@drawable/bg_button_profile"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="554dp"
         android:clickable="true"
-        android:drawableLeft="@drawable/ic_edit"
-        android:gravity="center"
-        android:paddingLeft="10dp"
-        android:state_focused="true"
-        android:text="@string/btn_EditProfile"
-        android:textColor="@color/myColor"
-        android:textSize="15dp" />
+        android:src="@drawable/ic_edit"
+        android:state_focused="true" />
+
+    <ImageView
+        android:id="@+id/iv_BtnDeleteProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="-10dp"
+        android:layout_marginEnd="186dp"
+        android:layout_marginBottom="47dp"
+        android:clickable="true"
+        android:src="@drawable/ic_delete_24dp"
+        android:state_focused="true" />
 
     <LinearLayout
         android:id="@+id/ly_ProfilePwd"

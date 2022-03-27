@@ -80,7 +80,7 @@ public class BreederViewModel extends AndroidViewModel {
         repository.update(breeder, callback, application);
     }
 
-    public void deleteClient(Breeder breeder, OnAsyncEventListener callback) {
+    public void deleteBreeder(Breeder breeder, OnAsyncEventListener callback) {
         repository.delete(breeder, callback, application);
 
     }
