@@ -64,4 +64,5 @@
     <string name="str_welcome_fragment">Bienvenue sur DoGa Breeders</string>
     <string name="str_sign_up">S\'inscrire</string>
     <string name="str_Password_conf">Confirmer mot de passe</string>
+    <string name="logout_msg">Voulez-vous vous déconnecter ?</string>
 </resources>
