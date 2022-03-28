@@ -130,7 +130,6 @@ public class AddNewDogFragment extends Fragment {
             if (dogEntity != null) {
                 dog = dogEntity;
                 updateContent();
-
             }
         });
 

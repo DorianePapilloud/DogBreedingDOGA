@@ -114,18 +114,18 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    @Override // ce sont peut etre les 3 petits points mais pas sur
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        if (item.getItemId() == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override // ce sont peut etre les 3 petits points mais pas sur
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        if (item.getItemId() == R.id.action_settings) {
+//            Intent intent = new Intent(this, SettingsActivity.class);
+//            startActivity(intent);
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -142,7 +142,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setCheckedItem(id);
 
         if (id == R.id.nav_list_dogs) {
-            intent = new Intent(this, DogsListFragment.class);
+            intent = new Intent(this, MainActivity.class);
         } else if (id == R.id.nav_breeder_profile) {
             intent = new Intent(this, BreederProfileActivity.class);
         } else if (id == R.id.nav_settings) {
@@ -151,9 +151,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         else if (id == R.id.language_en){
             Paper.book().write("language", "en");
             updateView((String)Paper.book().read("language"));
+            intent = new Intent(this, BreederProfileActivity.class);
         } else if(id == R.id.language_fr) {
             Paper.book().write("language", "fr");
             updateView((String)Paper.book().read("language"));
+            intent = new Intent(this, BreederProfileActivity.class);
         } //end language choice
         else if (id == R.id.nav_logout) {
             logout();
@@ -182,7 +184,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
-
 
     public View.OnClickListener btnLogoutListener = new View.OnClickListener() {
         @Override
