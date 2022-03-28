@@ -54,6 +54,7 @@
     <string name="action_logout">Logout</string>
     <string name="title_activity_breeder">My Profile</string>
     <string name="delete_msg">Do you really want to delete your breeder account ?</string>
+    <string name="delete_msg_dog">Do you really want to delete this dog ?</string>
     <string name="action_delete">Delete</string>
     <string name="action_cancel">Cancel</string>
     <string name="str_hi_there">Hi there! Nice to see you again.</string>

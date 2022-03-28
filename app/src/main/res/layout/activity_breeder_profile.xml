@@ -28,7 +28,7 @@
             android:id="@+id/iv_PictureProfile"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:src="@drawable/arthur"></de.hdodenhof.circleimageview.CircleImageView>
+            android:src="@drawable/profile"></de.hdodenhof.circleimageview.CircleImageView>
 
         <View
             android:layout_width="match_parent"

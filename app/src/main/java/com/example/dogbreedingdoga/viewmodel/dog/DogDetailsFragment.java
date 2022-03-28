@@ -2,20 +2,21 @@ package com.example.dogbreedingdoga.viewmodel.dog;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dogbreedingdoga.Database.Entity.Dog;
 import com.example.dogbreedingdoga.Database.Repository.DogRepository;
+import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
-import com.example.dogbreedingdoga.ui.BaseActivity;
-import com.example.dogbreedingdoga.viewmodel.breeder.BreederViewModel;
 
 public class DogDetailsFragment extends Fragment {
 
@@ -34,6 +35,9 @@ public class DogDetailsFragment extends Fragment {
     private DogRepository dogRepository;
     private DogViewModel viewModel;
     private long idDoggy;
+
+    private ImageView iv_BtnDelete;
+    private ImageView iv_BtnEdit;
 
 
 //
@@ -96,6 +100,14 @@ public class DogDetailsFragment extends Fragment {
             }
         });
 
+
+        iv_BtnEdit = view.findViewById(R.id.iv_BtnEditDog);
+        iv_BtnEdit.setOnClickListener(btnEditListener);
+
+        iv_BtnDelete = view.findViewById(R.id.iv_BtnDeleteDog);
+        iv_BtnDelete.setOnClickListener(btnDeleteListener);
+
+
         return view;
     }
 
@@ -109,6 +121,7 @@ public class DogDetailsFragment extends Fragment {
         tv_birthDateDog = getActivity().findViewById(R.id.tv_dog_details_birth);
         tv_birthDateDog.setText(dog.getDateOfBirth());
 
+        /// mention if parents are null
 //        tv_mother = getActivity().findViewById(R.id.tv_dog_details_mother);
 //        tv_mother.setText(dog.getIdMother());
 //
@@ -121,6 +134,56 @@ public class DogDetailsFragment extends Fragment {
         }
         tv_pedigree.setText(R.string.str_NoPedigree);
 
+    }
+
+
+    private View.OnClickListener btnEditListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //call fragment add a new dog for edition
+            Bundle data = new Bundle();
+            data.putLong("DogID", idDoggy);
+            AddNewDogFragment addNewDogFragment = new AddNewDogFragment();
+            addNewDogFragment.setArguments(data);
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.nv_NavHostView, addNewDogFragment)
+                    .setReorderingAllowed(true)
+                    .addToBackStack("").commit();
+        }
+    };
+
+    private View.OnClickListener btnDeleteListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //method for deleting breeder
+            deleteDog();
+        }
+    };
+
+
+    private void deleteDog() {
+        final AlertDialog alertDialog = new AlertDialog.Builder(this.getActivity()).create();
+        alertDialog.setTitle(getString(R.string.action_delete));
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage(getString(R.string.delete_msg_dog));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.action_delete), (dialog, which) -> {
+            viewModel.deleteDog(dog, new OnAsyncEventListener() {
+                @Override
+                public void onSuccess() {
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
+                            .setReorderingAllowed(true)
+                            .addToBackStack("").commit();
+                }
+
+                @Override
+                public void onFailure(Exception e) {}
+            });
+        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.action_cancel), (dialog, which) -> alertDialog.dismiss());
+        alertDialog.show();
     }
 
 }

@@ -59,4 +59,5 @@
     <string name="str_login">Connexion</string>
     <string name="str_dogGender">Genre</string>
     <string name="str_dogDateOfBirht">Date de naissance</string>
+    <string name="delete_msg_dog">Êtes-vous sûr de vouloir supprimer ce chien ?</string>
 </resources>

@@ -25,6 +25,7 @@
             android:textStyle="bold"
             />
 
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -50,7 +51,7 @@
             android:layout_height="20dp"
             android:src="@drawable/ic_breed_24dp"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogTVwidth"
             android:layout_height="wrap_content"
             android:text="@string/str_DogBreed"
             android:textStyle="bold"
@@ -61,13 +62,10 @@
 
         <TextView
             android:id="@+id/tv_dog_details_breed"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogEditable"
             android:layout_height="wrap_content"
-            android:text="Samoyed"
-            android:layout_marginLeft="65dp"
-            android:textSize="15dp"
             android:textColor="@color/grey"
-            />
+            android:textSize="15dp" />
 
     </LinearLayout>
     <View
@@ -93,7 +91,7 @@
             android:layout_height="20dp"
             android:src="@drawable/ic_gender_24dp"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogTVwidth"
             android:layout_height="wrap_content"
             android:text="@string/str_dogGender"
             android:textStyle="bold"
@@ -104,10 +102,8 @@
 
         <TextView
             android:id="@+id/tv_dog_details_gender"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogEditable"
             android:layout_height="wrap_content"
-            android:text="Female"
-            android:layout_marginLeft="60dp"
             android:textSize="15dp"
             android:textColor="@color/grey"
             />
@@ -136,7 +132,7 @@
             android:layout_height="20dp"
             android:src="@drawable/ic_calendar"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogTVwidth"
             android:layout_height="wrap_content"
             android:text="@string/str_dogDateOfBirht"
             android:textStyle="bold"
@@ -147,10 +143,8 @@
 
         <TextView
             android:id="@+id/tv_dog_details_birth"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogEditable"
             android:layout_height="wrap_content"
-            android:text="01.08.2023"
-            android:layout_marginLeft="25dp"
             android:textSize="15dp"
             android:textColor="@color/grey"
             />
@@ -179,7 +173,7 @@
             android:layout_height="20dp"
             android:src="@drawable/ic_parents_24dp"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogTVwidth"
             android:layout_height="wrap_content"
             android:text="@string/str_DogMother"
             android:textStyle="bold"
@@ -190,10 +184,8 @@
 
         <TextView
             android:id="@+id/tv_dog_details_mother"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogEditable"
             android:layout_height="wrap_content"
-            android:text="Rafale Jenna"
-            android:layout_marginLeft="60dp"
             android:textSize="15dp"
             android:textColor="@color/grey"
             />
@@ -223,7 +215,7 @@
             android:layout_height="20dp"
             android:src="@drawable/ic_parents_24dp"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogTVwidth"
             android:layout_height="wrap_content"
             android:text="@string/str_DogFather"
             android:textStyle="bold"
@@ -234,10 +226,8 @@
 
         <TextView
             android:id="@+id/tv_dog_details_father"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogEditable"
             android:layout_height="wrap_content"
-            android:text="Neji"
-            android:layout_marginLeft="65dp"
             android:textSize="15dp"
             android:textColor="@color/grey"
             />
@@ -267,7 +257,7 @@
             android:layout_height="20dp"
             android:src="@drawable/ic__star_24dp"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogTVwidth"
             android:layout_height="wrap_content"
             android:text="@string/str_DogPedigree"
             android:textStyle="bold"
@@ -278,10 +268,8 @@
 
         <TextView
             android:id="@+id/tv_dog_details_pedigree"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dim_ProfileDogEditable"
             android:layout_height="wrap_content"
-            android:text="Yes"
-            android:layout_marginLeft="45dp"
             android:textSize="15dp"
             android:textColor="@color/grey"
             />
@@ -311,6 +299,29 @@
             android:src="@drawable/plume"/>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_BtnEditDog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_edit"
+        android:state_focused="true" />
+
+    <ImageView
+        android:id="@+id/iv_BtnDeleteDog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:paddingTop="20dp"
+        android:src="@drawable/ic_delete_24dp"
+        android:state_focused="true" />
 
 
 
