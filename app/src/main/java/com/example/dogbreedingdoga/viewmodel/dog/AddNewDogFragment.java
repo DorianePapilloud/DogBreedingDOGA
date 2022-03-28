@@ -1,6 +1,8 @@
 package com.example.dogbreedingdoga.viewmodel.dog;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
@@ -9,7 +11,11 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
@@ -21,6 +27,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -33,6 +40,7 @@ import com.example.dogbreedingdoga.Database.Gender;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.BaseActivity;
+import com.example.dogbreedingdoga.ui.DatePickerFragment;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -42,7 +50,7 @@ import java.util.Calendar;
  * Use the {@link AddNewDogFragment #newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+public class AddNewDogFragment extends Fragment {
 
     private static final String TAG = "New Dog added" ;
 
@@ -69,6 +77,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private TextView tvDate;
 
     private Toast toast;
+    private final static int REQUEST_CODE = 11;
 
     private String currentBreederMail;
 
@@ -110,16 +119,6 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
         this.currentBreederMail = settings.getString(BaseActivity.PREFS_USER, null);
         //check if new dog and initialise checkbox Availability
         Long idDog = getActivity().getIntent().getLongExtra("idDog", 0L);
-        available = true;
-        if(idDog == 0L) {
-            cb_Availability = new CheckBox(getContext());
-            cb_Availability.setChecked(true);
-            isNewDog = true;
-        } else {
-            cb_Availability = root.findViewById(R.id.cb_availability);
-//            cb_Availability.setChecked();
-            isNewDog = false;
-        }
 
         //UI initialisation
         initialisation(root);
@@ -139,38 +138,41 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 //        System.out.println("================================================ " + idDogFromList);
 
 
-        // =================== code à checker ========================
+        // =================== code à checker - DatePicker ========================
 
+        //get fragment manager to launch from datepicker fragment
+        final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
 
-        //this code will open a calendar in which you can select a date
-//        tvDate = root.findViewById(R.id.tv_birth);
-//        ImageButton btnDate = (ImageButton) root.findViewById(R.id.ib_birth);
-//        btnDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DatePickerFragment datePicker = new DatePickerFragment();
-//                System.out.println("=========== FROM onClick - AddNewDogFragment =========== +" +
-//                        "\ngetActivity : " +getActivity() +"\nGET_CONTEXT : " +getContext()
-//                        +"\nPARENT_FRAGMENT : " +getParentFragment()
-//                        +"\nPARENT_FRAGMENT MANAGER : " +getParentFragmentManager()
-//                        +"\nChildFragmentManager : " +getChildFragmentManager()
-//                        +"\n======================================================");
-//                datePicker.show(getChildFragmentManager(), "Date picker"); //.getSupportFragmentManager()
-//            }
-//        });
+        ImageButton btnDate = (ImageButton) root.findViewById(R.id.ib_birth);
+        btnDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               DialogFragment newFrag = new DatePickerFragment();
+
+                newFrag.setTargetFragment(AddNewDogFragment.this, REQUEST_CODE);
+//
+//                newFrag.show( root.getA, "datePicker");
+                showDatePickerDialog(view);
+            }
+        });
 
         // ============================================================
 
-
-
         return root;
     }
+
 
     private void initialisation(ViewGroup root) {
         et_NameDog = root.findViewById(R.id.et_name_dog);
         et_BreedDog = root.findViewById(R.id.et_breed);
         tv_BirthDateDog = root.findViewById(R.id.tv_birth);
+        tv_PedigInfo = root.findViewById(R.id.tv_PedigreeInfo);
         et_Description = root.findViewById(R.id.et_DogDescription);
+        tvDate = root.findViewById(R.id.tv_birth);
+
+        //initiate checkbox and manage availability according to this checkBox value
+        checkBoxAvailabilityManagement(root);
 
         //code for implementing picture selector
         imageView = root.findViewById(R.id.iv_add_picture_dog);
@@ -193,6 +195,28 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
                         pedigree,
                         available
                         );
+        });
+
+    }
+
+    private void checkBoxAvailabilityManagement(ViewGroup root) {
+        //initiate checkbox and set at true
+        cb_Availability = root.findViewById(R.id.cb_availability);
+        cb_Availability.setChecked(true);
+        if(cb_Availability.isChecked()) {
+            available = true;
+        }
+        else {available = false;}
+
+        cb_Availability.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(cb_Availability.isChecked()) {
+                    available = true;
+                }
+                else {available = false;}
+            }
         });
 
     }
@@ -225,16 +249,18 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private void pedigreeManagement(ViewGroup root) {
         //pedigree management based on switch
         tv_PedigInfo = root.findViewById(R.id.tv_PedigreeInfo);
+        tv_PedigInfo.setFocusable(false); //avoid tab stop
         Switch pedig = (Switch) root.findViewById(R.id.sw_pedigree);
         //check initial state
+        pedig.setChecked(false);
         if(pedig.isChecked()){
             pedigree = true;
             tv_PedigInfo.setText(R.string.str_Pedigree);
-            tv_PedigInfo.setTextColor(Color.GREEN);
+            tv_PedigInfo.setTextColor(getResources().getColor(R.color.niceGreen_teal_700));
         } else {
             pedigree = false;
             tv_PedigInfo.setText(R.string.str_NoPedigree);
-            tv_PedigInfo.setTextColor(Color.red(R.color.myColor));
+            tv_PedigInfo.setTextColor(getResources().getColor(R.color.myColor));
         }
         pedig.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -242,12 +268,12 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
                 if(pedig.isChecked()){
                     pedigree = true;
                     tv_PedigInfo.setText(R.string.str_Pedigree);
-                    tv_PedigInfo.setTextColor(Color.red(R.color.myColor));
+                    tv_PedigInfo.setTextColor(getResources().getColor(R.color.niceGreen_teal_700));
                 }
                 else {
                     pedigree = false;
                     tv_PedigInfo.setText(R.string.str_NoPedigree);
-                    tv_PedigInfo.setTextColor(Color.GREEN);
+                    tv_PedigInfo.setTextColor(getResources().getColor(R.color.myColor));
                 }
             }
         });
@@ -268,6 +294,18 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
             }
     );
 
+    private void showDatePickerDialog(View view) {
+
+        DialogFragment newFrag = new DatePickerFragment();
+
+//        newFrag.setTargetFragment(AddNewDogFragment.this, REQUEST_CODE);
+
+        DialogFragment dateShower = new DatePickerFragment();
+        dateShower.show(getActivity().getSupportFragmentManager(), "datePicker");
+//        newFrag.show(this.getActivity().getSupportFragmentManager(), "datePicker");
+//        int day = datePicker. getDayOfMonth();
+    }
+
     private void saveDog(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
         if( validateDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl) ) {
             Dog newDog = new Dog(dogName, dogBreed, dogBirth,gender, this.currentBreederMail, pedig, avlbl);
@@ -280,8 +318,17 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
                 @Override
                 public void onSuccess() {
                     Log.d(TAG, getString(R.string.msg_DogCreated));
+
+
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
+                            .setReorderingAllowed(true)
+                            .addToBackStack("").commit();
+
                     toast = Toast.makeText(getContext(), getString(R.string.msg_DogCreated), Toast.LENGTH_LONG);
                     toast.show();
+
                 }
 
                 @Override
@@ -344,13 +391,23 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     }
 
     @Override
-    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-
-        tvDate.setText(currentDateString);
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            String selectedDate = data.getStringExtra("selectedDate");
+            tv_BirthDateDog.setText(selectedDate);
+        }
     }
+
+
+//    @Override
+//    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+//        System.out.println("FROM ADDNewDogFragment CALENDAR");
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.YEAR, year);
+//        calendar.set(Calendar.MONTH, month);
+//        calendar.set(Calendar.DAY_OF_MONTH, day);
+//        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+//
+//        tvDate.setText(currentDateString);
+//    }
 }

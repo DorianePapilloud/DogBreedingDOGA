@@ -147,7 +147,7 @@ public class Dog implements Comparable {
     public void setAvailable(boolean available) { isAvailable = available; }
 
     @Override
-    public String toString() {return nameDog +", " +breedDog; }
+    public String toString() {return nameDog +", " +breederMail; }
 
     @Override
     public int compareTo(@NonNull Object o) {

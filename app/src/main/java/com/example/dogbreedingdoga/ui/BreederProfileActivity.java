@@ -75,19 +75,19 @@ public class BreederProfileActivity extends BaseActivity {
 
     private void initiateView() {
         //Toolbar
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        frameLayout = findViewById(R.id.flContent);
-
-        drawerLayout = findViewById(R.id.base_drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView = findViewById(R.id.base_nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        frameLayout = findViewById(R.id.flContent);
+//
+//        drawerLayout = findViewById(R.id.base_drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawerLayout.addDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        navigationView = findViewById(R.id.base_nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
         //End toolbar
 
         et_ProfileEmail = findViewById(R.id.et_email);

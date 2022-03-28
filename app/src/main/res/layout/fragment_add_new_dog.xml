@@ -224,6 +224,7 @@
             android:id="@+id/cb_availability"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:state_checked="true"
             android:text="@string/str_Availability"
             app:layout_constraintBottom_toTopOf="@+id/et_name_dog"
             app:layout_constraintEnd_toEndOf="@+id/et_name_dog"
