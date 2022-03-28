@@ -156,7 +156,8 @@ public class SettingsActivity extends PreferenceActivity {
      */
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
-                || AboutPreferenceFragment.class.getName().equals(fragmentName);
+                || AboutPreferenceFragment.class.getName().equals(fragmentName)
+                || LanguagePreferenceFragment.class.getName().equals(fragmentName);
     }
 
     /**

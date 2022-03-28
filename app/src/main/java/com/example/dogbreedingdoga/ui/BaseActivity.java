@@ -114,18 +114,18 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-//    @Override // ce sont peut etre les 3 petits points mais pas sur
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        if (item.getItemId() == R.id.action_settings) {
-//            Intent intent = new Intent(this, SettingsActivity.class);
-//            startActivity(intent);
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override // ce sont peut etre les 3 petits points mais pas sur
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        if (item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
