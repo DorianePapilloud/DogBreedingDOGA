@@ -3,7 +3,9 @@ package com.example.dogbreedingdoga.ui;
 import static com.example.dogbreedingdoga.Database.AppDatabase.initializeDemoData;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -29,7 +31,7 @@ public class WelcomeActivity extends BaseActivity {
                 super.onCreate(savedInstances);
                 setContentView(R.layout.activity_welcome);
 
-                initializeDemoData(AppDatabase.getInstance(this));
+//                initializeDemoData(AppDatabase.getInstance(this));
 
                 logo = findViewById(R.id.logo);
                 background = findViewById(R.id.imageView2);
@@ -47,19 +49,35 @@ public class WelcomeActivity extends BaseActivity {
                         public void run() {
                                 //Verify if a user disconnect without loggout. In this case, run his profile
                                 // 1 ATTENTION SI 1ère utilisation -> à check
-                                if((SharedPreferences) getSharedPreferences(BaseActivity.PREFS_NAME, 0) != null) {
-                                        SharedPreferences currentSession = (SharedPreferences) getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-                                        String currentUser = currentSession.getString(BaseActivity.PREFS_USER, null);
 
-                                        Intent intent = new Intent(WelcomeActivity.this, MainActivity.class); //BreederProfileActivity.class
-                                        startActivity(intent);
-                                }
-                                else {
+
+//                                SharedPreferences activeSession = getPreferences(Context.MODE_PRIVATE);
+//                                SharedPreferences.Editor editor = activeSession.edit();;
+//                                editor.putString("login", response)
+
+//                                if(PreferenceManager.getDefaultSharedPreferences(getApplication()).getString(BaseActivity.PREFS_USER, null) != null) { //(SharedPreferences) getSharedPreferences(BaseActivity.PREFS_USER, 0) != null
+//                                        System.out.println("PASSE PAR LOGIN DIRECT : ");
+//                                        SharedPreferences currentSession = PreferenceManager.getDefaultSharedPreferences(getApplication()); //(SharedPreferences) getSharedPreferences(BaseActivity.PREFS_NAME, 0);
+//                                        String currentUser = currentSession.getString(BaseActivity.PREFS_USER, null);
+//
+//                                        if(!currentUser.equals("")) {
+//                                                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class); //BreederProfileActivity.class
+//                                                startActivity(intent);
+//                                        }
+//                                        else{
+//                                                getSupportFragmentManager();
+//                                                setContentView(R.layout.activity_login);
+//                                                Intent i3 = new Intent(WelcomeActivity.this, LoginActivity.class);
+//                                                startActivity(i3);
+//                                        }
+//                                }
+//                                else {
+//                                        System.out.println("PASSE PAR LOGGIN ");
                                         getSupportFragmentManager();
                                         setContentView(R.layout.activity_login);
                                         Intent i3 = new Intent(WelcomeActivity.this, LoginActivity.class);
                                         startActivity(i3);
-                                }
+//                                }
                         }
                 }, _splashTime);
 

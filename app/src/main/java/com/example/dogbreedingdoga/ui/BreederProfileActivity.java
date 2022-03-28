@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -54,7 +55,6 @@ public class BreederProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breeder_profile);
 
-
 //        getLayoutInflater().inflate(R.layout.create_new_account_tab_fragment, frameLayout);
 
         initiateView();
@@ -74,6 +74,22 @@ public class BreederProfileActivity extends BaseActivity {
 
 
     private void initiateView() {
+        //Toolbar
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        frameLayout = findViewById(R.id.flContent);
+
+        drawerLayout = findViewById(R.id.base_drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView = findViewById(R.id.base_nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        //End toolbar
+
         et_ProfileEmail = findViewById(R.id.et_email);
         et_ProfileName = findViewById(R.id.et_ProfileName);
         et_ProfileSurname = findViewById(R.id.et_ProfileSurname);
