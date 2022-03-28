@@ -84,7 +84,7 @@ public class AddNewDogFragment extends Fragment {
 
     private Dog dog;
     private boolean isNewDog;
-    private long idDoggy = 0;
+    private long idDoggy;
 
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
@@ -122,16 +122,18 @@ public class AddNewDogFragment extends Fragment {
         //check if new dog and initialise checkbox Availability
 //        Long idDog = getActivity().getIntent().getLongExtra("idDog", 0L);
 
+        //UI initialisation
+        initialisation(root);
+
+        idDoggy = 0;
         Bundle data = getArguments();
         if(data != null){
             idDoggy = data.getLong("DogID");
         }
-        //UI initialisation
-        initialisation(root);
 
         // check if we received an id dog from previous fragment
         if(idDoggy != 0){
-            isNewDog = true;
+            isNewDog = false;
 
         DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDoggy, currentBreederMail);
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
@@ -179,6 +181,7 @@ public class AddNewDogFragment extends Fragment {
         tv_PedigInfo = root.findViewById(R.id.tv_PedigreeInfo);
         et_Description = root.findViewById(R.id.et_DogDescription);
         tvDate = root.findViewById(R.id.tv_birth);
+
 
         //initiate checkbox and manage availability according to this checkBox value
         checkBoxAvailabilityManagement(root);
@@ -317,36 +320,66 @@ public class AddNewDogFragment extends Fragment {
 
     private void saveDog(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
         if( validateDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl) ) {
-            Dog newDog = new Dog(dogName, dogBreed, dogBirth,gender, this.currentBreederMail, pedig, avlbl);
-            newDog.setSpecificationsDog(et_Description.getText().toString());
-            newDog.setBreederMail(this.currentBreederMail);
+            Dog dog = new Dog(dogName, dogBreed, dogBirth,gender, this.currentBreederMail, pedig, avlbl);
+            dog.setSpecificationsDog(et_Description.getText().toString());
+            dog.setBreederMail(this.currentBreederMail);
 
             //set mother + father
 
-            viewModel.createDog(newDog, new OnAsyncEventListener() {
-                @Override
-                public void onSuccess() {
-                    Log.d(TAG, getString(R.string.msg_DogCreated));
+            if(isNewDog==true) { //We need to create the new dog
+                viewModel.createDog(dog, new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, getString(R.string.msg_DogCreated));
 
 
-                    FragmentManager fragmentManager = getParentFragmentManager();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
-                            .setReorderingAllowed(true)
-                            .addToBackStack("").commit();
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
+                                .setReorderingAllowed(true)
+                                .addToBackStack("").commit();
 
-                    toast = Toast.makeText(getContext(), getString(R.string.msg_DogCreated), Toast.LENGTH_LONG);
-                    toast.show();
+                        toast = Toast.makeText(getContext(), getString(R.string.msg_DogCreated), Toast.LENGTH_LONG);
+                        toast.show();
 
-                }
+                    }
 
-                @Override
-                public void onFailure(Exception e) {
-                    Log.d(TAG, "createDog: failure", e);
-                    toast = Toast.makeText(getContext(), getString(R.string.msg_DogNOTCreated), Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            });
+                    @Override
+                    public void onFailure(Exception e) {
+                        Log.d(TAG, "createDog: failure", e);
+                        toast = Toast.makeText(getContext(), getString(R.string.msg_DogNOTCreated), Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                });
+            }
+
+            else { // we need to update the dog
+                viewModel.updateDog(dog, new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, getString(R.string.msg_DogCreated));
+
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
+                                .setReorderingAllowed(true)
+                                .addToBackStack("").commit();
+
+                        toast = Toast.makeText(getContext(), getString(R.string.msg_DogCreated), Toast.LENGTH_LONG);
+                        toast.show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+                        Log.d(TAG, "createDog: failure", e);
+                        toast = Toast.makeText(getContext(), getString(R.string.msg_DogNOTCreated), Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                });
+
+            }
+
         }
     }
 
@@ -401,7 +434,7 @@ public class AddNewDogFragment extends Fragment {
             rb_Male = getActivity().findViewById(R.id.rb_DogMale);
             rb_Female = getActivity().findViewById(R.id.rb_DogFemale);
 
-            btn_AddDog = getActivity().findViewById(R.id.btn_add_dog);
+            btn_AddDog = getActivity().findViewById(R.id.btn_CreateDog);
             btn_AddDog.setText(R.string.str_save);
 
             // we need to check how to do this
