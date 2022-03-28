@@ -2,10 +2,10 @@
 
     <!-- These settings headers are only used on tablets. -->
 
-<!--    <header-->
-<!--        android:fragment="com.example.dogbreedingdoga.ui.mgmt.SettingsActivity$AboutPreferenceFragment"-->
-<!--        android:icon="@drawable/ic_info_black_24dp"-->
-<!--        android:title="@string/language_settings_title" />-->
+    <header
+        android:fragment="com.example.dogbreedingdoga.ui.mgmt.SettingsActivity$LanguagePreferenceFragment"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="@string/language_settings_title" />
 
     <header
         android:fragment="com.example.dogbreedingdoga.ui.mgmt.SettingsActivity$AboutPreferenceFragment"
