@@ -26,6 +26,7 @@ public class DogDetailsFragment extends Fragment {
 
     private TextView tv_gender;
     private TextView tv_mother;
+    private TextView tv_father;
     private TextView tv_pedigree;
 
     private Dog dog;
@@ -84,9 +85,9 @@ public class DogDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = getLayoutInflater().inflate(R.layout.fragment_dog_details, container, false);
 
-        Long dogId = getActivity().getIntent().getLongExtra("dogId", 0L);
+//        Long dogId = getActivity().getIntent().getLongExtra("dogId", 0L);
 
-        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), dogId, dog.getBreederMail());
+        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDoggy, "test@test.fr");
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
         viewModel.getDog().observe(getActivity(), dogEntity -> {
             if (dogEntity != null) {
@@ -99,9 +100,26 @@ public class DogDetailsFragment extends Fragment {
     }
 
     private void getDataFromIdDog() {
-
         tv_nameDog = getActivity().findViewById(R.id.tv_dog_details_name_dog);
         tv_nameDog.setText(dog.getNameDog());
+
+        tv_breedDog = getActivity().findViewById(R.id.tv_dog_details_breed);
+        tv_breedDog.setText(dog.getBreedDog());
+
+        tv_birthDateDog = getActivity().findViewById(R.id.tv_dog_details_birth);
+        tv_birthDateDog.setText(dog.getDateOfBirth());
+
+//        tv_mother = getActivity().findViewById(R.id.tv_dog_details_mother);
+//        tv_mother.setText(dog.getIdMother());
+//
+//        tv_father = getActivity().findViewById(R.id.tv_dog_details_father);
+//        tv_father.setText(dog.getIdFather());
+
+        tv_pedigree = getActivity().findViewById(R.id.tv_dog_details_pedigree);
+        if(dog.getPedigree() == true) {
+            tv_pedigree.setText(R.string.str_Pedigree);
+        }
+        tv_pedigree.setText(R.string.str_NoPedigree);
 
     }
 
