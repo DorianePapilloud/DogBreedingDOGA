@@ -8,14 +8,31 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import com.example.dogbreedingdoga.Database.Entity.Dog;
+import com.example.dogbreedingdoga.Database.Repository.DogRepository;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 import com.example.dogbreedingdoga.viewmodel.breeder.BreederViewModel;
 
 public class DogDetailsFragment extends Fragment {
 
-    BaseActivity baseActivity = new BaseActivity();
+
+    private TextView tv_nameDog;
+    private TextView tv_breedDog;
+    private TextView tv_birthDateDog;
+
+    private TextView tv_gender;
+    private TextView tv_mother;
+    private TextView tv_pedigree;
+
+    private Dog dog;
+
+    private DogRepository dogRepository;
+    private DogViewModel viewModel;
+    private long idDoggy;
 
 
 //
@@ -51,25 +68,41 @@ public class DogDetailsFragment extends Fragment {
 //    }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+//        long idDoggy = savedInstanceState.getLong("DogID", 0L);
+
+
+        Bundle data = getArguments();
+        if(data != null){
+            idDoggy = data.getLong("DogID");
+        }
+
         // Inflate the layout for this fragment
         View view = getLayoutInflater().inflate(R.layout.fragment_dog_details, container, false);
-//        view. navigationView.setCheckedItem(baseActivity.position);
-//
-//        Long dogId = getActivity().getIntent().getLongExtra("dogId", 0L);
-//
-//
-//        DogViewModel.Factory factory = new DogViewModel(getActivity().getApplication(), dogId, );
-//        viewModel = new ViewModelProvider(this, factory).get(BreederViewModel.class);
-//        viewModel.getBreeder().observe(this, accountEntity -> {
-//            if (accountEntity != null) {
-//                breeder = accountEntity;
-//                updateContent();
-//            }
-//        });
+
+        Long dogId = getActivity().getIntent().getLongExtra("dogId", 0L);
+
+        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), dogId, dog.getBreederMail());
+        viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
+        viewModel.getDog().observe(getActivity(), dogEntity -> {
+            if (dogEntity != null) {
+                dog = dogEntity;
+                getDataFromIdDog();
+            }
+        });
 
         return view;
     }
+
+    private void getDataFromIdDog() {
+
+        tv_nameDog = getActivity().findViewById(R.id.tv_dog_details_name_dog);
+        tv_nameDog.setText(dog.getNameDog());
+
+    }
+
 }

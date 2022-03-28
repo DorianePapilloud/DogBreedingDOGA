@@ -78,15 +78,18 @@ public class DogsListFragment extends Fragment {
 
                 FragmentManager fragmentManager = getParentFragmentManager();
 
+
+//                DogsListFragmentDirections.ActionDogsListFragmentToAddNewDogFragment action  = DogsListFragmentDirections.actionDogsListFragmentToAddNewDogFragment(idDog);
+//                action.setDogId(idDog);
+//                Navigation.findNavController(view).navigate(action);
+
                 long idDog = dogs.get(position).getIdDog();
-                DogsListFragmentDirections.ActionDogsListFragmentToAddNewDogFragment action  = DogsListFragmentDirections.actionDogsListFragmentToAddNewDogFragment(idDog);
-                action.setDogId(idDog);
-                Navigation.findNavController(view).navigate(action);
-
-                System.out.println("===============================================" + idDog);
-
+                Bundle data = new Bundle();
+                data.putLong("DogID", idDog);
+                DogDetailsFragment dogDetailsFragment = new DogDetailsFragment();
+                dogDetailsFragment.setArguments(data);
                 fragmentManager.beginTransaction()
-                        .replace(R.id.nv_NavHostView, AddNewDogFragment.class, null)
+                        .replace(R.id.nv_NavHostView, dogDetailsFragment)
                         .setReorderingAllowed(true)
                         .addToBackStack("").commit();
             }

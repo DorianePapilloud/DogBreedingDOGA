@@ -15,6 +15,7 @@
 
 
         <TextView
+            android:id="@+id/tv_dog_details_name_dog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name of the dog"
@@ -47,11 +48,11 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_person"/>
+            android:src="@drawable/ic_breed_24dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Breed"
+            android:text="@string/str_DogBreed"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="15dp"
@@ -59,6 +60,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_dog_details_breed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Samoyed"
@@ -89,11 +91,11 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_address"/>
+            android:src="@drawable/ic_gender_24dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gender"
+            android:text="@string/str_dogGender"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="15dp"
@@ -101,6 +103,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_dog_details_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Female"
@@ -131,11 +134,11 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_email"/>
+            android:src="@drawable/ic_calendar"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date of brith"
+            android:text="@string/str_dogDateOfBirht"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="15dp"
@@ -143,6 +146,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_dog_details_birth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="01.08.2023"
@@ -173,11 +177,11 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_phone"/>
+            android:src="@drawable/ic_parents_24dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mother"
+            android:text="@string/str_DogMother"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="15dp"
@@ -185,6 +189,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_dog_details_mother"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rafale Jenna"
@@ -216,11 +221,11 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_address"/>
+            android:src="@drawable/ic_parents_24dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Father"
+            android:text="@string/str_DogFather"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="15dp"
@@ -228,6 +233,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_dog_details_father"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Neji"
@@ -259,11 +265,11 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_address"/>
+            android:src="@drawable/ic__star_24dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pedigree"
+            android:text="@string/str_DogPedigree"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="15dp"
@@ -271,6 +277,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_dog_details_pedigree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Yes"
@@ -297,6 +304,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/iv_dog_details_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="30dp"

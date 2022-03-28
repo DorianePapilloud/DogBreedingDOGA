@@ -135,8 +135,8 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
             }
         });
 
-        long idDogFromList = AddNewDogFragmentArgs.fromBundle(getArguments()).getDogId();
-        System.out.println("================================================ " + idDogFromList);
+//        long idDogFromList = AddNewDogFragmentArgs.fromBundle(getArguments()).getDogId();
+//        System.out.println("================================================ " + idDogFromList);
 
 
         // =================== code à checker ========================

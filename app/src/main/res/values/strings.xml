@@ -63,6 +63,8 @@
     <string name="language_settings_title">Language</string>
     <string name="language_en" translatable="false">English</string>
     <string name="language_fr" translatable="false">Français</string>
+    <string name="str_dogGender">Gender</string>
+    <string name="str_dogDateOfBirht">Date of birth</string>
     <string-array name="pref_language_list_entries">
         <item>@string/language_en</item>
         <item>@string/language_fr</item>
