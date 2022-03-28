@@ -172,8 +172,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-
-
     public void logout() {
         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
         editor.remove(BaseActivity.PREFS_USER);

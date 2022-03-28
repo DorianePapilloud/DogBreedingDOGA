@@ -79,7 +79,6 @@ public class DogsListFragment extends Fragment {
 
                 FragmentManager fragmentManager = getParentFragmentManager();
 
-
 //                DogsListFragmentDirections.ActionDogsListFragmentToAddNewDogFragment action  = DogsListFragmentDirections.actionDogsListFragmentToAddNewDogFragment(idDog);
 //                action.setDogId(idDog);
 //                Navigation.findNavController(view).navigate(action);

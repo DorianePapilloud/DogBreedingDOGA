@@ -60,6 +60,8 @@
     <string name="str_hi_there">Hi there! Nice to see you again.</string>
     <string name="str_sign_in">Sign in</string>
     <string name="str_login">Login</string>
+    <string name="logout_msg">Do you really want to logout?</string>
+
 
     <string name="language_settings_title">Language</string>
     <string name="language_en" translatable="false">English</string>
