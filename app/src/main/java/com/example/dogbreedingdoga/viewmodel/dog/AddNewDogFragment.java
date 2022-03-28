@@ -70,6 +70,7 @@ public class AddNewDogFragment extends Fragment {
 
     private TextView tv_PedigInfo;
     private boolean pedigree;
+    private Switch sw_pedigree;
 
     private Button btn_AddDog;
 
@@ -83,6 +84,7 @@ public class AddNewDogFragment extends Fragment {
 
     private Dog dog;
     private boolean isNewDog;
+    private long idDoggy = 0;
 
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
@@ -118,21 +120,28 @@ public class AddNewDogFragment extends Fragment {
         SharedPreferences settings = getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0);
         this.currentBreederMail = settings.getString(BaseActivity.PREFS_USER, null);
         //check if new dog and initialise checkbox Availability
-        Long idDog = getActivity().getIntent().getLongExtra("idDog", 0L);
+//        Long idDog = getActivity().getIntent().getLongExtra("idDog", 0L);
 
+        Bundle data = getArguments();
+        if(data != null){
+            idDoggy = data.getLong("DogID");
+        }
         //UI initialisation
         initialisation(root);
 
+        // check if we received an id dog from previous fragment
+        if(idDoggy != 0){
+            isNewDog = true;
 
-        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDog, currentBreederMail);
+        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDoggy, currentBreederMail);
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
-        viewModel.getDog().observe((BaseActivity)getActivity(), dogEntity -> {
+        viewModel.getDog().observe(getActivity(), dogEntity -> {
             if (dogEntity != null) {
                 dog = dogEntity;
                 updateContent();
-
             }
         });
+        }
 
 //        long idDogFromList = AddNewDogFragmentArgs.fromBundle(getArguments()).getDogId();
 //        System.out.println("================================================ " + idDogFromList);
@@ -381,12 +390,36 @@ public class AddNewDogFragment extends Fragment {
     }
 
     private void updateContent() {
-        if(dog != null) {
+        if (dog != null) {
+            et_NameDog = getActivity().findViewById(R.id.et_name_dog);
             et_NameDog.setText(dog.getNameDog());
-            et_BreedDog.setText(dog.getBreedDog());
-            tv_BirthDateDog.setText(Calendar.getInstance().getTime().toString());
-            et_Description.setText(dog.getSpecificationsDog());
 
+            et_BreedDog = getActivity().findViewById(R.id.et_breed);
+            et_BreedDog.setText(dog.getBreedDog());
+
+            sw_pedigree = getActivity().findViewById(R.id.sw_pedigree);
+            rb_Male = getActivity().findViewById(R.id.rb_DogMale);
+            rb_Female = getActivity().findViewById(R.id.rb_DogFemale);
+
+            // we need to check how to do this
+            //tv_BirthDateDog.setText(Calendar.getInstance().getTime().toString());
+            //et_Description.setText(dog.getSpecificationsDog());
+
+
+            if(dog.getPedigree() == true){
+                sw_pedigree.setChecked(true);
+            }
+            else {
+                sw_pedigree.setChecked(false);
+            }
+
+            Gender gender = dog.getGender();
+            if (gender.equals(Gender.Female)) {
+                rb_Female.setChecked(true);
+            }
+                else {
+                rb_Male.setChecked(true);
+            }
         }
     }
 

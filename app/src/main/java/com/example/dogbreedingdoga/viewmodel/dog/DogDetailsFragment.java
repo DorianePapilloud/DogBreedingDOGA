@@ -1,5 +1,6 @@
 package com.example.dogbreedingdoga.viewmodel.dog;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +18,7 @@ import com.example.dogbreedingdoga.Database.Entity.Dog;
 import com.example.dogbreedingdoga.Database.Repository.DogRepository;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
+import com.example.dogbreedingdoga.ui.BaseActivity;
 
 public class DogDetailsFragment extends Fragment {
 
@@ -31,10 +33,10 @@ public class DogDetailsFragment extends Fragment {
     private TextView tv_pedigree;
 
     private Dog dog;
-
     private DogRepository dogRepository;
     private DogViewModel viewModel;
     private long idDoggy;
+    private String currentBreederMail;
 
     private ImageView iv_BtnDelete;
     private ImageView iv_BtnEdit;
@@ -80,6 +82,8 @@ public class DogDetailsFragment extends Fragment {
 
 //        long idDoggy = savedInstanceState.getLong("DogID", 0L);
 
+        SharedPreferences settings = getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0);
+        this.currentBreederMail = settings.getString(BaseActivity.PREFS_USER, null);
 
         Bundle data = getArguments();
         if(data != null){
@@ -91,7 +95,7 @@ public class DogDetailsFragment extends Fragment {
 
 //        Long dogId = getActivity().getIntent().getLongExtra("dogId", 0L);
 
-        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDoggy, "test@test.fr");
+        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDoggy, currentBreederMail);
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
         viewModel.getDog().observe(getActivity(), dogEntity -> {
             if (dogEntity != null) {

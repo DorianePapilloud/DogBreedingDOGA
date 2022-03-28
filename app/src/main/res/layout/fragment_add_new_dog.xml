@@ -180,7 +180,6 @@
             android:id="@+id/et_DogDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/str_DogDescrip"
@@ -191,7 +190,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_PedigreeInfo"
+            app:layout_constraintTop_toBottomOf="@+id/rbg_FemaleMaleRadioBtnGroup"
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -211,9 +210,10 @@
 
         <TextView
             android:id="@+id/tv_PedigreeInfo"
-            android:layout_width="127dp"
-            android:layout_height="24dp"
+            android:layout_width="128dp"
+            android:layout_height="32dp"
             android:editable="true"
+            android:paddingTop="7dp"
             android:text="@string/str_NoPedigree"
             android:textColor="@color/myColor"
             app:layout_constraintEnd_toEndOf="@+id/sw_pedigree"
