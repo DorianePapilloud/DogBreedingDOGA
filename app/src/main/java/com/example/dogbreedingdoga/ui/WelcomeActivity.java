@@ -29,7 +29,7 @@ public class WelcomeActivity extends BaseActivity {
                 super.onCreate(savedInstances);
                 setContentView(R.layout.activity_welcome);
 
-                initializeDemoData(AppDatabase.getInstance(this));
+//                initializeDemoData(AppDatabase.getInstance(this));
 
                 logo = findViewById(R.id.logo);
                 background = findViewById(R.id.imageView2);

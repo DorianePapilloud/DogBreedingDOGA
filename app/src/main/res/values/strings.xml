@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DogBreedingDOGA</string>
+    <string name="app_name">DOGA Breeders</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="disclaimer" translatable="false">HES-SO Valais//Wallis Sierre</string>
