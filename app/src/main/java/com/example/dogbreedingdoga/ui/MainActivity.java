@@ -17,9 +17,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("============= HELLO FROM MAINACTIVITY ! :-) "+frameLayout);
         getLayoutInflater().inflate(R.layout.activity_main, frameLayout);
-//        setContentView(R.layout.activity_main);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nv_NavHostView);
         NavController navController = navHostFragment.getNavController();

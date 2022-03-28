@@ -6,6 +6,7 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -15,11 +16,17 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NavUtils;
 
 import com.example.dogbreedingdoga.R;
+import com.example.dogbreedingdoga.helper.LocaleHelper;
+import com.example.dogbreedingdoga.ui.BaseActivity;
+import com.example.dogbreedingdoga.ui.BreederProfileActivity;
 
 import java.util.List;
+
+import io.paperdb.Paper;
 
 
 /**
@@ -190,11 +197,13 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.N)
-    public static class LanguagePreferenceFragment extends PreferenceFragment {
+    public static class LanguagePreferenceFragment extends PreferenceFragment implements androidx.preference.Preference.OnPreferenceClickListener {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences_screen);
+            androidx.preference.Preference pref = new androidx.preference.Preference(getContext());
+            onPreferenceClick(pref);
             setHasOptionsMenu(true);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
@@ -202,15 +211,56 @@ public class SettingsActivity extends PreferenceActivity {
             // updated to reflect the new value, per the Android Design
             // guidelines.
         }
+        @Override
+        public boolean onPreferenceClick(androidx.preference.Preference preference) {
+            System.out.println("======== CLIC =============");
+
+            Preference.OnPreferenceClickListener pref = new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference pref) {
+                    if (preference.equals("en")){
+                        System.out.println("======== Langue : ENGLISH");
+                        Paper.book().write("language", "en");
+                        updateView((String)Paper.book().read("language"));
+                    } else if(preference.equals("fr")) {
+                        System.out.println("======== Langue : FRANCAIS");
+                        Paper.book().write("language", "fr");
+                        updateView((String) Paper.book().read("language"));
+                        startActivity(new Intent(getActivity(), BreederProfileActivity.class));
+                    }
+                    return false ;
+                }
+            };
+
+            return false ;
+        }
 
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
+            System.out.println("======== CLIC CLIC CLIC =============");
+            BaseActivity currentActivity = (BaseActivity) getActivity();
+            //language choice
+        if (id == R.id.language_en){
+            Paper.book().write("language", "en");
+            updateView((String)Paper.book().read("language"));
+        } else if(id == R.id.language_fr) {
+            System.out.println("======== Langue : FRANCAIS");
+            Paper.book().write("language", "fr");
+            updateView((String)Paper.book().read("language"));
+            startActivity(new Intent(getActivity(), BreederProfileActivity.class));
+        } //end language choice
+
             if (id == android.R.id.home) {
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
             }
             return super.onOptionsItemSelected(item);
+        }
+
+        private void updateView(String language) {
+            Context context = LocaleHelper.setLocale(getActivity().getBaseContext(), language);
+            Resources resources = context.getResources();
         }
     }
 

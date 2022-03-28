@@ -58,6 +58,7 @@ public class DogsListFragment extends Fragment {
                 LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        //Retrieve current user
         SharedPreferences settings = this.getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0);
         String user = settings.getString(BaseActivity.PREFS_USER, null);
 
@@ -108,8 +109,6 @@ public class DogsListFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this, factory).get(DogListViewModel.class);
 
-        System.out.println("========================= VIEW MODEL =============================" + viewModel);
-
         viewModel.getOwnDogs().observe((BaseActivity)getActivity(), dogEntities -> {
             if (dogEntities != null) {
                 dogs = dogEntities;
@@ -151,9 +150,5 @@ public class DogsListFragment extends Fragment {
         });
         return view;
     }
-
-
-
-
 
 }
