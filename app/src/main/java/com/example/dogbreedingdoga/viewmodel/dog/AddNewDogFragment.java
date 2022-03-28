@@ -401,6 +401,9 @@ public class AddNewDogFragment extends Fragment {
             rb_Male = getActivity().findViewById(R.id.rb_DogMale);
             rb_Female = getActivity().findViewById(R.id.rb_DogFemale);
 
+            btn_AddDog = getActivity().findViewById(R.id.btn_add_dog);
+            btn_AddDog.setText(R.string.str_save);
+
             // we need to check how to do this
             //tv_BirthDateDog.setText(Calendar.getInstance().getTime().toString());
             //et_Description.setText(dog.getSpecificationsDog());

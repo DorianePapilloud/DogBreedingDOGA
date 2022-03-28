@@ -29,7 +29,6 @@ public class LoginActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        setContentView(R.layout.login_tab_fragment);
 
 
         tabLayout = findViewById(R.id.tab_layout);
@@ -55,7 +54,7 @@ public class LoginActivity extends FragmentActivity {
         tabLayout.setAlpha(v);
         tabLayout.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
 
-        getApplication();
+//        getApplication();
 
     }
 

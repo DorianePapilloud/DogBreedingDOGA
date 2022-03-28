@@ -60,4 +60,8 @@
     <string name="str_dogGender">Genre</string>
     <string name="str_dogDateOfBirht">Date de naissance</string>
     <string name="delete_msg_dog">Êtes-vous sûr de vouloir supprimer ce chien ?</string>
+    <string name="str_save">Enregistrer</string>
+    <string name="str_welcome_fragment">Bienvenue sur DoGa Breeders</string>
+    <string name="str_sign_up">S\'inscrire</string>
+    <string name="str_Password_conf">Confirmer mot de passe</string>
 </resources>

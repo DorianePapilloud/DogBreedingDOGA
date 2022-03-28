@@ -66,6 +66,10 @@
     <string name="language_fr" translatable="false">Français</string>
     <string name="str_dogGender">Gender</string>
     <string name="str_dogDateOfBirht">Date of birth</string>
+    <string name="str_save">Save</string>
+    <string name="str_welcome_fragment">Welcome to DoGa Breeders</string>
+    <string name="str_sign_up">Sign Up</string>
+    <string name="str_Password_conf">Password confirmation</string>
     <string-array name="pref_language_list_entries">
         <item>@string/language_en</item>
         <item>@string/language_fr</item>

@@ -24,7 +24,7 @@ public class WelcomeActivity extends BaseActivity {
         private ImageView logo, background;
         private TextView welcome, start;
 
-        protected int _splashTime = 5000;
+        protected int _splashTime = 8000;
 
         @Override
         protected void onCreate(Bundle savedInstances) {
@@ -67,16 +67,17 @@ public class WelcomeActivity extends BaseActivity {
 //                                        else{
 //                                                getSupportFragmentManager();
 //                                                setContentView(R.layout.activity_login);
-//                                                Intent i3 = new Intent(WelcomeActivity.this, LoginActivity.class);
-//                                                startActivity(i3);
+//                                                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+//                                                startActivity(intent);
 //                                        }
 //                                }
 //                                else {
 //                                        System.out.println("PASSE PAR LOGGIN ");
-                                        getSupportFragmentManager();
-                                        setContentView(R.layout.activity_login);
-                                        Intent i3 = new Intent(WelcomeActivity.this, LoginActivity.class);
-                                        startActivity(i3);
+//                                        getSupportFragmentManager();
+//                                        setContentView(R.layout.activity_login);
+                                        Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                                        startActivity(intent);
+
 //                                }
                         }
                 }, _splashTime);

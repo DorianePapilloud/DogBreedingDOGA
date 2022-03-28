@@ -30,13 +30,13 @@ public class LoginTabFragment extends Fragment {
     private int position;
     private BreederRepository repository;
 
-    public static Fragment getInstance(int position) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("pos", position);
-        LoginTabFragment tabFragment = new LoginTabFragment();
-        tabFragment.setArguments(bundle);
-        return tabFragment;
-    }
+//    public static Fragment getInstance(int position) {
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("pos", position);
+//        LoginTabFragment tabFragment = new LoginTabFragment();
+//        tabFragment.setArguments(bundle);
+//        return tabFragment;
+//    }
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
