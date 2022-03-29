@@ -9,9 +9,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,8 +29,11 @@ import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 
+import java.util.Calendar;
+
 public class DogDetailsFragment extends Fragment {
 
+    private static final String TAG = "Dog updated" ;
 
     private TextView tv_nameDogDetails;
     private TextView tv_breedDog;
@@ -41,6 +47,11 @@ public class DogDetailsFragment extends Fragment {
     private RadioButton rb_Female;
     private RadioButton rb_Male;
     private Gender gender;
+    private TextView tv_PedigInfo;
+    private boolean pedigree;
+    private TextView tv_Description;
+    private boolean available;
+    private CheckBox cb_Availability;
 
     private Dog dog;
     private DogRepository dogRepository;
@@ -75,7 +86,7 @@ public class DogDetailsFragment extends Fragment {
         }
 
         // Inflate the layout for this fragment
-        View view = getLayoutInflater().inflate(R.layout.fragment_dog_details, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_dog_details, container, false);
 
 //        Long dogId = getActivity().getIntent().getLongExtra("dogId", 0L);
 
@@ -118,6 +129,9 @@ public class DogDetailsFragment extends Fragment {
         tv_father = getActivity().findViewById(R.id.et_dog_details_father);
 //        tv_father.setText(dog.getIdFather());
 
+        tv_PedigInfo = getActivity().findViewById(R.id.tv_PedigreeInfoDogDetails);
+        pedigreeManagement();
+
         sw_pedigree = getActivity().findViewById(R.id.sw_pedigree_dog_details);
         if(dog.getPedigree() == true) {
             sw_pedigree.setChecked(true);
@@ -129,13 +143,22 @@ public class DogDetailsFragment extends Fragment {
         if(dog.getGender() == Gender.Female)
         {
             rb_Female.setChecked(true);
+            gender = Gender.Female;
         }
         else
         {
             rb_Male.setChecked(true);
+            gender = Gender.Male;
         }
 
-        disableTextView(tv_nameDogDetails, tv_breedDog, tv_birthDateDog, tv_mother, tv_father);
+
+        tv_Description = getActivity().findViewById(R.id.et_DogDescriptionDogDetails);
+        tv_Description.setText(dog.getSpecificationsDog());
+
+        checkBoxAvailabilityManagement();
+        cb_Availability.setEnabled(false);
+
+        disableTextView(tv_nameDogDetails, tv_breedDog, tv_birthDateDog, tv_mother, tv_father, tv_Description);
 
     }
 
@@ -154,6 +177,28 @@ public class DogDetailsFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void checkBoxAvailabilityManagement() {
+        //initiate checkbox and set at true
+        cb_Availability =getActivity().findViewById(R.id.cb_availabilityDogDetails);
+        cb_Availability.setChecked(true);
+        if(cb_Availability.isChecked()) {
+            available = true;
+        }
+        else {available = false;}
+
+        cb_Availability.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(cb_Availability.isChecked()) {
+                    available = true;
+                }
+                else {available = false;}
+            }
+        });
+
     }
 
 
@@ -189,7 +234,7 @@ public class DogDetailsFragment extends Fragment {
 
     private void editDog() {
         //make all EditText editable
-        enableTextView(tv_nameDogDetails, tv_breedDog, tv_birthDateDog, tv_mother, tv_father);
+        enableTextView(tv_nameDogDetails, tv_breedDog, tv_birthDateDog, tv_mother, tv_father, tv_Description);
         //modify 'button' text + listener
         iv_BtnEdit.setImageResource(R.drawable.ic_validate_24dp);
 
@@ -205,16 +250,94 @@ public class DogDetailsFragment extends Fragment {
             public void onClick(View view) {
                 //all save stuff
                 //disable EditTexts
-//
-//                saveChanges(tv_nameDogDetails.getText().toString(), tv_breedDog.getText().toString(),
-//                        tv_gender. getText().toString(), //////////////////////////////////////////
-//                        tv_birthDateDog.getText().toString(), tv_mother.getText().toString(),
-//                        tv_father.getText().toString(),
-//                        sw_pedigree.isChecked()); //////////////////////////////////////
+
+                saveChanges(tv_nameDogDetails.getText().toString(),
+                        tv_breedDog.getText().toString(),
+                        gender,
+                        tv_birthDateDog.getText().toString(),
+                        pedigree,
+                        available)
+                        ; //////////////////////////////////////
 
 //////////////////////////////// GENDER and PEDIGREE /////////////////////////
             }
         };
+
+    private void pedigreeManagement() {
+        //pedigree management based on switch
+        tv_PedigInfo = getActivity().findViewById(R.id.tv_PedigreeInfoDogDetails);
+        tv_PedigInfo.setFocusable(false); //avoid tab stop
+        Switch pedig = (Switch) getActivity().findViewById(R.id.sw_pedigree_dog_details);
+        //check initial state
+        pedig.setChecked(false);
+        if(pedig.isChecked()){
+            pedigree = true;
+            tv_PedigInfo.setText(R.string.str_Pedigree);
+            tv_PedigInfo.setTextColor(getResources().getColor(R.color.niceGreen_teal_700));
+        } else {
+            pedigree = false;
+            tv_PedigInfo.setText(R.string.str_NoPedigree);
+            tv_PedigInfo.setTextColor(getResources().getColor(R.color.myColor));
+        }
+        pedig.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(pedig.isChecked()){
+                    pedigree = true;
+                    tv_PedigInfo.setText(R.string.str_Pedigree);
+                    tv_PedigInfo.setTextColor(getResources().getColor(R.color.niceGreen_teal_700));
+                }
+                else {
+                    pedigree = false;
+                    tv_PedigInfo.setText(R.string.str_NoPedigree);
+                    tv_PedigInfo.setTextColor(getResources().getColor(R.color.myColor));
+                }
+            }
+        });
+    }
+
+
+    private boolean valideDogAttributes(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig) {
+
+        boolean cancel = false;
+        View focusView = null;
+
+
+        if(dogName.isEmpty() || dogName.equals("")) {
+            tv_nameDogDetails.setError(getString(R.string.error_dog_noName));
+            focusView = radioGroup;
+            cancel = true;
+        }
+
+        //check name doublon
+//        for (Dog d : dogsBreederList) {
+//            if(d.getNameDog().equals(dogName)){
+//                et_NameDog.setError("This name is already assigned.\nPlease choose another one.");
+//                focusView = et_NameDog;
+//                cancel = true;
+//            }
+//        }
+
+        if(dogBreed.isEmpty() || dogBreed.equals("")) {
+            tv_breedDog.setError(getString(R.string.error_dog_noBreed));
+            focusView = radioGroup;
+            cancel = true;
+        }
+
+        if(dogBirth.isEmpty() || dogBirth.equals("")) {
+            dogBirth = Calendar.getInstance().getTime().toString();
+//            tv_BirthDateDog.setError(getString(R.string.error_dog_noBirth));
+//            focusView = radioGroup;
+//            cancel = true;
+        }
+
+        if(cancel){
+            focusView.requestFocus();
+            return false;
+        }
+
+        return true ;
+    }
 
 
     private void enableTextView(TextView... TVs) {
@@ -230,6 +353,7 @@ public class DogDetailsFragment extends Fragment {
         radioGroup.setEnabled(true);
         rb_Female.setEnabled(true);
         rb_Male.setEnabled(true);
+        cb_Availability.setEnabled(true);
 
     }
 
@@ -258,22 +382,51 @@ public class DogDetailsFragment extends Fragment {
         alertDialog.show();
     }
 
-    private void saveChanges(String nameDoggy, String breedDoggy, Gender genderDoggy , String dateOfBithDoggy, int motherDoggy, int fatherDoggy, Boolean pedigreeDoggy) {
+    private void saveChanges(String nameDoggy, String breedDoggy, Gender genderDoggy , String dateOfBithDoggy,  Boolean pedigreeDoggy, boolean avlbl) {
 
+        if( valideDogAttributes(nameDoggy, breedDoggy, dateOfBithDoggy, genderDoggy, pedigreeDoggy) ) {
+            Dog newDog = new Dog(nameDoggy, breedDoggy, dateOfBithDoggy, gender, this.currentBreederMail, pedigreeDoggy, avlbl);
+            newDog.setSpecificationsDog(tv_Description.getText().toString());
+            newDog.setBreederMail(this.currentBreederMail);
+
+            //set mother + father
+
+            viewModel.updateDog(dog, new OnAsyncEventListener() {
+                @Override
+                public void onSuccess() {
+                    Log.d(TAG, getString(R.string.msg_DogCreated));
+                    toast = Toast.makeText(getContext(), getString(R.string.msg_DogUpdated), Toast.LENGTH_LONG);
+                    toast.show();
+
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
+                            .setReorderingAllowed(true)
+                            .addToBackStack("").commit();
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Log.d(TAG, "createDog: failure", e);
+                    toast = Toast.makeText(getContext(), getString(R.string.msg_DogNOTCreated), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            });
+        }
 
         dog.setNameDog(nameDoggy);
         dog.setBreedDog(breedDoggy);
         dog.setGender(genderDoggy);
         dog.setDateOfBirth(dateOfBithDoggy);
-        dog.setIdMother(motherDoggy);
-        dog.setIdFather(fatherDoggy);
+//        dog.setIdMother(motherDoggy);
+//        dog.setIdFather(fatherDoggy);
         dog.setPedigree(pedigreeDoggy);
 
         //restore 'Edit Profile' textview-button
         iv_BtnEdit.setImageResource(R.drawable.ic_edit);
         iv_BtnEdit.setOnClickListener(btnEditListener);
 
-        disableTextView(tv_nameDogDetails, tv_breedDog, tv_gender, tv_birthDateDog, tv_mother, tv_father);
+        disableTextView(tv_nameDogDetails, tv_breedDog, tv_birthDateDog, tv_mother, tv_father);
 
         viewModel.updateDog(dog, new OnAsyncEventListener() {
             @Override
