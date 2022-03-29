@@ -11,12 +11,12 @@ public class UpdateBreeder extends AsyncTask<Breeder, Void, Void>{
 
 
     private Application application;
-    private OnAsyncEventListener calback;
+    private OnAsyncEventListener callback;
     private Exception exception;
 
     public UpdateBreeder(Application application, OnAsyncEventListener callback) {
         this.application = application;
-        calback = callback;
+        this.callback = callback;
     }
 
     @Override
@@ -33,11 +33,11 @@ public class UpdateBreeder extends AsyncTask<Breeder, Void, Void>{
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        if (calback != null) {
+        if (callback != null) {
             if (exception == null) {
-                calback.onSuccess();
+                this.callback.onSuccess();
             } else {
-                calback.onFailure(exception);
+                this.callback.onFailure(exception);
             }
         }
     }
