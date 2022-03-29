@@ -39,9 +39,11 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
+            android:layout_alignBottom="@+id/tv_dog_details_name_dog"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="1dp"
             android:layout_marginRight="8dp"
+            android:layout_marginBottom="0dp"
             android:background="@color/myColor" />
     </RelativeLayout>
 
@@ -325,7 +327,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:gravity="start|top"
+        android:textAlignment="center"
         android:hint="@string/str_DogDescrip"
         android:inputType="textMultiLine"
         android:maxHeight="100dp"
