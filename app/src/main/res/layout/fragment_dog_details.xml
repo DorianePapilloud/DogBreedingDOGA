@@ -6,35 +6,44 @@
     tools:context=".viewmodel.dog.DogDetailsFragment"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:gravity="center"
-        android:paddingTop="15dp"
         android:orientation="vertical">
 
 
-        <TextView
+        <EditText
             android:id="@+id/tv_dog_details_name_dog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="136dp"
+            android:layout_marginEnd="126dp"
+            android:background="@null"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:text="Name of the dog"
             android:textColor="@color/myColor"
-            android:textSize="20dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            />
+            android:textSize="20dp" />
 
+        <CheckBox
+            android:id="@+id/cb_availabilityDogDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:state_checked="true"
+            android:text="@string/str_Availability"
+            tools:ignore="MissingConstraints" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/myColor"
-            android:layout_marginTop="10dp"
+            android:layout_height="2dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="1dp"
             android:layout_marginRight="8dp"
-            />
-    </LinearLayout>
+            android:background="@color/myColor" />
+    </RelativeLayout>
 
 
     <LinearLayout
@@ -60,12 +69,13 @@
             android:layout_marginLeft="5dp"
             />
 
-        <TextView
-            android:id="@+id/tv_dog_details_breed"
+        <EditText
+            android:id="@+id/et_dog_details_breed"
             android:layout_width="@dimen/dim_ProfileDogEditable"
             android:layout_height="wrap_content"
             android:textColor="@color/grey"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:background="@null"/>
 
     </LinearLayout>
     <View
@@ -100,13 +110,29 @@
             android:layout_marginLeft="5dp"
             />
 
-        <TextView
-            android:id="@+id/tv_dog_details_gender"
-            android:layout_width="@dimen/dim_ProfileDogEditable"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <RadioGroup
+            android:id="@+id/rbg_FemaleMaleRadioBtnGroupDogDetails"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textColor="@color/grey"
-            />
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <RadioButton
+                android:id="@+id/rb_DogFemaleDogDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_DogCheckFemale" />
+
+            <RadioButton
+                android:id="@+id/rb_DogMaleDogDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_DogCheckMale" />
+        </RadioGroup>
+        </LinearLayout>
 
     </LinearLayout>
     <View
@@ -141,13 +167,13 @@
             android:layout_marginLeft="5dp"
             />
 
-        <TextView
-            android:id="@+id/tv_dog_details_birth"
+        <EditText
+            android:id="@+id/et_dog_details_birth"
             android:layout_width="@dimen/dim_ProfileDogEditable"
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:textColor="@color/grey"
-            />
+            android:background="@null"/>
 
     </LinearLayout>
     <View
@@ -182,13 +208,13 @@
             android:layout_marginLeft="5dp"
             />
 
-        <TextView
-            android:id="@+id/tv_dog_details_mother"
+        <EditText
+            android:id="@+id/et_dog_details_mother"
             android:layout_width="@dimen/dim_ProfileDogEditable"
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:textColor="@color/grey"
-            />
+            android:background="@null"/>
 
     </LinearLayout>
 
@@ -224,13 +250,13 @@
             android:layout_marginLeft="5dp"
             />
 
-        <TextView
-            android:id="@+id/tv_dog_details_father"
+        <EditText
+            android:id="@+id/et_dog_details_father"
             android:layout_width="@dimen/dim_ProfileDogEditable"
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:textColor="@color/grey"
-            />
+            android:background="@null"/>
 
     </LinearLayout>
 
@@ -266,15 +292,46 @@
             android:layout_marginLeft="5dp"
             />
 
-        <TextView
-            android:id="@+id/tv_dog_details_pedigree"
-            android:layout_width="@dimen/dim_ProfileDogEditable"
+<!--        <TextView-->
+<!--            android:id="@+id/tv_dog_details_pedigree"-->
+<!--            android:layout_width="@dimen/dim_ProfileDogEditable"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="15dp"-->
+<!--            android:textColor="@color/grey"-->
+<!--            />-->
+
+        <Switch
+            android:id="@+id/sw_pedigree_dog_details"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textColor="@color/grey"
+            android:text="@string/str_LabelPedigree"
+            tools:ignore="MissingConstraints"
             />
 
+        <TextView
+            android:id="@+id/tv_PedigreeInfoDogDetails"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:paddingTop="7dp"
+            android:text="@string/str_NoPedigree"
+            android:textColor="@color/myColor"
+            tools:ignore="MissingConstraints" />
+
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_DogDescriptionDogDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/str_DogDescrip"
+        android:inputType="textMultiLine"
+        android:maxHeight="100dp"
+        android:minWidth="280dp"
+        android:minHeight="50dp"
+        tools:ignore="MissingConstraints" />
 
 
 
@@ -295,34 +352,38 @@
             android:id="@+id/iv_dog_details_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="30dp"
+            android:paddingTop="10dp"
             android:src="@drawable/plume"/>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_BtnEditDog"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_edit"
-        android:state_focused="true" />
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_BtnDeleteDog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:clickable="true"
-        android:paddingTop="20dp"
-        android:src="@drawable/ic_delete_24dp"
-        android:state_focused="true" />
+        <ImageView
+            android:id="@+id/iv_BtnEditDog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="40dp"
+            android:clickable="true"
+            android:src="@drawable/ic_edit"
+            android:state_focused="true" />
 
+        <ImageView
+            android:id="@+id/iv_BtnDeleteDog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="348dp"
+            android:clickable="true"
+            android:src="@drawable/ic_delete_24dp"
+            android:state_focused="true" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>

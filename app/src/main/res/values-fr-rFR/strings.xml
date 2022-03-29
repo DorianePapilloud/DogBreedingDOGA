@@ -65,4 +65,6 @@
     <string name="str_sign_up">S\'inscrire</string>
     <string name="str_Password_conf">Confirmer mot de passe</string>
     <string name="logout_msg">Voulez-vous vous déconnecter ?</string>
+    <string name="dog_updated">Le chien a été modifié</string>
+    <string name="error_used_name">Ce nom est déjà attribué</string>
 </resources>

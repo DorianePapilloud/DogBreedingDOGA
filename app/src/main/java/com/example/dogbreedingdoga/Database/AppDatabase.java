@@ -20,7 +20,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
 
-    private static final String DATABASE_NAME = "Breeding-database";
+    private static final String DATABASE_NAME = "BreedingDB1";
 
     public abstract BreederDAO breederDao();
 

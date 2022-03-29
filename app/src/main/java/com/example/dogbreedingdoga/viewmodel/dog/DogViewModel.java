@@ -38,14 +38,14 @@ public class DogViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableDog.setValue(null);
 
-        LiveData<Dog> dog = this.dogRepository.getDog(dogId, application);
+        LiveData<Dog> dog = dogRepository.getDog(dogId, application);
 
         //==== observable for dog's breeder ====
         observableBreeder = new MediatorLiveData<>();
         observableBreeder.setValue(null);
 
         //determine the breeder of this dog
-        LiveData<Breeder> breeder = this.dogRepository.getDogsBreeder(dogId, application);
+        LiveData<Breeder> breeder = dogRepository.getDogsBreeder(dogId, application);
 
         // observe the changes of the dog and its breeder entities from the database and forward them
         observableDog.addSource(dog, observableDog::setValue);

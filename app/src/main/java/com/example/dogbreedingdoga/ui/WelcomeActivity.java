@@ -30,8 +30,8 @@ public class WelcomeActivity extends BaseActivity {
         protected void onCreate(Bundle savedInstances) {
                 super.onCreate(savedInstances);
                 setContentView(R.layout.activity_welcome);
-
-//                initializeDemoData(AppDatabase.getInstance(this));
+//
+                initializeDemoData(AppDatabase.getInstance(this));
 
                 logo = findViewById(R.id.logo);
                 background = findViewById(R.id.imageView2);
