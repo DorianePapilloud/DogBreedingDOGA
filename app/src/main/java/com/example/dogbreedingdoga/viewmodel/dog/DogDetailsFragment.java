@@ -64,6 +64,8 @@ public class DogDetailsFragment extends Fragment {
 
     private Toast toast;
 
+    private ViewGroup view ;
+
     /**
      * Class managing view with dog details (Dog Profile)
      * @param inflater
@@ -86,7 +88,7 @@ public class DogDetailsFragment extends Fragment {
         }
 
         // Inflate the layout for this fragment
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_dog_details, container, false);
+        view = (ViewGroup) inflater.inflate(R.layout.fragment_dog_details, container, false);
 
 //        Long dogId = getActivity().getIntent().getLongExtra("dogId", 0L);
 
@@ -111,28 +113,28 @@ public class DogDetailsFragment extends Fragment {
 
     private void getDataFromIdDog() {
 
-        tv_nameDogDetails = getActivity().findViewById(R.id.tv_dog_details_name_dog);
+        tv_nameDogDetails = view.findViewById(R.id.tv_dog_details_name_dog);
         tv_nameDogDetails.setText(dog.getNameDog());
 
-        tv_breedDog = getActivity().findViewById(R.id.et_dog_details_breed);
+        tv_breedDog = view.findViewById(R.id.et_dog_details_breed);
         tv_breedDog.setText(dog.getBreedDog());
 
-        tv_birthDateDog = getActivity().findViewById(R.id.et_dog_details_birth);
+        tv_birthDateDog = view.findViewById(R.id.et_dog_details_birth);
         tv_birthDateDog.setText(dog.getDateOfBirth());
 
         genderManagement();
 
         /// mention if parents are null
-        tv_mother = getActivity().findViewById(R.id.et_dog_details_mother);
+        tv_mother = view.findViewById(R.id.et_dog_details_mother);
 //        tv_mother.setText(dog.getIdMother());
 
-        tv_father = getActivity().findViewById(R.id.et_dog_details_father);
+        tv_father = view.findViewById(R.id.et_dog_details_father);
 //        tv_father.setText(dog.getIdFather());
 
-        tv_PedigInfo = getActivity().findViewById(R.id.tv_PedigreeInfoDogDetails);
+        tv_PedigInfo = view.findViewById(R.id.tv_PedigreeInfoDogDetails);
         pedigreeManagement();
 
-        sw_pedigree = getActivity().findViewById(R.id.sw_pedigree_dog_details);
+        sw_pedigree = view.findViewById(R.id.sw_pedigree_dog_details);
         if(dog.getPedigree() == true) {
             sw_pedigree.setChecked(true);
         }
@@ -152,7 +154,7 @@ public class DogDetailsFragment extends Fragment {
         }
 
 
-        tv_Description = getActivity().findViewById(R.id.et_DogDescriptionDogDetails);
+        tv_Description = view.findViewById(R.id.et_DogDescriptionDogDetails);
         tv_Description.setText(dog.getSpecificationsDog());
 
         checkBoxAvailabilityManagement();
@@ -163,9 +165,9 @@ public class DogDetailsFragment extends Fragment {
     }
 
     private void genderManagement() {
-        rb_Female = (RadioButton)getActivity().findViewById(R.id.rb_DogFemaleDogDetails);
-        rb_Male = (RadioButton)getActivity().findViewById(R.id.rb_DogMaleDogDetails);
-        radioGroup = getActivity().findViewById(R.id.rbg_FemaleMaleRadioBtnGroupDogDetails);
+        rb_Female = (RadioButton)view.findViewById(R.id.rb_DogFemaleDogDetails);
+        rb_Male = (RadioButton)view.findViewById(R.id.rb_DogMaleDogDetails);
+        radioGroup = view.findViewById(R.id.rbg_FemaleMaleRadioBtnGroupDogDetails);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int genderChoice) {
@@ -181,7 +183,7 @@ public class DogDetailsFragment extends Fragment {
 
     private void checkBoxAvailabilityManagement() {
         //initiate checkbox and set at true
-        cb_Availability =getActivity().findViewById(R.id.cb_availabilityDogDetails);
+        cb_Availability =view.findViewById(R.id.cb_availabilityDogDetails);
         cb_Availability.setChecked(true);
         if(cb_Availability.isChecked()) {
             available = true;
@@ -265,9 +267,9 @@ public class DogDetailsFragment extends Fragment {
 
     private void pedigreeManagement() {
         //pedigree management based on switch
-        tv_PedigInfo = getActivity().findViewById(R.id.tv_PedigreeInfoDogDetails);
+        tv_PedigInfo = view.findViewById(R.id.tv_PedigreeInfoDogDetails);
         tv_PedigInfo.setFocusable(false); //avoid tab stop
-        Switch pedig = (Switch) getActivity().findViewById(R.id.sw_pedigree_dog_details);
+        Switch pedig = (Switch) view.findViewById(R.id.sw_pedigree_dog_details);
         //check initial state
         pedig.setChecked(false);
         if(pedig.isChecked()){
