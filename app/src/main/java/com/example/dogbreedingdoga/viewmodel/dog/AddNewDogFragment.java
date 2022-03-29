@@ -12,7 +12,6 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -50,7 +49,7 @@ import java.util.Calendar;
  * Use the {@link AddNewDogFragment #newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddNewDogFragment extends Fragment {
+public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
     private static final String TAG = "New Dog added" ;
 
@@ -70,7 +69,6 @@ public class AddNewDogFragment extends Fragment {
 
     private TextView tv_PedigInfo;
     private boolean pedigree;
-    private Switch sw_pedigree;
 
     private Button btn_AddDog;
 
@@ -84,7 +82,7 @@ public class AddNewDogFragment extends Fragment {
 
     private Dog dog;
     private boolean isNewDog;
-    private long idDoggy;
+
 
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
@@ -119,37 +117,27 @@ public class AddNewDogFragment extends Fragment {
         //Retrieve the id (mail) of the connected breeder
         SharedPreferences settings = getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0);
         this.currentBreederMail = settings.getString(BaseActivity.PREFS_USER, null);
+
         //check if new dog and initialise checkbox Availability
-//        Long idDog = getActivity().getIntent().getLongExtra("idDog", 0L);
+        Long idDog = getActivity().getIntent().getLongExtra("idDog", 0L);
 
         //UI initialisation
         initialisation(root);
 
-        idDoggy = 0;
-        Bundle data = getArguments();
-        if(data != null){
-            idDoggy = data.getLong("DogID");
-        }
 
-        // check if we received an id dog from previous fragment
-        if(idDoggy != 0){
-            isNewDog = false;
 
-        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDoggy, currentBreederMail);
+        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDog, currentBreederMail);
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
-        viewModel.getDog().observe(getActivity(), dogEntity -> {
+        viewModel.getDog().observe((BaseActivity)getActivity(), dogEntity -> {
             if (dogEntity != null) {
                 dog = dogEntity;
                 updateContent();
+
             }
         });
-        }
-
-//        long idDogFromList = AddNewDogFragmentArgs.fromBundle(getArguments()).getDogId();
-//        System.out.println("================================================ " + idDogFromList);
 
 
-        // =================== code à checker - DatePicker ========================
+        // =================== code à checker ========================
 
         //get fragment manager to launch from datepicker fragment
         final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
@@ -159,7 +147,7 @@ public class AddNewDogFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-               DialogFragment newFrag = new DatePickerFragment();
+                DialogFragment newFrag = new DatePickerFragment();
 
                 newFrag.setTargetFragment(AddNewDogFragment.this, REQUEST_CODE);
 //
@@ -170,9 +158,10 @@ public class AddNewDogFragment extends Fragment {
 
         // ============================================================
 
+
+
         return root;
     }
-
 
     private void initialisation(ViewGroup root) {
         et_NameDog = root.findViewById(R.id.et_name_dog);
@@ -181,6 +170,7 @@ public class AddNewDogFragment extends Fragment {
         tv_PedigInfo = root.findViewById(R.id.tv_PedigreeInfo);
         et_Description = root.findViewById(R.id.et_DogDescription);
         tvDate = root.findViewById(R.id.tv_birth);
+
 
 
         //initiate checkbox and manage availability according to this checkBox value
@@ -201,12 +191,12 @@ public class AddNewDogFragment extends Fragment {
         btn_AddDog = root.findViewById(R.id.btn_CreateDog);
         btn_AddDog.setOnClickListener(view -> {
             saveDog(  et_NameDog.getText().toString(),
-                        et_BreedDog.getText().toString(),
-                        tv_BirthDateDog.getText().toString(),
-                        genderDog,
-                        pedigree,
-                        available
-                        );
+                    et_BreedDog.getText().toString(),
+                    tv_BirthDateDog.getText().toString(),
+                    genderDog,
+                    pedigree,
+                    available
+            );
         });
 
     }
@@ -292,8 +282,8 @@ public class AddNewDogFragment extends Fragment {
     }
 
     /**
-    * Method used to import picture from the gallery
-    */
+     * Method used to import picture from the gallery
+     */
     private ActivityResultLauncher<String> mGetContent = registerForActivityResult(
             new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
@@ -318,72 +308,49 @@ public class AddNewDogFragment extends Fragment {
 //        int day = datePicker. getDayOfMonth();
     }
 
+    /**
+     * Manage the behavior of a clic on button save
+     * @param dogName
+     * @param dogBreed
+     * @param dogBirth
+     * @param gender
+     * @param pedig
+     * @param avlbl
+     */
     private void saveDog(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
-        if( validateDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl) ) {
-            Dog dog = new Dog(dogName, dogBreed, dogBirth,gender, this.currentBreederMail, pedig, avlbl);
-            dog.setSpecificationsDog(et_Description.getText().toString());
-            dog.setBreederMail(this.currentBreederMail);
+
+        if( valideDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl) ) {
+            Dog newDog = new Dog(dogName, dogBreed, dogBirth,gender, this.currentBreederMail, pedig, avlbl);
+            newDog.setSpecificationsDog(et_Description.getText().toString());
+            newDog.setBreederMail(this.currentBreederMail);
 
             //set mother + father
 
-            if(isNewDog==true) { //We need to create the new dog
-                viewModel.createDog(dog, new OnAsyncEventListener() {
-                    @Override
-                    public void onSuccess() {
-                        Log.d(TAG, getString(R.string.msg_DogCreated));
+            viewModel.createDog(newDog, new OnAsyncEventListener() {
+                @Override
+                public void onSuccess() {
+                    Log.d(TAG, getString(R.string.msg_DogCreated));
+                    toast = Toast.makeText(getContext(), getString(R.string.msg_DogCreated), Toast.LENGTH_LONG);
+                    toast.show();
 
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
+                            .setReorderingAllowed(true)
+                            .addToBackStack("").commit();
+                }
 
-                        FragmentManager fragmentManager = getParentFragmentManager();
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
-                                .setReorderingAllowed(true)
-                                .addToBackStack("").commit();
-
-                        toast = Toast.makeText(getContext(), getString(R.string.msg_DogCreated), Toast.LENGTH_LONG);
-                        toast.show();
-
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-                        Log.d(TAG, "createDog: failure", e);
-                        toast = Toast.makeText(getContext(), getString(R.string.msg_DogNOTCreated), Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                });
-            }
-
-            else { // we need to update the dog
-                viewModel.updateDog(dog, new OnAsyncEventListener() {
-                    @Override
-                    public void onSuccess() {
-                        Log.d(TAG, getString(R.string.msg_DogCreated));
-
-                        FragmentManager fragmentManager = getParentFragmentManager();
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
-                                .setReorderingAllowed(true)
-                                .addToBackStack("").commit();
-
-                        toast = Toast.makeText(getContext(), getString(R.string.msg_DogCreated), Toast.LENGTH_LONG);
-                        toast.show();
-
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-                        Log.d(TAG, "createDog: failure", e);
-                        toast = Toast.makeText(getContext(), getString(R.string.msg_DogNOTCreated), Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                });
-
-            }
-
+                @Override
+                public void onFailure(Exception e) {
+                    Log.d(TAG, "createDog: failure", e);
+                    toast = Toast.makeText(getContext(), getString(R.string.msg_DogNOTCreated), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            });
         }
     }
 
-    private boolean validateDogAttributes(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
+    private boolean valideDogAttributes(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
 
         boolean cancel = false;
         View focusView = null;
@@ -423,42 +390,16 @@ public class AddNewDogFragment extends Fragment {
     }
 
     private void updateContent() {
-        if (dog != null) {
-            et_NameDog = getActivity().findViewById(R.id.et_name_dog);
+        if(dog != null) {
             et_NameDog.setText(dog.getNameDog());
-
-            et_BreedDog = getActivity().findViewById(R.id.et_breed);
             et_BreedDog.setText(dog.getBreedDog());
+            tv_BirthDateDog.setText(Calendar.getInstance().getTime().toString());
+            et_Description.setText(dog.getSpecificationsDog());
 
-            sw_pedigree = getActivity().findViewById(R.id.sw_pedigree);
-            rb_Male = getActivity().findViewById(R.id.rb_DogMale);
-            rb_Female = getActivity().findViewById(R.id.rb_DogFemale);
-
-            btn_AddDog = getActivity().findViewById(R.id.btn_CreateDog);
-            btn_AddDog.setText(R.string.str_save);
-
-            // we need to check how to do this
-            //tv_BirthDateDog.setText(Calendar.getInstance().getTime().toString());
-            //et_Description.setText(dog.getSpecificationsDog());
-
-
-            if(dog.getPedigree() == true){
-                sw_pedigree.setChecked(true);
-            }
-            else {
-                sw_pedigree.setChecked(false);
-            }
-
-            Gender gender = dog.getGender();
-            if (gender.equals(Gender.Female)) {
-                rb_Female.setChecked(true);
-            }
-                else {
-                rb_Male.setChecked(true);
-            }
         }
     }
 
+    //for datePicker. A check...
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
@@ -467,16 +408,14 @@ public class AddNewDogFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
 
-//    @Override
-//    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-//        System.out.println("FROM ADDNewDogFragment CALENDAR");
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.YEAR, year);
-//        calendar.set(Calendar.MONTH, month);
-//        calendar.set(Calendar.DAY_OF_MONTH, day);
-//        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-//
-//        tvDate.setText(currentDateString);
-//    }
+        tvDate.setText(currentDateString);
+    }
 }

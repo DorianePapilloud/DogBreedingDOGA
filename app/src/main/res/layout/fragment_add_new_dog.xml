@@ -59,7 +59,7 @@
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/et_mother"
+            android:id="@+id/liste_mother"
             android:layout_width="128dp"
             android:layout_height="43dp"
             android:layout_marginTop="@dimen/dim_GapAddDogFrag"
@@ -87,7 +87,7 @@
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
             android:textSize="16dp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/et_mother"
+            app:layout_constraintBaseline_toBaselineOf="@+id/liste_mother"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.769"
             app:layout_constraintStart_toStartOf="parent"
@@ -157,8 +157,8 @@
             android:layout_width="105dp"
             android:layout_height="72dp"
             android:layout_marginTop="@dimen/dim_GapAddDogFrag"
-            app:layout_constraintStart_toStartOf="@+id/et_mother"
-            app:layout_constraintTop_toBottomOf="@+id/et_mother"
+            app:layout_constraintStart_toStartOf="@+id/liste_mother"
+            app:layout_constraintTop_toBottomOf="@+id/liste_mother"
             tools:ignore="MissingConstraints">
 
             <RadioButton
@@ -211,8 +211,8 @@
         <TextView
             android:id="@+id/tv_PedigreeInfo"
             android:layout_width="128dp"
-            android:layout_height="32dp"
-            android:editable="true"
+            android:layout_height="wrap_content"
+            android:editable="false"
             android:paddingTop="7dp"
             android:text="@string/str_NoPedigree"
             android:textColor="@color/myColor"
