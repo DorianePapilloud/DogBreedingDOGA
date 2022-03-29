@@ -1,4 +1,4 @@
-package com.example.dogbreedingdoga.ui.mgmt;
+package com.example.dogbreedingdoga.adapter;
 
 import android.content.Context;
 
@@ -6,6 +6,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.example.dogbreedingdoga.ui.mgmt.CreateNewAccountFragment;
+import com.example.dogbreedingdoga.ui.mgmt.LoginTabFragment;
 
 public class LoginAdapter extends FragmentPagerAdapter {
 

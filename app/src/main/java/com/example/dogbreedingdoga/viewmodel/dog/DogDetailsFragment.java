@@ -90,8 +90,6 @@ public class DogDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = (ViewGroup) inflater.inflate(R.layout.fragment_dog_details, container, false);
 
-//        Long dogId = getActivity().getIntent().getLongExtra("dogId", 0L);
-
         DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDoggy, currentBreederMail);
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
         viewModel.getDog().observe(getActivity(), dogEntity -> {
@@ -207,16 +205,7 @@ public class DogDetailsFragment extends Fragment {
     private View.OnClickListener btnEditListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //call fragment add a new dog for edition
-//            Bundle data = new Bundle();
-//            data.putLong("DogID", idDoggy);
-//            AddNewDogFragment addNewDogFragment = new AddNewDogFragment();
-//            addNewDogFragment.setArguments(data);
-//            FragmentManager fragmentManager = getParentFragmentManager();
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.nv_NavHostView, addNewDogFragment)
-//                    .setReorderingAllowed(true)
-//                    .addToBackStack("").commit();
+
             editDog();
         }
 
@@ -258,10 +247,8 @@ public class DogDetailsFragment extends Fragment {
                         gender,
                         tv_birthDateDog.getText().toString(),
                         pedigree,
-                        available)
-                        ; //////////////////////////////////////
-
-//////////////////////////////// GENDER and PEDIGREE /////////////////////////
+                        available
+                );
             }
         };
 

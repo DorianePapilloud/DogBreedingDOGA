@@ -28,11 +28,7 @@ public class MyDogsRecyclerViewAdapter extends RecyclerView.Adapter<MyDogsRecycl
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        Context context = parent.getContext();
-//        LayoutInflater inflater = LayoutInflater.from(context);
-//        View view = inflater.inflate(R.layout.list_dog_item, parent, false) ;
-//
-//        return new ViewHolder(view);
+
         return new ViewHolder(FragmentDogsBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
 
     }

@@ -97,17 +97,6 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private List<Dog> dogsBreederList;
     private boolean isNewDog;
 
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//    }
-
     /**
      * RESTE A TRAITER :
      *      edit vs create
@@ -201,19 +190,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
                 Log.d(TAG, "clicked position:" + position);
                 Log.d(TAG, "clicked on: " + dogsBreederList.get(position).getNameDog());
 
-//                Intent intent = new Intent(getContext(), BaseActivity.class)
-//                intent.setFlags(
-//                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
-//                                Intent.FLAG_ACTIVITY_NO_HISTORY
-//                );
-//                intent.putExtra("accountId", dogs.get(position).getIdDog());
-//                startActivity(intent);
-
                 FragmentManager fragmentManager = getParentFragmentManager();
-
-//                DogsListFragmentDirections.ActionDogsListFragmentToAddNewDogFragment action  = DogsListFragmentDirections.actionDogsListFragmentToAddNewDogFragment(idDog);
-//                action.setDogId(idDog);
-//                Navigation.findNavController(view).navigate(action);
 
                 long idDog = dogsBreederList.get(position).getIdDog();
                 Bundle data = new Bundle();
@@ -237,6 +214,9 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
         ArrayList<Dog> AL_Fathers = new ArrayList<>();
         ArrayList<Dog> AL_Mothers = new ArrayList<>();
+
+        SpinnerAdapter motherAdapter = new com.example.dogbreedingdoga.adapter.SpinnerAdapter(getActivity(), R.layout.custom_spinner_adapter, AL_Mothers);
+        SpinnerAdapter fatherAdapter = new com.example.dogbreedingdoga.adapter.SpinnerAdapter(getActivity(), R.layout.custom_spinner_adapter, AL_Fathers);
 
         //to fetch all current breeder's dogs for Mother - Father and check the name availability
         DogListViewModel.Factory factoryList = new DogListViewModel.Factory(
@@ -264,8 +244,6 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 //                AL_Mothers.add(d);
 //            }
 //        }
-        SpinnerAdapter motherAdapter = new com.example.dogbreedingdoga.adapter.SpinnerAdapter(getActivity(), R.layout.custom_spinner_adapter, AL_Mothers);
-        SpinnerAdapter fatherAdapter = new com.example.dogbreedingdoga.adapter.SpinnerAdapter(getActivity(), R.layout.custom_spinner_adapter, AL_Fathers);
 
         lv_Mother.setAdapter(motherAdapter);
         lv_Father.setAdapter(fatherAdapter);

@@ -1,17 +1,13 @@
 package com.example.dogbreedingdoga.ui.mgmt;
 
-import static com.example.dogbreedingdoga.Database.AppDatabase.initializeDemoData;
-
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.dogbreedingdoga.Database.AppDatabase;
 import com.example.dogbreedingdoga.R;
+import com.example.dogbreedingdoga.adapter.LoginAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class LoginActivity extends FragmentActivity {

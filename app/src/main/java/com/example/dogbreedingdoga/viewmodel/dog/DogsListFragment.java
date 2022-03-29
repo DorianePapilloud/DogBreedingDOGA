@@ -69,19 +69,8 @@ public class DogsListFragment extends Fragment {
                 Log.d(TAG, "clicked position:" + position);
                 Log.d(TAG, "clicked on: " + dogs.get(position).getNameDog());
 
-//                Intent intent = new Intent(getContext(), BaseActivity.class)
-//                intent.setFlags(
-//                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
-//                                Intent.FLAG_ACTIVITY_NO_HISTORY
-//                );
-//                intent.putExtra("accountId", dogs.get(position).getIdDog());
-//                startActivity(intent);
-
                 FragmentManager fragmentManager = getParentFragmentManager();
 
-//                DogsListFragmentDirections.ActionDogsListFragmentToAddNewDogFragment action  = DogsListFragmentDirections.actionDogsListFragmentToAddNewDogFragment(idDog);
-//                action.setDogId(idDog);
-//                Navigation.findNavController(view).navigate(action);
 
                 long idDog = dogs.get(position).getIdDog();
                 Bundle data = new Bundle();
@@ -111,30 +100,12 @@ public class DogsListFragment extends Fragment {
         viewModel.getOwnDogs().observe((BaseActivity)getActivity(), dogEntities -> {
             if (dogEntities != null) {
                 dogs = dogEntities;
-                adapter.setData(dogs); //========================================
+                adapter.setData(dogs);
             }
         });
 
         recyclerView.setAdapter(adapter);
 
-        //=====================OLD AUTO ==================================
-//        recyclerView = view.findViewById(R.id.recycler_view_list_dogs);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-//
-//         Set the adapter
-//        if (view instanceof RecyclerView) {
-//            Context context = view.getContext();
-//            RecyclerView recyclerView = (RecyclerView) view;
-//            if (mColumnCount <= 1) {
-//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//            } else {
-//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-//            }
-//            //manage if no dogs in the list
-//            recyclerView.setAdapter(new MyDogsRecyclerViewAdapter(PlaceholderContent.ITEMS));
-//        }
-        //===================OLD AUTO END=====================================
 
         btn_add_new_dog = view.findViewById(R.id.btn_add_dog);
         btn_add_new_dog.setOnClickListener(new View.OnClickListener(){
