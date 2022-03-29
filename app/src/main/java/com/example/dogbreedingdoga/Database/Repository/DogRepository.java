@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
+import com.example.dogbreedingdoga.Database.Gender;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.Database.async.dog.CreateDog;
 import com.example.dogbreedingdoga.Database.async.dog.DeleteDog;
@@ -50,6 +51,10 @@ public class DogRepository {
 
     public LiveData<List<Dog>> getDogsByBreederByAvailability(final String breederMail, boolean availability, Application application) {
         return ((BaseApp) application).getDatabase().dogDao().getDogsByBreederByAvailability(breederMail, availability);
+    }
+
+    public LiveData<List<Dog>> getDogsByBreederByGenderByAvailability(final String breederMail, Gender gender, boolean availability, Application application) {
+        return ((BaseApp) application).getDatabase().dogDao().getDogsByBreederByGenderByAvailability(breederMail, gender, availability);
     }
 
     public void insert(final Dog dog, OnAsyncEventListener callback,

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -21,15 +20,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,12 +40,16 @@ import android.widget.Toast;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
 import com.example.dogbreedingdoga.Database.Gender;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
+import com.example.dogbreedingdoga.Database.util.RecyclerViewItemClickListener;
 import com.example.dogbreedingdoga.R;
+import com.example.dogbreedingdoga.adapter.RecyclerAdapter;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 import com.example.dogbreedingdoga.ui.DatePickerFragment;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +61,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private static final String TAG = "New Dog added" ;
 
     private DogViewModel viewModel;
+    private DogListViewModel listDogsViewModel;
 
     private EditText et_NameDog;
     private EditText et_BreedDog;
@@ -61,6 +69,11 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private EditText et_Description;
     private CheckBox cb_Availability;
     private boolean available;
+
+    private Spinner lv_Mother;
+    private Spinner lv_Father;
+    private RecyclerAdapter adapterMothers;
+    private RecyclerAdapter adapterFathers;
 
     private RadioGroup radioGroup;
     private RadioButton rb_Female;
@@ -81,6 +94,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private String currentBreederMail;
 
     private Dog dog;
+    private List<Dog> dogsBreederList;
     private boolean isNewDog;
 
 
@@ -125,7 +139,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
         initialisation(root);
 
 
-
+        //for the dog view
         DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDog, currentBreederMail);
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
         viewModel.getDog().observe((BaseActivity)getActivity(), dogEntity -> {
@@ -167,6 +181,8 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
         et_NameDog = root.findViewById(R.id.et_name_dog);
         et_BreedDog = root.findViewById(R.id.et_breed);
         tv_BirthDateDog = root.findViewById(R.id.tv_birth);
+        lv_Mother = (Spinner) root.findViewById(R.id.list_Mother);
+        lv_Father = (Spinner) root.findViewById(R.id.list_Father);
         tv_PedigInfo = root.findViewById(R.id.tv_PedigreeInfo);
         et_Description = root.findViewById(R.id.et_DogDescription);
         tvDate = root.findViewById(R.id.tv_birth);
@@ -175,6 +191,84 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
         //initiate checkbox and manage availability according to this checkBox value
         checkBoxAvailabilityManagement(root);
+
+        //=================================================
+
+        dogsBreederList = new ArrayList<>();
+        adapterMothers = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Log.d(TAG, "clicked position:" + position);
+                Log.d(TAG, "clicked on: " + dogsBreederList.get(position).getNameDog());
+
+//                Intent intent = new Intent(getContext(), BaseActivity.class)
+//                intent.setFlags(
+//                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
+//                                Intent.FLAG_ACTIVITY_NO_HISTORY
+//                );
+//                intent.putExtra("accountId", dogs.get(position).getIdDog());
+//                startActivity(intent);
+
+                FragmentManager fragmentManager = getParentFragmentManager();
+
+//                DogsListFragmentDirections.ActionDogsListFragmentToAddNewDogFragment action  = DogsListFragmentDirections.actionDogsListFragmentToAddNewDogFragment(idDog);
+//                action.setDogId(idDog);
+//                Navigation.findNavController(view).navigate(action);
+
+                long idDog = dogsBreederList.get(position).getIdDog();
+                Bundle data = new Bundle();
+                data.putLong("DogID", idDog);
+                DogDetailsFragment dogDetailsFragment = new DogDetailsFragment();
+                dogDetailsFragment.setArguments(data);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.nv_NavHostView, dogDetailsFragment)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("").commit();
+            }
+
+            @Override
+            public void onItemLongClick(View v, int position) {
+                Log.d(TAG, "longClicked position:" + position);
+                Log.d(TAG, "longClicked on: " + dogsBreederList.get(position).getNameDog());
+
+
+            }
+        });
+
+        ArrayList<Dog> AL_Fathers = new ArrayList<>();
+        ArrayList<Dog> AL_Mothers = new ArrayList<>();
+
+        //to fetch all current breeder's dogs for Mother - Father and check the name availability
+        DogListViewModel.Factory factoryList = new DogListViewModel.Factory(
+                getActivity().getApplication(), currentBreederMail);
+
+        listDogsViewModel = new ViewModelProvider(this, factoryList).get(DogListViewModel.class);
+
+        listDogsViewModel.getOwnAvailableFemaleDogs().observe((BaseActivity)getActivity(), dogEntities -> {
+            if (dogEntities != null) {
+                dogsBreederList = dogEntities;
+                adapterMothers.setData(AL_Mothers); //========================================
+            }
+        });
+
+
+//        for (Dog d: dogsBreederList) {
+//            if(d.getGender() == Gender.Male) {
+//                //add to father list
+//                AL_Fathers.add(d);
+//
+//            }
+//
+//            if(d.getGender() == Gender.Female) {
+//                //add to Mother list
+//                AL_Mothers.add(d);
+//            }
+//        }
+        SpinnerAdapter motherAdapter = new com.example.dogbreedingdoga.adapter.SpinnerAdapter(getActivity(), R.layout.custom_spinner_adapter, AL_Mothers);
+        SpinnerAdapter fatherAdapter = new com.example.dogbreedingdoga.adapter.SpinnerAdapter(getActivity(), R.layout.custom_spinner_adapter, AL_Fathers);
+
+        lv_Mother.setAdapter(motherAdapter);
+        lv_Father.setAdapter(fatherAdapter);
 
         //code for implementing picture selector
         imageView = root.findViewById(R.id.iv_add_picture_dog);
@@ -364,13 +458,23 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
         if(dogName.isEmpty() || dogName.equals("")) {
             et_NameDog.setError(getString(R.string.error_dog_noName));
-            focusView = radioGroup;
+            focusView = et_NameDog;
             cancel = true;
         }
 
+        //check name doublon
+        for (Dog d : dogsBreederList) {
+            if(d.getNameDog().equals(dogName)){
+                et_NameDog.setError("This name is already assigned.\nPlease choose another one.");
+                focusView = et_NameDog;
+                cancel = true;
+            }
+        }
+
+
         if(dogBreed.isEmpty() || dogBreed.equals("")) {
             et_BreedDog.setError(getString(R.string.error_dog_noBreed));
-            focusView = radioGroup;
+            focusView = et_BreedDog;
             cancel = true;
         }
 

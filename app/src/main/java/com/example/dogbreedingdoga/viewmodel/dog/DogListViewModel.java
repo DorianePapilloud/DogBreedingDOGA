@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
+import com.example.dogbreedingdoga.Database.Gender;
 import com.example.dogbreedingdoga.Database.Repository.BreederRepository;
 import com.example.dogbreedingdoga.Database.Repository.DogRepository;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
@@ -25,6 +26,8 @@ public class DogListViewModel extends AndroidViewModel {
 
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
     private final MediatorLiveData<List<Dog>> observableOwnDogs;
+    private final MediatorLiveData<List<Dog>> observableOwnFemaleDogs;
+    private final MediatorLiveData<List<Dog>> observableOwnMaleDogs;
 
     public DogListViewModel(@NonNull Application application,
                             final String breederId,
@@ -39,14 +42,28 @@ public class DogListViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableOwnDogs.setValue(null);
 
+        observableOwnFemaleDogs = new MediatorLiveData<>();
+        observableOwnFemaleDogs.setValue(null);
+
+        observableOwnMaleDogs = new MediatorLiveData<>();
+        observableOwnMaleDogs.setValue(null);
+
 
 //        LiveData<List<Dog>> ownDogs = repository.getAllDogsByBreeder(breederId, application); //independant of availability
         //depending of dog availability :
         boolean dogAvailable = true ;
-        LiveData<List<Dog>> ownDogs = repository.getDogsByBreederByAvailability(breederId, dogAvailable, application);
 
+        LiveData<List<Dog>> ownDogs = this.repository.getDogsByBreederByAvailability(breederId, dogAvailable, application);
         // observe the changes of the entities from the database and forward them
         observableOwnDogs.addSource(ownDogs, observableOwnDogs::setValue);
+
+        LiveData<List<Dog>> ownFemaleDogs = this.repository.getDogsByBreederByGenderByAvailability(breederId, Gender.Female, dogAvailable, application);
+        observableOwnFemaleDogs.addSource(ownFemaleDogs, observableOwnFemaleDogs::setValue);
+
+        LiveData<List<Dog>> ownMaleDogs = this.repository.getDogsByBreederByGenderByAvailability(breederId, Gender.Male, dogAvailable, application);
+        observableOwnFemaleDogs.addSource(ownMaleDogs, observableOwnMaleDogs::setValue);
+
+
     }
 
     /**
@@ -83,6 +100,14 @@ public class DogListViewModel extends AndroidViewModel {
      */
     public LiveData<List<Dog>> getOwnDogs() {
         return observableOwnDogs;
+    }
+
+    public LiveData<List<Dog>> getOwnAvailableFemaleDogs() {
+        return observableOwnFemaleDogs;
+    }
+
+    public LiveData<List<Dog>> getOwnAvailableMaleDogs() {
+        return observableOwnMaleDogs;
     }
 
     public void deleteDog(Dog dog, OnAsyncEventListener callback) {

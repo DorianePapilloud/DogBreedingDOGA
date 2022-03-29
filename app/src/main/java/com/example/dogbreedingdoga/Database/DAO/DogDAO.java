@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
+import com.example.dogbreedingdoga.Database.Gender;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public abstract class DogDAO {
 
     @Query("SELECT * FROM dog WHERE breederMail LIKE :breederMail AND availability LIKE :availability")
     public abstract LiveData<List<Dog>> getDogsByBreederByAvailability(String breederMail, boolean availability);
+
+    @Query("SELECT * FROM dog WHERE breederMail LIKE :breederMail AND gender LIKE :gender AND availability LIKE :availability")
+    public abstract LiveData<List<Dog>> getDogsByBreederByGenderByAvailability(String breederMail, Gender gender, boolean availability);
 
     @Insert
     public abstract long insertDog(Dog dog);
