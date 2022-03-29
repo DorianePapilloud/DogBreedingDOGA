@@ -51,30 +51,6 @@ public class WelcomeActivity extends BaseActivity {
                                 // 1 ATTENTION SI 1ère utilisation -> à check
 
 
-//                                SharedPreferences activeSession = getPreferences(Context.MODE_PRIVATE);
-//                                SharedPreferences.Editor editor = activeSession.edit();;
-//                                editor.putString("login", response)
-
-//                                if(PreferenceManager.getDefaultSharedPreferences(getApplication()).getString(BaseActivity.PREFS_USER, null) != null) { //(SharedPreferences) getSharedPreferences(BaseActivity.PREFS_USER, 0) != null
-//                                        System.out.println("PASSE PAR LOGIN DIRECT : ");
-//                                        SharedPreferences currentSession = PreferenceManager.getDefaultSharedPreferences(getApplication()); //(SharedPreferences) getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-//                                        String currentUser = currentSession.getString(BaseActivity.PREFS_USER, null);
-//
-//                                        if(!currentUser.equals("")) {
-//                                                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class); //BreederProfileActivity.class
-//                                                startActivity(intent);
-//                                        }
-//                                        else{
-//                                                getSupportFragmentManager();
-//                                                setContentView(R.layout.activity_login);
-//                                                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-//                                                startActivity(intent);
-//                                        }
-//                                }
-//                                else {
-//                                        System.out.println("PASSE PAR LOGGIN ");
-//                                        getSupportFragmentManager();
-//                                        setContentView(R.layout.activity_login);
                                         Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                                         startActivity(intent);
 
@@ -85,27 +61,3 @@ public class WelcomeActivity extends BaseActivity {
         }
 
 }
-
-
-//public class WelcomeActivity extends Fragments {
-//
-//        FloatingActionButton arrowNext;
-//
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//                ViewGroup root = (ViewGroup) inflater.inflate(R.layout.login_welcome, container, false);
-//
-//                arrowNext = root.findViewById(R.id.arrowNext);
-//
-//                arrowNext.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                                Intent intent = new Intent(getActivity(), LoginActivity.class);
-//                                startActivity(intent);
-//
-//                        }
-//                });
-//
-//                return root;
-//        }
-//}

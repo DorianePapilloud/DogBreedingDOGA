@@ -26,30 +26,10 @@ public class LoginTabFragment extends Fragment {
     private Button btn_login;
     private float v = 0;
 
-    //début code Gaétan
     private int position;
     private BreederRepository repository;
 
-//    public static Fragment getInstance(int position) {
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("pos", position);
-//        LoginTabFragment tabFragment = new LoginTabFragment();
-//        tabFragment.setArguments(bundle);
-//        return tabFragment;
-//    }
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        position = getArguments().getInt("pos");
-//    }
 
-//    @Override
-//    public void OnViewCreated(View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//
-//    }
-
-    //fin code Gaétan
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){

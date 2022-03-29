@@ -105,12 +105,6 @@ public class SettingsActivity extends PreferenceActivity {
         setupActionBar();
         setActionBarTitle(getString(R.string.title_activity_settings));
 
-//        if(findViewById(R.id.fragment_settings_container) != null) {
-//            if(savedInstanceState != null)
-//                return
-//
-//                getFragmentManager().beginTransaction().add(R.id.fragment_settings_container, new SettingsFragment()).commit();
-//        }
     }
 
     /**

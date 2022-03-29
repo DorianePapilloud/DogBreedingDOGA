@@ -26,14 +26,6 @@ public class MainActivity extends BaseActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nv_NavHostView);
         NavController navController = navHostFragment.getNavController();
 
-        // call the main fragment
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.nv_NavHostView, DogsListFragment.class, null)
-//                .setReorderingAllowed(true)
-//                .addToBackStack("").commit();
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
         }
 
     @Override
