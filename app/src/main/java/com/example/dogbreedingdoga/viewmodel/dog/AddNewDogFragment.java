@@ -317,6 +317,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
      * @param pedig
      * @param avlbl
      */
+
     private void saveDog(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
 
         if( valideDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl) ) {

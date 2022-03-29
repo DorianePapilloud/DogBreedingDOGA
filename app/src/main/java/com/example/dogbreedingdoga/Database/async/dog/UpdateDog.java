@@ -9,12 +9,12 @@ import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 
 public class UpdateDog extends AsyncTask<Dog, Void, Void> {
     private Application application;
-    private OnAsyncEventListener callback;
+    private OnAsyncEventListener calback;
     private Exception exception;
 
     public UpdateDog(Application application, OnAsyncEventListener callback) {
         this.application = application;
-        this.callback = callback;
+        calback = callback;
     }
 
     @Override
@@ -31,11 +31,11 @@ public class UpdateDog extends AsyncTask<Dog, Void, Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        if (callback != null) {
+        if (calback != null) {
             if (exception == null) {
-                callback.onSuccess();
+                calback.onSuccess();
             } else {
-                callback.onFailure(exception);
+                calback.onFailure(exception);
             }
         }
     }
