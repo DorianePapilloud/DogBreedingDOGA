@@ -24,7 +24,7 @@ public class WelcomeActivity extends BaseActivity {
         private ImageView logo, background;
         private TextView welcome, start;
 
-        protected int _splashTime = 0000;
+        protected int _splashTime = 5000;
 
         @Override
         protected void onCreate(Bundle savedInstances) {
