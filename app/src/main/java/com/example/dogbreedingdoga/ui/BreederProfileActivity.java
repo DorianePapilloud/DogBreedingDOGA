@@ -10,13 +10,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
@@ -236,7 +233,7 @@ public class BreederProfileActivity extends BaseActivity {
 
         disableTextView(et_ProfileName, et_ProfileSurname, et_ProfileAddress, et_ProfilePhone, et_ProfileEmail);
 
-        viewModel.updateClient(breeder, new OnAsyncEventListener() {
+        viewModel.updateBreeder(breeder, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 setResponse(true);

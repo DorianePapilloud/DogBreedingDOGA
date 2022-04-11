@@ -2,30 +2,29 @@ package com.example.dogbreedingdoga.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+
 import androidx.annotation.NonNull;
-
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.helper.LocaleHelper;
 import com.example.dogbreedingdoga.ui.mgmt.LoginActivity;
-import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.mgmt.SettingsActivity;
-import com.example.dogbreedingdoga.viewmodel.dog.DogsListFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
-import io.paperdb.Paper;
+import io.paperdb.
+
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{ //implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -173,9 +172,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
 
     public void logout() {
-        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-        editor.remove(BaseActivity.PREFS_USER);
-        editor.apply();
+        FirebaseAuth.getInstance().signOut();
 
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

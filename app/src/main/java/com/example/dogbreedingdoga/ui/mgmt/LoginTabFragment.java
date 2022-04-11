@@ -107,31 +107,16 @@ public class LoginTabFragment extends Fragment {
         } else {
 //            progressBar.setVisibility(View.VISIBLE);
 
-            repository.getBreeder(email, this.getActivity().getApplication()).observe(LoginTabFragment.this, breeder -> {
-                if (breeder != null) {
-                    if (breeder.getPassword().equals(password)) {
-                        // We need an Editor object to make preference changes.
-                        // All objects are from android.context.Context
-                        SharedPreferences.Editor editor = this.getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-                        editor.putString(BaseActivity.PREFS_USER, breeder.getEmail());
-                        editor.apply();
-
-                        Intent intent = new Intent(this.getContext(), MainActivity.class); //BreederProfileActivity.class
-                        startActivity(intent);
-
-                        tv_email.setText("");
-                        tv_pass.setText("");
-                    } else {
-                        tv_pass.setError(getString(R.string.error_incorrect_password));
-                        tv_pass.requestFocus();
-                        tv_pass.setText("");
-                    }
-//                    progressBar.setVisibility(View.GONE);
+            repository.signIn(email, password, task -> {
+                if (task.isSuccessful()) {
+                    Intent intent = new Intent(this.getContext(), MainActivity.class); //BreederProfileActivity.class
+                    startActivity(intent);
+                    tv_email.setText("");
+                    tv_pass.setText("");
                 } else {
                     tv_email.setError(getString(R.string.error_invalid_email));
                     tv_email.requestFocus();
                     tv_pass.setText("");
-//                    progressBar.setVisibility(View.GONE);
                 }
             });
         }

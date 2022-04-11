@@ -16,11 +16,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
-import com.example.dogbreedingdoga.Database.async.breeder.CreateBreeder;
+import com.example.dogbreedingdoga.Database.Repository.BreederRepository;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 import com.example.dogbreedingdoga.ui.BreederProfileActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class CreateNewAccountFragment extends Fragment {
@@ -34,9 +36,13 @@ public class CreateNewAccountFragment extends Fragment {
 
     private Toast toast;
 
+    private BreederRepository repository;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.create_new_account_tab_fragment, container, false);
+
+        repository = ((BaseApp) getActivity().getApplication()).getBreederRepository();
 
         tv_email = root.findViewById(R.id.et_email);
         tv_pwd = root.findViewById(R.id.createPass);
@@ -71,7 +77,7 @@ public class CreateNewAccountFragment extends Fragment {
         }
         Breeder newBreeder = new Breeder(email, pwd);
 
-        new CreateBreeder((BaseApp)getActivity().getApplication(), new OnAsyncEventListener() {
+        repository.register(newBreeder, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "createUserWithEmail: success");
@@ -83,7 +89,7 @@ public class CreateNewAccountFragment extends Fragment {
                 Log.d(TAG, "createUserWithEmail: failure", e);
                 setResponse(false);
             }
-        }).execute(newBreeder);
+        });
 
     }
 
@@ -103,5 +109,6 @@ public class CreateNewAccountFragment extends Fragment {
             tv_email.requestFocus();
         }
     }
+
 
 }
