@@ -15,15 +15,6 @@ import com.example.dogbreedingdoga.helper.LocaleHelper;
  */
 public class BaseApp extends Application {
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
-    public AppDatabase getDatabase() {
-        return AppDatabase.getInstance(this);
-    }
-
     public DogRepository getDogRepository() {
         return DogRepository.getInstance();
     }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "57471027828",
+    "project_id": "dogabreeders",
+    "storage_bucket": "dogabreeders.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57471027828:android:e8958d682f2784eefadf21",
+        "android_client_info": {
+          "package_name": "com.example.dogbreedingdoga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57471027828-hd1g26th6c2k346k9uqghlkft24te4uo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHbHOhWu0Wa6X6hXjzkMu2Hlh5Xl_WAxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57471027828-hd1g26th6c2k346k9uqghlkft24te4uo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

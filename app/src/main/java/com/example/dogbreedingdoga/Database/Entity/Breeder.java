@@ -1,30 +1,23 @@
 package com.example.dogbreedingdoga.Database.Entity;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "breeder", primaryKeys = {"email"})
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Breeder {
 
+    String idBreeder;
     @NonNull
-    @ColumnInfo (name = "email")
     String email;
-    @ColumnInfo (name = "nameBreeder")
     String nameBreeder;
-    @ColumnInfo (name = "surnameBreeder")
     String surnameBreeder;
-    @ColumnInfo (name = "addressBreeder")
     String addressBreeder;
-    @ColumnInfo (name = "phone")
     String phone;
-    @ColumnInfo (name = "password")
     String password;
-    @ColumnInfo (name = "pictureBreeder")
     String pictureBreeder;
-    @ColumnInfo (name = "descriptionBreeder")
     String descriptionBreeder;
 
 
@@ -32,6 +25,15 @@ public class Breeder {
 
         this.email = email;
         this.password = password;
+    }
+
+    @Exclude
+    public String getIdBreeder() {
+        return idBreeder;
+    }
+
+    public void setIdBreeder(String idBreeder) {
+        this.idBreeder = idBreeder;
     }
 
     public String getNameBreeder() {
@@ -97,4 +99,29 @@ public class Breeder {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) return false;
+        if (object == this) return true;
+        if (!(object instanceof Breeder)) return false;
+        Breeder b = (Breeder) object;
+        return b.getEmail().equals(this.getEmail());
+    }
+
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("email", email);
+        result.put("Name Breeder", nameBreeder);
+        result.put("Surname Breeder", surnameBreeder);
+        result.put("Address", addressBreeder);
+        result.put("Phone", phone);
+        result.put("Password", password);
+//        result.put("Picture Breeder", pictureBreeder);
+//        result.put("Description Breeder", descriptionBreeder);
+        return result;
+    }
+
 }

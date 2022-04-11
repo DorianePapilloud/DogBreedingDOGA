@@ -34,7 +34,7 @@ public class BreederViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableBreeder.setValue(null);
 
-        LiveData<Breeder> breeder = repository.getBreeder(breederMail, application);
+        LiveData<Breeder> breeder = repository.getBreeder(breederMail);
 
         // observe the changes of the client entity from the database and forward them
         observableBreeder.addSource(breeder, observableBreeder::setValue);
@@ -72,16 +72,16 @@ public class BreederViewModel extends AndroidViewModel {
         return observableBreeder;
     }
 
-    public void createClient(Breeder breeder, OnAsyncEventListener callback) {
-        repository.insert(breeder, callback, application);
+    public void createBreeder(Breeder breeder, OnAsyncEventListener callback) {
+        repository.insert(breeder, callback);
     }
 
-    public void updateClient(Breeder breeder, OnAsyncEventListener callback) {
-        repository.update(breeder, callback, application);
+    public void updateBreeder(Breeder breeder, OnAsyncEventListener callback) {
+        repository.update(breeder, callback);
     }
 
     public void deleteBreeder(Breeder breeder, OnAsyncEventListener callback) {
-        repository.delete(breeder, callback, application);
+        repository.delete(breeder, callback);
 
     }
 }
