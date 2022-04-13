@@ -21,12 +21,12 @@ task clean(type: Delete) {
 }
 
 
-allprojects {
-
-    repositories {
-        google()  // Google's Maven repository
-    }
-}
+//allprojects {
+//
+//    repositories {
+//        google()  // Google's Maven repository
+//    }
+//}
 
 //task clean(type: Delete) {
 //    delete.rootProject.buildDir

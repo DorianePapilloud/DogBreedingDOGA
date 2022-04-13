@@ -25,7 +25,7 @@ public class DogViewModel extends AndroidViewModel {
     private final MediatorLiveData<Breeder> observableBreeder;
 
     public DogViewModel(@NonNull Application application,
-                        final long dogId, DogRepository dogRep) {
+                        final String dogId, DogRepository dogRep) {
         super(application);
 
         this.application = application;
@@ -38,14 +38,14 @@ public class DogViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableDog.setValue(null);
 
-        LiveData<Dog> dog = dogRepository.getDog(dogId, application);
+        LiveData<Dog> dog = dogRepository.getDog(dogId);
 
         //==== observable for dog's breeder ====
         observableBreeder = new MediatorLiveData<>();
         observableBreeder.setValue(null);
 
         //determine the breeder of this dog
-        LiveData<Breeder> breeder = dogRepository.getDogsBreeder(dogId, application);
+        LiveData<Breeder> breeder = dogRepository.getDogsBreeder(dogId);
 
         // observe the changes of the dog and its breeder entities from the database and forward them
         observableDog.addSource(dog, observableDog::setValue);
@@ -60,12 +60,12 @@ public class DogViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final long dogId;
+        private final String dogId;
         private final String breederId;
 
         private final DogRepository repository;
 
-        public Factory(@NonNull Application application, long dogId, String breederId) {
+        public Factory(@NonNull Application application, String dogId, String breederId) {
             this.application = application;
             this.dogId = dogId;
             this.breederId = breederId;
@@ -89,15 +89,15 @@ public class DogViewModel extends AndroidViewModel {
     public LiveData<Dog> getDog() {return  observableDog;}
 
     public void createDog(Dog dog, OnAsyncEventListener callback) {
-        dogRepository.insert(dog, callback, application);
+        dogRepository.insert(dog, callback);
     }
 
     public void updateDog(Dog dog, OnAsyncEventListener callback) {
-        dogRepository.update(dog, callback, application);
+        dogRepository.update(dog, callback);
     }
 
     public void deleteDog(Dog dog, OnAsyncEventListener callback) {
-        dogRepository.delete(dog, callback, application);
+        dogRepository.delete(dog, callback);
 
     }
 }

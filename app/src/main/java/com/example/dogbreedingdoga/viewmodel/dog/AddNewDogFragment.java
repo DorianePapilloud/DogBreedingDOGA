@@ -20,13 +20,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -122,7 +120,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
         this.currentBreederMail = settings.getString(BaseActivity.PREFS_USER, null);
 
         //check if new dog and initialise checkbox Availability
-        Long idDog = getActivity().getIntent().getLongExtra("idDog", 0L);
+        String idDog = getActivity().getIntent().getStringExtra("idDog");
 
         //UI initialisation
         initialisation(root);
@@ -192,9 +190,9 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
                 FragmentManager fragmentManager = getParentFragmentManager();
 
-                long idDog = dogsBreederList.get(position).getIdDog();
+                String idDog = dogsBreederList.get(position).getIdDog();
                 Bundle data = new Bundle();
-                data.putLong("DogID", idDog);
+                data.putString("DogID", idDog);
                 DogDetailsFragment dogDetailsFragment = new DogDetailsFragment();
                 dogDetailsFragment.setArguments(data);
                 fragmentManager.beginTransaction()

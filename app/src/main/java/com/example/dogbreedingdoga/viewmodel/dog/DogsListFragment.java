@@ -72,9 +72,9 @@ public class DogsListFragment extends Fragment {
                 FragmentManager fragmentManager = getParentFragmentManager();
 
 
-                long idDog = dogs.get(position).getIdDog();
+                String idDog = dogs.get(position).getIdDog();
                 Bundle data = new Bundle();
-                data.putLong("DogID", idDog);
+                data.putString("DogID", idDog);
                 DogDetailsFragment dogDetailsFragment = new DogDetailsFragment();
                 dogDetailsFragment.setArguments(data);
                 fragmentManager.beginTransaction()

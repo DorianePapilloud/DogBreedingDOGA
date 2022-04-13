@@ -56,7 +56,7 @@ public class DogDetailsFragment extends Fragment {
     private Dog dog;
     private DogRepository dogRepository;
     private DogViewModel viewModel;
-    private long idDoggy;
+    private String idDoggy;
     private String currentBreederMail;
 
     private ImageView iv_BtnDelete;
@@ -84,7 +84,7 @@ public class DogDetailsFragment extends Fragment {
 
         Bundle data = getArguments();
         if(data != null){
-            idDoggy = data.getLong("DogID");
+            idDoggy = data.getString("DogID");
         }
 
         // Inflate the layout for this fragment

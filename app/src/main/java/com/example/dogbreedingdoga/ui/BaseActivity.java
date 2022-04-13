@@ -23,7 +23,7 @@ import com.example.dogbreedingdoga.ui.mgmt.SettingsActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import io.paperdb.
+import io.paperdb.Paper;
 
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{ //implements NavigationView.OnNavigationItemSelectedListener {

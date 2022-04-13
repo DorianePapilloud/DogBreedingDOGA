@@ -2,47 +2,31 @@ package com.example.dogbreedingdoga.Database.Entity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
 
 import com.example.dogbreedingdoga.Database.Gender;
+import com.google.firebase.database.Exclude;
 
-@Entity(tableName = "dog", foreignKeys = @ForeignKey(entity = Breeder.class,
-                                    parentColumns = "email",
-                                    childColumns = "breederMail",
-                                    onDelete = ForeignKey.CASCADE))
+import java.util.HashMap;
+import java.util.Map;
+
 public class Dog implements Comparable {
 
-    @PrimaryKey (autoGenerate = true)
-    long idDog;
-    @ColumnInfo(name = "nameDog")
+    String idDog;
     String nameDog;
-    @ColumnInfo(name = "breedDog")
     String breedDog;
     @Nullable
-    @ColumnInfo(name = "dateOfBirth")
     String dateOfBirth;
-    @ColumnInfo(name = "gender")
     Gender gender;
     @Nullable
-    @ColumnInfo (name = "mother")
     int idMother;
     @Nullable
-    @ColumnInfo (name = "father")
     int idFather;
-    @ColumnInfo (name = "breederMail")
     String breederMail;
-    @ColumnInfo (name = "pedigree")
     Boolean pedigree;
-    @Nullable /////////////////////
-    @ColumnInfo (name = "pictureDog")
+    @Nullable
     String profilePicture;
-    @Nullable /////////////////////////////
-    @ColumnInfo (name = "specificationsDog")
+    @Nullable
     String specificationsDog;
-    @ColumnInfo(name = "availability")
     boolean isAvailable ;
 
 
@@ -66,11 +50,12 @@ public class Dog implements Comparable {
         this.breederMail = breederMail;
     }
 
-    public long getIdDog() {
+    @Exclude
+    public String getIdDog() {
         return idDog;
     }
 
-    public void setIdDog(int idDog) {
+    public void setIdDog(String idDog) {
         this.idDog = idDog;
     }
 
@@ -153,4 +138,17 @@ public class Dog implements Comparable {
     public int compareTo(@NonNull Object o) {
         return toString().compareTo(o.toString());
     }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("Name Dog", nameDog);
+        result.put("Breed Dog", breedDog);
+        result.put("Date of Birth", dateOfBirth);
+        result.put("Gender Dog", gender);
+        result.put("Pedigree Dog", pedigree);
+        result.put("Available", isAvailable);
+        return result;
+    }
+
 }

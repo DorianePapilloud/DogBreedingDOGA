@@ -80,7 +80,7 @@ public class BreederRepository {
 //               });
 //    }
 
-    private void insert(final Breeder breeder, final OnAsyncEventListener callback){
+    public void insert(final Breeder breeder, final OnAsyncEventListener callback){
         FirebaseDatabase.getInstance()
                 .getReference("breeders")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
