@@ -9,8 +9,10 @@ import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
 import com.example.dogbreedingdoga.Database.Gender;
+import com.example.dogbreedingdoga.Database.firebase.BreederDogsListLiveData;
 import com.example.dogbreedingdoga.Database.firebase.BreederLiveData;
 import com.example.dogbreedingdoga.Database.firebase.DogLiveData;
+import com.example.dogbreedingdoga.Database.pojo.DogsFromBreeder;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -56,20 +58,32 @@ public class DogRepository {
 
 
     /// a controler /////////////////////////////////////77
-    public LiveData<Breeder> getDogsBreeder(final String idBreeder) {
+
+    //Get the breeder from the selected dog
+    public LiveData<Breeder> getDogsBreeder(final String idDog) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("Dogs")
-                .child(idBreeder);
+                .getReference("dogs")
+                .child(idDog);
         return new BreederLiveData(reference);
     }
 
-    public LiveData<List<Dog>> getDogsByBreederByAvailability(final String breederMail, boolean availability) {
-        return ;
+    public LiveData<List<Dog>> getAllDogsFromBreeder(final String idBreeder) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("dogs")
+                .child(idBreeder);
+        return new BreederDogsListLiveData(reference);
     }
 
-    public LiveData<List<Dog>> getDogsByBreederByGenderByAvailability(final String breederMail, Gender gender, boolean availability, Application application) {
-        return ((BaseApp) application).getDatabase().dogDao().getDogsByBreederByGenderByAvailability(breederMail, gender, availability);
-    }
+//    public LiveData<List<Dog>> getDogsByBreederByAvailability(final String idBreeder, boolean availability) {
+//        DatabaseReference reference = FirebaseDatabase.getInstance()
+//                .getReference("Dogs")
+//                .child(idBreeder);
+//        return BreederDogsListLiveData(reference);
+//    }
+
+//    public LiveData<List<Dog>> getDogsByBreederByGenderByAvailability(final String breederMail, Gender gender, boolean availability, Application application) {
+//        return ((BaseApp) application).getDatabase().dogDao().getDogsByBreederByGenderByAvailability(breederMail, gender, availability);
+//    }
 
     //////////////////////////////////////////////// this need to be changed //////////////////////////////////////////////
     public void insert(final Dog dog, final OnAsyncEventListener callback){

@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
+import com.example.dogbreedingdoga.Database.pojo.DogsFromBreeder;
 import com.example.dogbreedingdoga.Database.util.RecyclerViewItemClickListener;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.adapter.RecyclerAdapter;

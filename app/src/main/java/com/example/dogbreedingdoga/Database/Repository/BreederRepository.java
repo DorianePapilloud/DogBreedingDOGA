@@ -6,15 +6,12 @@ import androidx.lifecycle.LiveData;
 
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.firebase.BreederLiveData;
-import com.example.dogbreedingdoga.Database.pojo.BreederWithDogs;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.List;
 
 
 public class BreederRepository {

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * https://developer.android.com/reference/android/arch/persistence/room/Relation
  */
-public class BreederWithDogs {
+public class DogsFromBreeder {
     public Breeder breeder;
     public List<Dog> dogs;
 }

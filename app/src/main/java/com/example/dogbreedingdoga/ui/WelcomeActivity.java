@@ -1,20 +1,12 @@
 package com.example.dogbreedingdoga.ui;
 
-import static com.example.dogbreedingdoga.Database.AppDatabase.initializeDemoData;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dogbreedingdoga.BaseApp;
-import com.example.dogbreedingdoga.Database.AppDatabase;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.ui.mgmt.LoginActivity;
 

@@ -15,6 +15,8 @@ import com.example.dogbreedingdoga.Database.Entity.Dog;
 import com.example.dogbreedingdoga.Database.Repository.DogRepository;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 
+import java.util.List;
+
 public class DogViewModel extends AndroidViewModel {
     private DogRepository dogRepository;
 

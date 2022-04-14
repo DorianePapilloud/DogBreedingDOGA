@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
-import com.example.dogbreedingdoga.Database.pojo.BreederWithDogs;
+import com.example.dogbreedingdoga.Database.pojo.DogsFromBreeder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,18 +16,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BreederDogsListLiveData extends LiveData<List<BreederWithDogs>> {
+public class BreederDogsListLiveData extends LiveData<List<Dog>> {
 
     private static final String TAG = "BreederDogsLiveData";
 
     private final DatabaseReference reference;
-    private final String breeder;
+//    private final String breeder;
     private final BreederDogsListLiveData.MyValueEventListener listener =
             new BreederDogsListLiveData.MyValueEventListener();
 
-    public BreederDogsListLiveData(DatabaseReference ref, String breeder) {
+    public BreederDogsListLiveData(DatabaseReference ref) {
         reference = ref;
-        this.breeder = breeder;
     }
 
     @Override
@@ -45,7 +44,7 @@ public class BreederDogsListLiveData extends LiveData<List<BreederWithDogs>> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            setValue(toBreederWithDogsList(dataSnapshot));
+            setValue(toDogsFromBreederList(dataSnapshot));
         }
 
         @Override
@@ -54,19 +53,29 @@ public class BreederDogsListLiveData extends LiveData<List<BreederWithDogs>> {
         }
     }
 
-    private List<BreederWithDogs> toBreederWithDogsList(DataSnapshot dataSnapshot) {
-        List<BreederWithDogs> breederWithDogsList = new ArrayList<>();
+    private List<Dog> toDogsFromBreederList(DataSnapshot dataSnapshot) {
+        List<Dog> dogsFromBreederList = new ArrayList<>();
         for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-//            if(!childSnapshot.getKey().equals(breeder)) {
-                BreederWithDogs breederWithDogs = new BreederWithDogs();
-                breederWithDogs.breeder = childSnapshot.getValue(Breeder.class);
-                breederWithDogs.breeder.setIdBreeder(childSnapshot.getKey());
-                breederWithDogs.dogs = toDogs(childSnapshot.child("dogs"),
-                        childSnapshot.getKey());
-                breederWithDogsList.add(breederWithDogs);
-//            }
+                Dog dogsFromBreeder = childSnapshot.getValue(Dog.class);
+            dogsFromBreeder.setBreederId(childSnapshot.getKey());
+            dogsFromBreederList.add(dogsFromBreeder);
+//                dogsFromBreeder.breeder = childSnapshot.getValue(Breeder.class);
+//                dogsFromBreeder.breeder.setIdBreeder(childSnapshot.getKey());
+//                dogsFromBreeder.dogs = toDogs(childSnapshot.child("dogs"),
+//                        childSnapshot.getKey());
+//                dogsFromBreederList.add(dogsFromBreeder);
         }
-        return breederWithDogsList;
+        return dogsFromBreederList;
+    }
+
+    private List<CourseEntity> toCourseList(DataSnapshot snapshot) {
+        List<CourseEntity> courses = new ArrayList<>();
+        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+            CourseEntity entity = childSnapshot.getValue(CourseEntity.class);
+            entity.setCourseID(childSnapshot.getKey());
+            courses.add(entity);
+        }
+        return courses;
     }
 
 
@@ -81,8 +90,5 @@ public class BreederDogsListLiveData extends LiveData<List<BreederWithDogs>> {
 
         return dogs;
     }
-
-
-
 
 }
