@@ -56,7 +56,8 @@ public class BreederDogsListLiveData extends LiveData<List<Dog>> {
     private List<Dog> toDogsFromBreederList(DataSnapshot dataSnapshot) {
         List<Dog> dogsFromBreederList = new ArrayList<>();
         for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                Dog dogsFromBreeder = childSnapshot.getValue(Dog.class);
+            Dog dogsFromBreeder = new Dog();
+            dogsFromBreeder = childSnapshot.getValue(Dog.class);
             dogsFromBreeder.setBreederId(childSnapshot.getKey());
             dogsFromBreederList.add(dogsFromBreeder);
 //                dogsFromBreeder.breeder = childSnapshot.getValue(Breeder.class);
@@ -66,16 +67,6 @@ public class BreederDogsListLiveData extends LiveData<List<Dog>> {
 //                dogsFromBreederList.add(dogsFromBreeder);
         }
         return dogsFromBreederList;
-    }
-
-    private List<CourseEntity> toCourseList(DataSnapshot snapshot) {
-        List<CourseEntity> courses = new ArrayList<>();
-        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
-            CourseEntity entity = childSnapshot.getValue(CourseEntity.class);
-            entity.setCourseID(childSnapshot.getKey());
-            courses.add(entity);
-        }
-        return courses;
     }
 
 

@@ -28,10 +28,6 @@ import io.paperdb.Paper;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{ //implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String PREFS_NAME = "SharedPrefs";
-    public static final String PREFS_USER = "LoggedIn";
-
-
 
     /**
      *  Frame layout: Which is going to be used as parent layout for child activity layout.

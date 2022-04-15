@@ -1,7 +1,6 @@
 package com.example.dogbreedingdoga.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -19,6 +18,7 @@ import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.viewmodel.breeder.BreederViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class BreederProfileActivity extends BaseActivity {
 
@@ -52,10 +52,9 @@ public class BreederProfileActivity extends BaseActivity {
 
         initiateView();
 
-        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-        String user = settings.getString(PREFS_USER, null);
+        BreederViewModel.Factory factory = new BreederViewModel.Factory(getApplication(),
+                FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        BreederViewModel.Factory factory = new BreederViewModel.Factory(getApplication(), user);
         viewModel = new ViewModelProvider(this, factory).get(BreederViewModel.class);
         viewModel.getBreeder().observe(this, accountEntity -> {
             if (accountEntity != null) {

@@ -1,6 +1,5 @@
 package com.example.dogbreedingdoga.viewmodel.dog;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -27,7 +26,7 @@ import com.example.dogbreedingdoga.Database.Gender;
 import com.example.dogbreedingdoga.Database.Repository.DogRepository;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.example.dogbreedingdoga.R;
-import com.example.dogbreedingdoga.ui.BaseActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 
@@ -57,7 +56,7 @@ public class DogDetailsFragment extends Fragment {
     private DogRepository dogRepository;
     private DogViewModel viewModel;
     private String idDoggy;
-    private String currentBreederMail;
+    private String currentBreederUID;
 
     private ImageView iv_BtnDelete;
     private ImageView iv_BtnEdit;
@@ -79,18 +78,17 @@ public class DogDetailsFragment extends Fragment {
 
 //        long idDoggy = savedInstanceState.getLong("DogID", 0L);
 
-        SharedPreferences settings = getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-        this.currentBreederMail = settings.getString(BaseActivity.PREFS_USER, null);
-
         Bundle data = getArguments();
         if(data != null){
             idDoggy = data.getString("DogID");
         }
 
+        currentBreederUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         // Inflate the layout for this fragment
         view = (ViewGroup) inflater.inflate(R.layout.fragment_dog_details, container, false);
 
-        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDoggy, currentBreederMail);
+        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDoggy, currentBreederUID);
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
         viewModel.getDog().observe(getActivity(), dogEntity -> {
             if (dogEntity != null) {
@@ -374,9 +372,9 @@ public class DogDetailsFragment extends Fragment {
     private void saveChanges(String nameDoggy, String breedDoggy, Gender genderDoggy , String dateOfBithDoggy,  Boolean pedigreeDoggy, boolean avlbl) {
 
         if( valideDogAttributes(nameDoggy, breedDoggy, dateOfBithDoggy, genderDoggy, pedigreeDoggy) ) {
-            Dog newDog = new Dog(nameDoggy, breedDoggy, dateOfBithDoggy, gender, this.currentBreederMail, pedigreeDoggy, avlbl);
+            Dog newDog = new Dog(nameDoggy, breedDoggy, dateOfBithDoggy, gender, this.currentBreederUID, pedigreeDoggy, avlbl);
             newDog.setSpecificationsDog(tv_Description.getText().toString());
-            newDog.setBreederMail(this.currentBreederMail);
+            newDog.setBreederMail(this.currentBreederUID);
 
             //set mother + father
 

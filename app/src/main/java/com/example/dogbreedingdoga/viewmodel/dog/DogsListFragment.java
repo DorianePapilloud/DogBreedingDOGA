@@ -23,6 +23,7 @@ import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.adapter.RecyclerAdapter;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +61,7 @@ public class DogsListFragment extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         //Retrieve current user
-        SharedPreferences settings = this.getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-        String user = settings.getString(BaseActivity.PREFS_USER, null);
+        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         dogs = new ArrayList<>();
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {

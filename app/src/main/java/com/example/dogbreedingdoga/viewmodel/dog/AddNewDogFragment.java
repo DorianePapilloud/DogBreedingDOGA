@@ -3,7 +3,6 @@ package com.example.dogbreedingdoga.viewmodel.dog;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -43,6 +42,7 @@ import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.adapter.RecyclerAdapter;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 import com.example.dogbreedingdoga.ui.DatePickerFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -89,7 +89,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private Toast toast;
     private final static int REQUEST_CODE = 11;
 
-    private String currentBreederMail;
+    private String currentBreederUid;
 
     private Dog dog;
     private List<Dog> dogsBreederList;
@@ -115,27 +115,26 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
         // Inflate the layout for this fragment
         ViewGroup root = ((ViewGroup) inflater.inflate(R.layout.fragment_add_new_dog,container,false));
 
-        //Retrieve the id (mail) of the connected breeder
-        SharedPreferences settings = getActivity().getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-        this.currentBreederMail = settings.getString(BaseActivity.PREFS_USER, null);
-
         //check if new dog and initialise checkbox Availability
         String idDog = getActivity().getIntent().getStringExtra("idDog");
+
+        currentBreederUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         //UI initialisation
         initialisation(root);
 
 
-        //for the dog view
-        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDog, currentBreederMail);
-        viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
-        viewModel.getDog().observe((BaseActivity)getActivity(), dogEntity -> {
-            if (dogEntity != null) {
-                dog = dogEntity;
-                updateContent();
 
-            }
-        });
+        //for the dog view
+        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDog, currentBreederUid);
+        viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
+//        viewModel.getDog().observe((BaseActivity)getActivity(), dogEntity -> {
+//            if (dogEntity != null) {
+//                dog = dogEntity;
+//                updateContent();
+//
+//            }
+//        });
 
 
         // =================== code à checker ========================
@@ -218,7 +217,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
         //to fetch all current breeder's dogs for Mother - Father and check the name availability
         DogListViewModel.Factory factoryList = new DogListViewModel.Factory(
-                getActivity().getApplication(), currentBreederMail);
+                getActivity().getApplication(), currentBreederUid);
 
         listDogsViewModel = new ViewModelProvider(this, factoryList).get(DogListViewModel.class);
 
@@ -391,9 +390,9 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private void saveDog(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
 
         if( valideDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl) ) {
-            Dog newDog = new Dog(dogName, dogBreed, dogBirth,gender, this.currentBreederMail, pedig, avlbl);
+            Dog newDog = new Dog(dogName, dogBreed, dogBirth,gender, this.currentBreederUid, pedig, avlbl);
             newDog.setSpecificationsDog(et_Description.getText().toString());
-            newDog.setBreederMail(this.currentBreederMail);
+            newDog.setBreederMail(this.currentBreederUid);
 
             //set mother + father
 

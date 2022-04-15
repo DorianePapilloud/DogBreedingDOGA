@@ -43,7 +43,8 @@ public class DogRepository {
 
     public LiveData<Dog> getDog(final String idDog) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("Dogs")
+                .getReference("dogs")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(idDog);
         return new DogLiveData(reference);
     }

@@ -61,8 +61,4 @@ public class BreederLiveData extends LiveData<Breeder> {
             return breeders;
     }
 
-
-
-
-
 }

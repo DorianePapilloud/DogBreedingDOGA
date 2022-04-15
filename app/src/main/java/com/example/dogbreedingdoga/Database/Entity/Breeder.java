@@ -1,7 +1,5 @@
 package com.example.dogbreedingdoga.Database.Entity;
 
-import androidx.annotation.NonNull;
-
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -10,7 +8,6 @@ import java.util.Map;
 public class Breeder {
 
     String idBreeder;
-    @NonNull
     String email;
     String nameBreeder;
     String surnameBreeder;
@@ -21,10 +18,13 @@ public class Breeder {
     String descriptionBreeder;
 
 
-    public Breeder(@NonNull String email, String password) {
-
+    public Breeder(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+
+    public Breeder() {
     }
 
     @Exclude

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "57471027828",
+    "firebase_url": "https://dogabreeders-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "dogabreeders",
     "storage_bucket": "dogabreeders.appspot.com"
   },

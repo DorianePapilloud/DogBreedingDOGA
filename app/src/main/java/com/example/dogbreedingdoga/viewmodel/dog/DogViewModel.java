@@ -14,6 +14,7 @@ import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
 import com.example.dogbreedingdoga.Database.Repository.DogRepository;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -40,18 +41,21 @@ public class DogViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableDog.setValue(null);
 
-        LiveData<Dog> dog = dogRepository.getDog(dogId);
+        if(dogId != null){
+            LiveData<Dog> dog = dogRepository.getDog(dogId);
+            observableDog.addSource(dog, observableDog::setValue);
+        }
 
         //==== observable for dog's breeder ====
         observableBreeder = new MediatorLiveData<>();
         observableBreeder.setValue(null);
 
         //determine the breeder of this dog
-        LiveData<Breeder> breeder = dogRepository.getDogsBreeder(dogId);
+//        LiveData<Breeder> breeder = dogRepository.getDogsBreeder(dogId);
 
         // observe the changes of the dog and its breeder entities from the database and forward them
-        observableDog.addSource(dog, observableDog::setValue);
-        observableBreeder.addSource(breeder, observableBreeder::setValue);
+//        observableDog.addSource(dog, observableDog::setValue);
+//        observableBreeder.addSource(breeder, observableBreeder::setValue);
     }
 
     /**
@@ -91,15 +95,18 @@ public class DogViewModel extends AndroidViewModel {
     public LiveData<Dog> getDog() {return  observableDog;}
 
     public void createDog(Dog dog, OnAsyncEventListener callback) {
-        dogRepository.insert(dog, callback);
+        ((BaseApp) getApplication()).getDogRepository().
+                insert(dog, callback);
     }
 
     public void updateDog(Dog dog, OnAsyncEventListener callback) {
-        dogRepository.update(dog, callback);
+        ((BaseApp) getApplication()).getDogRepository()
+        .update(dog, callback);
     }
 
     public void deleteDog(Dog dog, OnAsyncEventListener callback) {
-        dogRepository.delete(dog, callback);
+        ((BaseApp) getApplication()).getDogRepository()
+                .delete(dog, callback);
 
     }
 }

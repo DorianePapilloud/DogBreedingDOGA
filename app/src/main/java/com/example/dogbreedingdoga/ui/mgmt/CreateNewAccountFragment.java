@@ -1,7 +1,6 @@
 package com.example.dogbreedingdoga.ui.mgmt;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -95,9 +94,6 @@ public class CreateNewAccountFragment extends Fragment {
 
     private void setResponse(Boolean response) {
         if (response) {
-            final SharedPreferences.Editor editor = getContext().getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-            editor.putString(BaseActivity.PREFS_USER, tv_email.getText().toString());
-            editor.apply();
             toast.show();
             Intent intent = new Intent(CreateNewAccountFragment.this.getActivity(), BreederProfileActivity.class);
             startActivity(intent);

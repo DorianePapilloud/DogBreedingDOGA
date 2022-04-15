@@ -14,6 +14,7 @@ public class Dog implements Comparable {
     String idDog;
     String nameDog;
     String breedDog;
+    String breederId;
     @Nullable
     String dateOfBirth;
     Gender gender;
@@ -42,12 +43,20 @@ public class Dog implements Comparable {
         this.isAvailable = isAvailable;
     }
 
+    public Dog() {
+    }
+
     public String getBreederMail() {
         return breederMail;
     }
 
     public void setBreederMail(String breederMail) {
         this.breederMail = breederMail;
+    }
+
+
+    public void setBreederId(String breederId) {
+        this.breederId = breederId;
     }
 
     @Exclude
