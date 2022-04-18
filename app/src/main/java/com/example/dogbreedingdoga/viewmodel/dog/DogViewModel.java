@@ -28,7 +28,7 @@ public class DogViewModel extends AndroidViewModel {
     private final MediatorLiveData<Breeder> observableBreeder;
 
     public DogViewModel(@NonNull Application application,
-                        final String dogId, DogRepository dogRep) {
+                        DogRepository dogRep) {
         super(application);
 
         this.application = application;
@@ -41,21 +41,15 @@ public class DogViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableDog.setValue(null);
 
-        if(dogId != null){
-            LiveData<Dog> dog = dogRepository.getDog(dogId);
-            observableDog.addSource(dog, observableDog::setValue);
-        }
+//        if(dogId != null){
+//            LiveData<Dog> dog = dogRepository.getDog(dogId);
+//            observableDog.addSource(dog, observableDog::setValue);
+//        }
 
         //==== observable for dog's breeder ====
         observableBreeder = new MediatorLiveData<>();
         observableBreeder.setValue(null);
 
-        //determine the breeder of this dog
-//        LiveData<Breeder> breeder = dogRepository.getDogsBreeder(dogId);
-
-        // observe the changes of the dog and its breeder entities from the database and forward them
-//        observableDog.addSource(dog, observableDog::setValue);
-//        observableBreeder.addSource(breeder, observableBreeder::setValue);
     }
 
     /**
@@ -66,14 +60,14 @@ public class DogViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final String dogId;
+//        private final String dogId;
         private final String breederId;
 
         private final DogRepository repository;
 
-        public Factory(@NonNull Application application, String dogId, String breederId) {
+        public Factory(@NonNull Application application,  String breederId) {
             this.application = application;
-            this.dogId = dogId;
+//            this.dogId = dogId;
             this.breederId = breederId;
             repository = ((BaseApp) application).getDogRepository();
         }
@@ -81,7 +75,7 @@ public class DogViewModel extends AndroidViewModel {
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new DogViewModel(application, dogId, repository);
+            return (T) new DogViewModel(application, repository);
         }
     }
 
@@ -94,9 +88,10 @@ public class DogViewModel extends AndroidViewModel {
 
     public LiveData<Dog> getDog() {return  observableDog;}
 
+
     public void createDog(Dog dog, OnAsyncEventListener callback) {
-        ((BaseApp) getApplication()).getDogRepository().
-                insert(dog, callback);
+        ((BaseApp) getApplication()).getDogRepository()
+                .insert(dog, callback);
     }
 
     public void updateDog(Dog dog, OnAsyncEventListener callback) {

@@ -31,14 +31,27 @@ public class Dog implements Comparable {
     boolean isAvailable ;
 
 
+    public Dog(@Nullable String idDog, String nameDog, String breedDog, String dateOfBirth, Gender gender,
+               Boolean pedigree, boolean isAvailable) {
+
+        this.idDog = idDog;
+        this.nameDog = nameDog;
+        this.breedDog = breedDog;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+
+        this.pedigree = pedigree;
+        this.isAvailable = isAvailable;
+    }
+
     public Dog(String nameDog, String breedDog, String dateOfBirth, Gender gender,
-               String breederMail, Boolean pedigree, boolean isAvailable) {
+               Boolean pedigree, boolean isAvailable) {
 
         this.nameDog = nameDog;
         this.breedDog = breedDog;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.breederMail = breederMail;
+
         this.pedigree = pedigree;
         this.isAvailable = isAvailable;
     }
@@ -139,6 +152,7 @@ public class Dog implements Comparable {
     public boolean isAvailable() { return isAvailable; }
 
     public void setAvailable(boolean available) { isAvailable = available; }
+
 
     @Override
     public String toString() {return nameDog +", " +breederMail; }

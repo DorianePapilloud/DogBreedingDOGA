@@ -43,6 +43,8 @@ import com.example.dogbreedingdoga.adapter.RecyclerAdapter;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 import com.example.dogbreedingdoga.ui.DatePickerFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -116,7 +118,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
         ViewGroup root = ((ViewGroup) inflater.inflate(R.layout.fragment_add_new_dog,container,false));
 
         //check if new dog and initialise checkbox Availability
-        String idDog = getActivity().getIntent().getStringExtra("idDog");
+//        String idDog = getActivity().getIntent().getStringExtra("idDog");
 
         currentBreederUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -126,7 +128,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
 
         //for the dog view
-        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDog, currentBreederUid);
+        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), currentBreederUid);
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
 //        viewModel.getDog().observe((BaseActivity)getActivity(), dogEntity -> {
 //            if (dogEntity != null) {
@@ -189,7 +191,10 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
                 FragmentManager fragmentManager = getParentFragmentManager();
 
-                String idDog = dogsBreederList.get(position).getIdDog();
+//                String idDog = dogsBreederList.get(position).getIdDog();
+                String breeder = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String idDog = FirebaseDatabase.getInstance().getReference("dogs").child(breeder).getKey();
+
                 Bundle data = new Bundle();
                 data.putString("DogID", idDog);
                 DogDetailsFragment dogDetailsFragment = new DogDetailsFragment();
@@ -259,7 +264,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
 
         btn_AddDog = root.findViewById(R.id.btn_CreateDog);
         btn_AddDog.setOnClickListener(view -> {
-            saveDog(  et_NameDog.getText().toString(),
+            saveDog( et_NameDog.getText().toString(),
                     et_BreedDog.getText().toString(),
                     tv_BirthDateDog.getText().toString(),
                     genderDog,
@@ -390,9 +395,17 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
     private void saveDog(String dogName, String dogBreed, String dogBirth, Gender gender, boolean pedig, boolean avlbl) {
 
         if( valideDogAttributes(dogName, dogBreed, dogBirth, gender, pedig, avlbl) ) {
-            Dog newDog = new Dog(dogName, dogBreed, dogBirth,gender, this.currentBreederUid, pedig, avlbl);
-            newDog.setSpecificationsDog(et_Description.getText().toString());
-            newDog.setBreederMail(this.currentBreederUid);
+
+
+            Dog newDog = new Dog(dogName, dogBreed, dogBirth, gender, pedig, avlbl);
+                newDog.setSpecificationsDog(et_Description.getText().toString());
+                newDog.setBreederMail(this.currentBreederUid);
+
+            DatabaseReference reference = FirebaseDatabase.getInstance()
+                    .getReference("dogs")
+                    .child(newDog.getBreederMail());
+            String dogKey = reference.push().getKey();
+            newDog.setIdDog(dogKey);
 
             //set mother + father
 

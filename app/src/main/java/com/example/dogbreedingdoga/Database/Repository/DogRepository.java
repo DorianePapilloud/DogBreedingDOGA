@@ -88,32 +88,31 @@ public class DogRepository {
 
     //////////////////////////////////////////////// this need to be changed //////////////////////////////////////////////
     public void insert(final Dog dog, final OnAsyncEventListener callback){
+//        DatabaseReference reference = FirebaseDatabase.getInstance()
+//                .getReference("dogs")
+//                .child(dog.getBreederMail());
+//        String dogKey = reference.push().getKey();
+//        dog.setIdDog(dogKey);
         FirebaseDatabase.getInstance()
                 .getReference("dogs")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(dog.getBreederMail())//(FirebaseAuth.getInstance().getCurrentUser().getUid()) //breeder's value
+                //generate new dog's ID
+                .child(dog.getIdDog())
                 .setValue(dog, (databaseError, databaseReference) -> {
                     if(databaseError != null) {
                         callback.onFailure(databaseError.toException());
-                        FirebaseAuth.getInstance().getCurrentUser().delete()
-                                .addOnCompleteListener(task -> {
-                                    if (task.isSuccessful()) {
-                                        callback.onFailure(null);
-                                        Log.d(TAG, "Rollback successful: Dog deleted");
-                                    } else {
-                                        callback.onFailure(task.getException());
-                                        Log.d(TAG, "Rollback failed: signInWithEmail:failure", task.getException());
-                                    }
-                                });
                     } else {
                         callback.onSuccess();
                     }
                 });
+//        dog.setIdDog(dogKey);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void update(final Dog dog, final OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("dogs")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(dog.getIdDog())
                 .updateChildren(dog.toMap(), (databaseError, databaseReference) -> {
                     if(databaseError != null) {
@@ -127,6 +126,7 @@ public class DogRepository {
     public void delete(final Dog dog, final OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("dogs")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(dog.getIdDog())
                 .removeValue((databaseError, databaseReference) -> {
                     if(databaseError != null) {

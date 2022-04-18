@@ -6,9 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.example.dogbreedingdoga.Database.Entity.Dog;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -21,8 +23,12 @@ public class DogLiveData extends LiveData<Dog> {
 
     private final DatabaseReference reference;
     private final DogLiveData.MyValueEventListener listener = new DogLiveData.MyValueEventListener();
+    private final String breeder;
 
-    public DogLiveData(DatabaseReference ref) { this.reference = ref; }
+    public DogLiveData(DatabaseReference ref) {
+        this.reference = ref;
+        breeder = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
 
     @Override
     protected void onActive() {
@@ -40,7 +46,8 @@ public class DogLiveData extends LiveData<Dog> {
         public void onDataChange(@NonNull DataSnapshot dataSnapshot){
             if (dataSnapshot.exists()) {
                 Dog dog = dataSnapshot.getValue(Dog.class);
-                dog.setIdDog(dataSnapshot.getKey());
+//                dog.setIdDog(dataSnapshot.getKey());//(dataSnapshot.child("dogs").child(breeder).getKey());
+                dog.setBreederId(breeder);
                 setValue(dog);
             }
         }
@@ -55,7 +62,7 @@ public class DogLiveData extends LiveData<Dog> {
         List<Dog> dogs = new ArrayList<>();
         for(DataSnapshot childSnapshot : dataSnapshot.getChildren()){
             Dog dog = childSnapshot.getValue(Dog.class);
-            dog.setIdDog(childSnapshot.getKey());
+//            dog.setIdDog(childSnapshot.getKey());
             dogs.add(dog);
         }
         return dogs;

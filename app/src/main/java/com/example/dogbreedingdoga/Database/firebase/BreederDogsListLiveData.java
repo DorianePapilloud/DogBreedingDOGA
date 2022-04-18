@@ -11,6 +11,7 @@ import com.example.dogbreedingdoga.Database.pojo.DogsFromBreeder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -56,10 +57,9 @@ public class BreederDogsListLiveData extends LiveData<List<Dog>> {
     private List<Dog> toDogsFromBreederList(DataSnapshot dataSnapshot) {
         List<Dog> dogsFromBreederList = new ArrayList<>();
         for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-            Dog dogsFromBreeder = new Dog();
-            dogsFromBreeder = childSnapshot.getValue(Dog.class);
-            dogsFromBreeder.setBreederId(childSnapshot.getKey());
-            dogsFromBreederList.add(dogsFromBreeder);
+            Dog dog = childSnapshot.getValue(Dog.class);
+            dog.setBreederId(childSnapshot.getKey());
+            dogsFromBreederList.add(dog);
 //                dogsFromBreeder.breeder = childSnapshot.getValue(Breeder.class);
 //                dogsFromBreeder.breeder.setIdBreeder(childSnapshot.getKey());
 //                dogsFromBreeder.dogs = toDogs(childSnapshot.child("dogs"),

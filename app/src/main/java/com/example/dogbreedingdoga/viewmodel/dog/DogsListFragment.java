@@ -24,6 +24,7 @@ import com.example.dogbreedingdoga.adapter.RecyclerAdapter;
 import com.example.dogbreedingdoga.ui.BaseActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,9 +74,12 @@ public class DogsListFragment extends Fragment {
                 FragmentManager fragmentManager = getParentFragmentManager();
 
 
-                String idDog = dogs.get(position).getIdDog();
+//                String idDog = dogs.get(position).getIdDog();
+                String breeder = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String idDog = FirebaseDatabase.getInstance().getReference("dogs").child(breeder).getKey();
                 Bundle data = new Bundle();
                 data.putString("DogID", idDog);
+
                 DogDetailsFragment dogDetailsFragment = new DogDetailsFragment();
                 dogDetailsFragment.setArguments(data);
                 fragmentManager.beginTransaction()

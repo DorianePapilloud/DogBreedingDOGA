@@ -43,7 +43,7 @@ public class BreederRepository {
 
     public LiveData<Breeder> getBreeder(final String breederId) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("Breeders")
+                .getReference("breeders")
                 .child(breederId);
         return new BreederLiveData(reference);
     }
