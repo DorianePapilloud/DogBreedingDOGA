@@ -5,13 +5,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
-import com.example.dogbreedingdoga.Database.pojo.DogsFromBreeder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -22,7 +19,7 @@ public class BreederDogsListLiveData extends LiveData<List<Dog>> {
     private static final String TAG = "BreederDogsLiveData";
 
     private final DatabaseReference reference;
-//    private final String breeder;
+
     private final BreederDogsListLiveData.MyValueEventListener listener =
             new BreederDogsListLiveData.MyValueEventListener();
 
@@ -60,26 +57,9 @@ public class BreederDogsListLiveData extends LiveData<List<Dog>> {
             Dog dog = childSnapshot.getValue(Dog.class);
             dog.setBreederId(childSnapshot.getKey());
             dogsFromBreederList.add(dog);
-//                dogsFromBreeder.breeder = childSnapshot.getValue(Breeder.class);
-//                dogsFromBreeder.breeder.setIdBreeder(childSnapshot.getKey());
-//                dogsFromBreeder.dogs = toDogs(childSnapshot.child("dogs"),
-//                        childSnapshot.getKey());
-//                dogsFromBreederList.add(dogsFromBreeder);
         }
         return dogsFromBreederList;
     }
 
-
-    private List<Dog> toDogs(DataSnapshot dataSnapshot, String breederId){
-        List<Dog> dogs = new ArrayList<>();
-        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-            Dog dog = childSnapshot.getValue(Dog.class);
-            dog.setIdDog(childSnapshot.getKey());
-            dog.setBreederMail(breederId);
-            dogs.add(dog);
-        }
-
-        return dogs;
-    }
 
 }

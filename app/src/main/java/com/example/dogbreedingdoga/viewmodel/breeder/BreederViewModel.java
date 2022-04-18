@@ -72,10 +72,6 @@ public class BreederViewModel extends AndroidViewModel {
         return observableBreeder;
     }
 
-    public void createBreeder(Breeder breeder, OnAsyncEventListener callback) {
-        repository.insert(breeder, callback);
-    }
-
     public void updateBreeder(Breeder breeder, OnAsyncEventListener callback) {
         repository.update(breeder, callback);
     }

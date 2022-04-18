@@ -1,20 +1,11 @@
 package com.example.dogbreedingdoga.ui;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.dogbreedingdoga.R;
-import com.example.dogbreedingdoga.viewmodel.dog.DogsListFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -45,7 +36,6 @@ public class MainActivity extends BaseActivity {
         }
         BaseActivity.position = 0;
         super.onBackPressed();
-//        startActivity(new Intent(this, BreederProfileActivity.class));
     }
 
 }

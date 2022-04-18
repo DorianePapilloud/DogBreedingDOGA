@@ -13,10 +13,6 @@ import com.google.android.material.tabs.TabLayout;
 public class LoginActivity extends FragmentActivity {
 
     TabLayout tabLayout;
-    //
-    TabLayout tabLogin;
-    View tabNewAccount;
-    //
     ViewPager viewPager;
     float v = 0;
 

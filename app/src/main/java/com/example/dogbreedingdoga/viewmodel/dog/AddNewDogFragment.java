@@ -128,16 +128,7 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
         //for the dog view
         DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDog, currentBreederUid);
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
-//        viewModel.getDog().observe((BaseActivity)getActivity(), dogEntity -> {
-//            if (dogEntity != null) {
-//                dog = dogEntity;
-//                updateContent();
-//
-//            }
-//        });
 
-
-        // =================== code à checker ========================
 
         //get fragment manager to launch from datepicker fragment
         final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
@@ -150,15 +141,11 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
                 DialogFragment newFrag = new DatePickerFragment();
 
                 newFrag.setTargetFragment(AddNewDogFragment.this, REQUEST_CODE);
-//
+
 //                newFrag.show( root.getA, "datePicker");
                 showDatePickerDialog(view);
             }
         });
-
-        // ============================================================
-
-
 
         return root;
     }
@@ -190,8 +177,6 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
                 FragmentManager fragmentManager = getParentFragmentManager();
                 
                 String idDog = dogsBreederList.get(position).getIdDog();
-//                String breeder = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//                String idDog = FirebaseDatabase.getInstance().getReference("dogs").child(breeder).getKey();
 
                 Bundle data = new Bundle();
                 data.putString("DogID", idDog);
@@ -231,19 +216,6 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
             }
         });
 
-
-//        for (Dog d: dogsBreederList) {
-//            if(d.getGender() == Gender.Male) {
-//                //add to father list
-//                AL_Fathers.add(d);
-//
-//            }
-//
-//            if(d.getGender() == Gender.Female) {
-//                //add to Mother list
-//                AL_Mothers.add(d);
-//            }
-//        }
 
         lv_Mother.setAdapter(motherAdapter);
         lv_Father.setAdapter(fatherAdapter);
@@ -477,18 +449,9 @@ public class AddNewDogFragment extends Fragment implements DatePickerDialog.OnDa
             return false;
         }
 
-        return true ;
+        return true;
     }
 
-    private void updateContent() {
-        if(dog != null) {
-            et_NameDog.setText(dog.getNameDog());
-            et_BreedDog.setText(dog.getBreedDog());
-            tv_BirthDateDog.setText(Calendar.getInstance().getTime().toString());
-            et_Description.setText(dog.getSpecificationsDog());
-
-        }
-    }
 
     //for datePicker. A check...
     @Override

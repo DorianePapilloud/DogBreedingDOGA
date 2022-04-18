@@ -2,13 +2,10 @@ package com.example.dogbreedingdoga.viewmodel.dog;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.dogbreedingdoga.R;
 import com.example.dogbreedingdoga.placeholder.PlaceholderContent.PlaceholderItem;
 import com.example.dogbreedingdoga.databinding.FragmentDogsBinding;
 

@@ -1,6 +1,5 @@
 package com.example.dogbreedingdoga.ui.mgmt;
 
-
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.Context;
@@ -15,8 +14,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
-
-import androidx.annotation.NonNull;
 import androidx.core.app.NavUtils;
 
 import com.example.dogbreedingdoga.R;

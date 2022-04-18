@@ -10,10 +10,8 @@ import androidx.annotation.NonNull;
 
 import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
-import com.example.dogbreedingdoga.Database.Gender;
 import com.example.dogbreedingdoga.Database.Repository.BreederRepository;
 import com.example.dogbreedingdoga.Database.Repository.DogRepository;
-import com.example.dogbreedingdoga.Database.pojo.DogsFromBreeder;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 
 import java.util.List;
@@ -50,19 +48,9 @@ public class DogListViewModel extends AndroidViewModel {
         observableOwnMaleDogs.setValue(null);
 
 
-//        LiveData<List<Dog>> ownDogs = repository.getAllDogsByBreeder(breederId, application); //independant of availability
-        //depending of dog availability :
-        boolean dogAvailable = true ;
-
         LiveData<List<Dog>> ownDogs = this.repository.getAllDogsFromBreeder(breederId);
         // observe the changes of the entities from the database and forward them
         observableOwnDogs.addSource(ownDogs, observableOwnDogs::setValue);
-
-//        LiveData<List<Dog>> ownFemaleDogs = this.repository.getDogsByBreederByGenderByAvailability(breederId, Gender.Female, dogAvailable, application);
-//        observableOwnFemaleDogs.addSource(ownFemaleDogs, observableOwnFemaleDogs::setValue);
-//
-//        LiveData<List<Dog>> ownMaleDogs = this.repository.getDogsByBreederByGenderByAvailability(breederId, Gender.Male, dogAvailable, application);
-//        observableOwnFemaleDogs.addSource(ownMaleDogs, observableOwnMaleDogs::setValue);
 
 
     }
@@ -111,8 +99,5 @@ public class DogListViewModel extends AndroidViewModel {
         return observableOwnMaleDogs;
     }
 
-    public void deleteDog(Dog dog, OnAsyncEventListener callback) {
-        repository.delete(dog, callback);
-    }
 
 }

@@ -22,9 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class BreederProfileActivity extends BaseActivity {
 
-    private static final int EDIT_CLIENT = 1;
-    private static final int DELETE_CLIENT = 2;
-
     private Toast toast;
 
     private EditText et_ProfileName;

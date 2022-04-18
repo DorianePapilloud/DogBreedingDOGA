@@ -63,19 +63,6 @@ public class BreederRepository {
         });
     }
 
-//    public void insert(final Breeder breeder, final OnAsyncEventListener callback) {
-//       String id = FirebaseDatabase.getInstance().getReference("breeders").push().getKey();
-//       FirebaseDatabase.getInstance()
-//               .getReference("breeders")
-//               .child(id)
-//               .setValue(breeder, (databaseError, databaseReference) -> {
-//                   if(databaseError != null) {
-//                       callback.onFailure(databaseError.toException());
-//                   } else {
-//                       callback.onSuccess();
-//                   }
-//               });
-//    }
 
     public void insert(final Breeder breeder, final OnAsyncEventListener callback){
         FirebaseDatabase.getInstance()

@@ -3,7 +3,6 @@ package com.example.dogbreedingdoga;
 import android.app.Application;
 import android.content.Context;
 
-
 import com.example.dogbreedingdoga.Database.Repository.BreederRepository;
 import com.example.dogbreedingdoga.Database.Repository.DogRepository;
 import com.example.dogbreedingdoga.helper.LocaleHelper;

@@ -14,9 +14,7 @@ import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
 import com.example.dogbreedingdoga.Database.Repository.DogRepository;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
-import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.List;
 
 public class DogViewModel extends AndroidViewModel {
     private DogRepository dogRepository;
@@ -82,9 +80,7 @@ public class DogViewModel extends AndroidViewModel {
     /**
      * Expose the LiveData DogEntity query so the UI can observe it.
      */
-    public LiveData<Breeder> getDogsBreeder() {
-        return observableBreeder;
-    }
+
 
     public LiveData<Dog> getDog() {return  observableDog;}
 

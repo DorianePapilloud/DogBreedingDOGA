@@ -446,26 +446,13 @@ public class DogDetailsFragment extends Fragment {
 
     private void setResponse(Boolean response) {
         if (response) {
-            updateContent();
             toast = Toast.makeText(this.getActivity(), getString(R.string.dog_updated), Toast.LENGTH_LONG);
             toast.show();
         } else {
             tv_nameDogDetails.setError(getString(R.string.error_used_name));
             tv_nameDogDetails.requestFocus();
-            updateContent();
         }
     }
 
-    private void updateContent() {
-        if (dog != null) {
-//            et_ProfileEmail.setText(breeder.getEmail());
-//            et_ProfileName.setText(breeder.getNameBreeder());
-//            et_ProfileSurname.setText(breeder.getSurnameBreeder());
-//            et_ProfileAddress.setText(breeder.getAddressBreeder());
-//            et_ProfilePhone.setText(breeder.getPhone());
-//            et_ProfilePwd.setText(breeder.getPassword());
-//            et_ProfilePwdConf.setText(breeder.getPassword());
-        }
-    }
 
 }

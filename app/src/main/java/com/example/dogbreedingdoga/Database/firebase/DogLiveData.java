@@ -10,11 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DogLiveData extends LiveData<Dog> {
 
@@ -58,15 +54,6 @@ public class DogLiveData extends LiveData<Dog> {
         }
     }
 
-    private List<Dog> toDogList(DataSnapshot dataSnapshot){
-        List<Dog> dogs = new ArrayList<>();
-        for(DataSnapshot childSnapshot : dataSnapshot.getChildren()){
-            Dog dog = childSnapshot.getValue(Dog.class);
-//            dog.setIdDog(childSnapshot.getKey());
-            dogs.add(dog);
-        }
-        return dogs;
-    }
 
 
 

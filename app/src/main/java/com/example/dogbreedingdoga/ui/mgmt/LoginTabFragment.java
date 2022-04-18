@@ -130,6 +130,8 @@ public class LoginTabFragment extends Fragment {
         return password.length() > 4;
     }
 
+
+    //////////////////////////////// ACTIVATE IF YOU NEED TO REINITIALIZE THE DATABASE /////////////////////////////////////////////////7
 //    private void reinitializeDatabase() {
 //        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 //        alertDialog.setTitle(getString(R.string.action_demo_data));

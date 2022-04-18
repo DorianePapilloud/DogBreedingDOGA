@@ -1,18 +1,12 @@
 package com.example.dogbreedingdoga.Database.Repository;
 
-import android.app.Application;
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 
-import com.example.dogbreedingdoga.BaseApp;
 import com.example.dogbreedingdoga.Database.Entity.Breeder;
 import com.example.dogbreedingdoga.Database.Entity.Dog;
-import com.example.dogbreedingdoga.Database.Gender;
 import com.example.dogbreedingdoga.Database.firebase.BreederDogsListLiveData;
 import com.example.dogbreedingdoga.Database.firebase.BreederLiveData;
 import com.example.dogbreedingdoga.Database.firebase.DogLiveData;
-import com.example.dogbreedingdoga.Database.pojo.DogsFromBreeder;
 import com.example.dogbreedingdoga.Database.util.OnAsyncEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -49,14 +43,6 @@ public class DogRepository {
         return new DogLiveData(reference);
     }
 
-//    public LiveData<List<Dog>> getDogs(Application application) {
-//        return ((BaseApp) application).getDatabase().dogDao().getAllDogs();
-//    }
-//
-//    public LiveData<List<Dog>> getAllDogsByBreeder(final String breederMail, Application application) {
-//        return ((BaseApp) application).getDatabase().dogDao().getDogsForOneBreeder(breederMail);
-//    }
-
 
     /// a controler /////////////////////////////////////77
 
@@ -75,24 +61,8 @@ public class DogRepository {
         return new BreederDogsListLiveData(reference);
     }
 
-//    public LiveData<List<Dog>> getDogsByBreederByAvailability(final String idBreeder, boolean availability) {
-//        DatabaseReference reference = FirebaseDatabase.getInstance()
-//                .getReference("Dogs")
-//                .child(idBreeder);
-//        return BreederDogsListLiveData(reference);
-//    }
 
-//    public LiveData<List<Dog>> getDogsByBreederByGenderByAvailability(final String breederMail, Gender gender, boolean availability, Application application) {
-//        return ((BaseApp) application).getDatabase().dogDao().getDogsByBreederByGenderByAvailability(breederMail, gender, availability);
-//    }
-
-    //////////////////////////////////////////////// this need to be changed //////////////////////////////////////////////
     public void insert(final Dog dog, final OnAsyncEventListener callback){
-//        DatabaseReference reference = FirebaseDatabase.getInstance()
-//                .getReference("dogs")
-//                .child(dog.getBreederMail());
-//        String dogKey = reference.push().getKey();
-//        dog.setIdDog(dogKey);
         FirebaseDatabase.getInstance()
                 .getReference("dogs")
                 .child(dog.getBreederMail())//(FirebaseAuth.getInstance().getCurrentUser().getUid()) //breeder's value
@@ -105,9 +75,8 @@ public class DogRepository {
                         callback.onSuccess();
                     }
                 });
-//        dog.setIdDog(dogKey);
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     public void update(final Dog dog, final OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
