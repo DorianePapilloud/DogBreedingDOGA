@@ -46,7 +46,7 @@ public class DogLiveData extends LiveData<Dog> {
         public void onDataChange(@NonNull DataSnapshot dataSnapshot){
             if (dataSnapshot.exists()) {
                 Dog dog = dataSnapshot.getValue(Dog.class);
-//                dog.setIdDog(dataSnapshot.getKey());//(dataSnapshot.child("dogs").child(breeder).getKey());
+                dog.setIdDog(dataSnapshot.getKey());//(dataSnapshot.child("dogs").child(breeder).getKey());
                 dog.setBreederId(breeder);
                 setValue(dog);
             }

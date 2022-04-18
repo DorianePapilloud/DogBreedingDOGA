@@ -88,7 +88,7 @@ public class DogDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = (ViewGroup) inflater.inflate(R.layout.fragment_dog_details, container, false);
 
-        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), currentBreederUID);
+        DogViewModel.Factory factory = new DogViewModel.Factory(getActivity().getApplication(), idDoggy, currentBreederUID);
         viewModel = new ViewModelProvider(this, factory).get(DogViewModel.class);
         viewModel.getDog().observe(getActivity(), dogEntity -> {
             if (dogEntity != null) {

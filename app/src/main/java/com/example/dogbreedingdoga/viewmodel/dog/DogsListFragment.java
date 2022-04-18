@@ -74,10 +74,11 @@ public class DogsListFragment extends Fragment {
                 FragmentManager fragmentManager = getParentFragmentManager();
 
 
-//                String idDog = dogs.get(position).getIdDog();
+                String idDog = dogs.get(position).getBreederId();
                 String breeder = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                String idDog = FirebaseDatabase.getInstance().getReference("dogs").child(breeder).getKey();
                 Bundle data = new Bundle();
+//                String idDog = FirebaseDatabase.getInstance().getReference("dogs").child(breeder).getKey();
+
                 data.putString("DogID", idDog);
 
                 DogDetailsFragment dogDetailsFragment = new DogDetailsFragment();

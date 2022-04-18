@@ -67,6 +67,9 @@ public class Dog implements Comparable {
         this.breederMail = breederMail;
     }
 
+    public String getBreederId() {
+        return breederId;
+    }
 
     public void setBreederId(String breederId) {
         this.breederId = breederId;

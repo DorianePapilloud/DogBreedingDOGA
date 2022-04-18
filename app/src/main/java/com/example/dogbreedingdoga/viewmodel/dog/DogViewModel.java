@@ -28,7 +28,7 @@ public class DogViewModel extends AndroidViewModel {
     private final MediatorLiveData<Breeder> observableBreeder;
 
     public DogViewModel(@NonNull Application application,
-                        DogRepository dogRep) {
+                        final String dogId, DogRepository dogRep) {
         super(application);
 
         this.application = application;
@@ -41,10 +41,10 @@ public class DogViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableDog.setValue(null);
 
-//        if(dogId != null){
-//            LiveData<Dog> dog = dogRepository.getDog(dogId);
-//            observableDog.addSource(dog, observableDog::setValue);
-//        }
+        if(dogId != null){
+            LiveData<Dog> dog = dogRepository.getDog(dogId);
+            observableDog.addSource(dog, observableDog::setValue);
+        }
 
         //==== observable for dog's breeder ====
         observableBreeder = new MediatorLiveData<>();
@@ -60,14 +60,14 @@ public class DogViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-//        private final String dogId;
+        private final String dogId;
         private final String breederId;
 
         private final DogRepository repository;
 
-        public Factory(@NonNull Application application,  String breederId) {
+        public Factory(@NonNull Application application, String dogId, String breederId) {
             this.application = application;
-//            this.dogId = dogId;
+            this.dogId = dogId;
             this.breederId = breederId;
             repository = ((BaseApp) application).getDogRepository();
         }
@@ -75,7 +75,7 @@ public class DogViewModel extends AndroidViewModel {
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new DogViewModel(application, repository);
+            return (T) new DogViewModel(application, dogId, repository);
         }
     }
 
