@@ -114,6 +114,8 @@ public class BreederRepository {
     }
 
     public void delete(final Breeder breeder, final OnAsyncEventListener callback) {
+        String currentBreeder = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //delete breeder
         FirebaseDatabase.getInstance()
                 .getReference("breeders")
                 .child(breeder.getIdBreeder())
@@ -124,5 +126,13 @@ public class BreederRepository {
                         callback.onSuccess();
                     }
                 });
+        //delete related dogs
+        FirebaseDatabase.getInstance()
+                .getReference("dogs")
+                .child(currentBreeder).removeValue();
+        //remove account from authentication
+        FirebaseAuth.getInstance()
+                .getCurrentUser()
+                .delete();
     }
 }

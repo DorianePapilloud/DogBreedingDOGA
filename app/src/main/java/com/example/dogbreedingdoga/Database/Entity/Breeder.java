@@ -114,11 +114,11 @@ public class Breeder {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("email", email);
-        result.put("Name Breeder", nameBreeder);
-        result.put("Surname Breeder", surnameBreeder);
-        result.put("Address", addressBreeder);
-        result.put("Phone", phone);
-        result.put("Password", password);
+        result.put("nameBreeder", nameBreeder);
+        result.put("surnameBreeder", surnameBreeder);
+        result.put("addressBreeder", addressBreeder);
+        result.put("phone", phone);
+        result.put("password", password);
 //        result.put("Picture Breeder", pictureBreeder);
 //        result.put("Description Breeder", descriptionBreeder);
         return result;

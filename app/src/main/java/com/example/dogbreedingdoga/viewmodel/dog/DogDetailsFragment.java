@@ -372,8 +372,8 @@ public class DogDetailsFragment extends Fragment {
     private void saveChanges(String nameDoggy, String breedDoggy, Gender genderDoggy , String dateOfBithDoggy,  Boolean pedigreeDoggy, boolean avlbl) {
 
         if( valideDogAttributes(nameDoggy, breedDoggy, dateOfBithDoggy, genderDoggy, pedigreeDoggy) ) {
-            Dog newDog = new Dog(idDoggy, nameDoggy, breedDoggy, dateOfBithDoggy, gender, pedigreeDoggy, avlbl);
-            newDog.setSpecificationsDog(tv_Description.getText().toString());
+//            Dog newDog = new Dog(idDoggy, nameDoggy, breedDoggy, dateOfBithDoggy, gender, pedigreeDoggy, avlbl);
+//            newDog.setSpecificationsDog(tv_Description.getText().toString());
 //            newDog.setBreederMail(this.currentBreederUID);
 
             //set mother + father
@@ -408,12 +408,13 @@ public class DogDetailsFragment extends Fragment {
 //        dog.setIdMother(motherDoggy);
 //        dog.setIdFather(fatherDoggy);
         dog.setPedigree(pedigreeDoggy);
+        dog.setSpecificationsDog(tv_Description.getText().toString());
 
         //restore 'Edit Profile' textview-button
         iv_BtnEdit.setImageResource(R.drawable.ic_edit);
         iv_BtnEdit.setOnClickListener(btnEditListener);
 
-        disableTextView(tv_nameDogDetails, tv_breedDog, tv_birthDateDog, tv_mother, tv_father);
+        disableTextView(tv_nameDogDetails, tv_breedDog, tv_birthDateDog, tv_mother, tv_father, tv_Description);
 
         viewModel.updateDog(dog, new OnAsyncEventListener() {
             @Override

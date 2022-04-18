@@ -168,12 +168,13 @@ public class Dog implements Comparable {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("Name Dog", nameDog);
-        result.put("Breed Dog", breedDog);
-        result.put("Date of Birth", dateOfBirth);
-        result.put("Gender Dog", gender);
-        result.put("Pedigree Dog", pedigree);
-        result.put("Available", isAvailable);
+        result.put("nameDog", nameDog);
+        result.put("breedDog", breedDog);
+        result.put("dateOfBirth", dateOfBirth);
+        result.put("gender", gender);
+        result.put("pedigree", pedigree);
+        result.put("available", isAvailable);
+        result.put("specificationsDog", specificationsDog);
         return result;
     }
 
